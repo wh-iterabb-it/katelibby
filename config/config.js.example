@@ -1,0 +1,67 @@
+const config = {
+  server: 'localhost',
+
+  port: '6667',
+
+  commandChar: '@',
+
+  irc: {
+    userName: 'kate',
+    realName: 'Kate Libby',
+    port: 6667,
+    localAddress: null,
+    debug: false,
+    showErrors: false,
+    autoRejoin: false,
+    autoConnect: true,
+    channels: ['#general,#dangerroom'],
+    secure: false,
+    selfSigned: false,
+    certExpired: false,
+    floodProtection: false,
+    floodProtectionDelay: 1000,
+    sasl: false,
+    retryCount: 0,
+    retryDelay: 2000,
+    stripColors: false,
+    channelPrefixes: "&#",
+    messageSplit: 512,
+    encoding: ''
+  },
+
+  // Giphy API key
+  giphy: {
+    key: 'steelbeams'
+  },
+
+  // Weather Underground API key
+  // only allows 500 calls a day and 10 a minute
+  wunderground: {
+    key: 'steelbeams'
+  },
+
+  debug: true,
+  showErrors: true,
+
+  database: {
+    username: 'root',
+    password: '', // you know why this is blank
+    schema: '', // you know why this is blank
+    connection: {
+      host: process.env.host ? '127.0.0.1' : 'localhost',
+      dialect: 'mysql',
+      logging: false,
+      pool: {
+        max: 1,
+        min: 1,
+        idle: 1000,
+      },
+      retry: {
+        match: 'ER_LOCK_DEADLOCK',
+        max: 3,
+      },
+    },
+  },
+};
+
+module.exports = config;

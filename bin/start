@@ -1,0 +1,7 @@
+#!/usr/bin/env node --use_strict
+require('babel-core/register');
+require('object.entries').shim();
+
+const kate = require('../app.js');
+
+kate.start();
