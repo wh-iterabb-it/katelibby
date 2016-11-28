@@ -4,9 +4,15 @@ const config = {
   port: '6667',
 
   commandChar: '@',
+  
+  twitch: { 
+    userName: 'katelibby', // twitch username of bot
+    channels: ['#beautato'], // add #twitchusername for twitch
+    password: '', // for connecting to twitch, use https://twitchapps.com/tmi/
+  },
 
   irc: {
-    userName: 'kate',
+    userName: 'kate', // twitch username of bot
     realName: 'Kate Libby',
     port: 6667,
     localAddress: null,
@@ -14,7 +20,7 @@ const config = {
     showErrors: false,
     autoRejoin: false,
     autoConnect: true,
-    channels: ['#general,#dangerroom'],
+    channels: ['#general, #dangerroom'],
     secure: false,
     selfSigned: false,
     certExpired: false,
