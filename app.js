@@ -3,12 +3,10 @@ import commands from './commands';
 import config from './helpers/config_helper';
 import urlRegex from './utils/url_regex';
 import logger from './utils/logger';
-// import { sanitize } from './utils/sanitize';
 import { randColor, color } from './utils/text_color';
 import irc from 'irc';
 import request from 'request';
 import entities from 'entities';
-
 
 // this may be moved to a new client file later
 // factory functions are hardly useful but i wanted use them
