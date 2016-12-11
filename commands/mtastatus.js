@@ -1,6 +1,6 @@
 import request from 'request';
 import parser from 'xml2js';
-import entities from 'entities;
+import entities from 'entities';
 import irc from 'irc';
 
 const url = 'http://web.mta.info/status/serviceStatus.txt';
@@ -11,7 +11,7 @@ module.exports = (callback, target, from, args) => {
       case 'help':
         callback.say(target, 'Check the status of your NYC Metro Line!');
         callback.say(target, 'Syntax is ' + callback.config.commandChar +
-         'mtastatus {line}');
+         'mtastatus { line }');
         return 'help';
        default:
         callback.say(target, 'You must specify a line!');
@@ -70,8 +70,7 @@ module.exports = (callback, target, from, args) => {
 }
 
 function getLineKey(input) {
-    input = input.toUpperCase();
-    switch (input) {
+    switch (input.toUpperCase()) {
         case '1':
         case '2':
         case '3':
@@ -123,7 +122,7 @@ function sanitize(text) {
     text = text.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, '');
     text = entities.decodeHTML(text);
     lines = text.split("\r\n");
-    for (var l in lines) {
+    for (let l in lines) {
         lines[l] = lines[l].trim();
     }
     lines = lines.filter(function(value) {
