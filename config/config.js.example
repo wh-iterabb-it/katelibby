@@ -12,7 +12,7 @@ const config = {
 
   irc: {
     server: 'localhost',
-    userName: 'kate', // twitch username of bot
+    userName: 'kate',
     realName: 'Kate Libby',
     port: 6667,
     localAddress: null,
