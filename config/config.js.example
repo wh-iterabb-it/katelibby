@@ -4,12 +4,14 @@ const config = {
   commandChar: '!',
   
   twitch: { 
+    server: 'irc.chat.twitch.tv',
     userName: 'katelibby', // twitch username of bot
     channels: ['#beautato'], // add #twitchusername
     password: '', // for connecting to twitch, use https://twitchapps.com/tmi/
   },
 
   irc: {
+    server: 'localhost',
     userName: 'kate', // twitch username of bot
     realName: 'Kate Libby',
     port: 6667,
