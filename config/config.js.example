@@ -1,13 +1,11 @@
 const config = {
   server: 'localhost',
 
-  port: '6667',
-
-  commandChar: '@',
+  commandChar: '!',
   
   twitch: { 
     userName: 'katelibby', // twitch username of bot
-    channels: ['#beautato'], // add #twitchusername for twitch
+    channels: ['#beautato'], // add #twitchusername
     password: '', // for connecting to twitch, use https://twitchapps.com/tmi/
   },
 
