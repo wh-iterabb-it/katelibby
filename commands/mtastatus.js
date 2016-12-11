@@ -9,9 +9,9 @@ module.exports = (callback, target, from, args) => {
   if (typeof args !== 'undefined') {
     switch (args) {
       case 'help':
-        callback.say(target, 'Catfacts returns a random cat fact!');
+        callback.say(target, 'Check the status of your NYC Metro Line!');
         callback.say(target, 'Syntax is ' + callback.config.commandChar +
-         'catfacts');
+         'mtastatus {line}');
         return 'help';
        default:
         callback.say(target, 'You must specify a line!');
