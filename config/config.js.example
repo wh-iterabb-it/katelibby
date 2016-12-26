@@ -7,8 +7,10 @@ const config = {
     connect: true, // true == connect, false == no connect to twitch (twitch disabled)
     server: 'irc.chat.twitch.tv',
     userName: 'katelibby', // twitch username of bot
+    streamer: 'beautato',
     channels: ['#beautato'], // add #twitchusername
-    password: '', // for connecting to twitch, use https://twitchapps.com/tmi/
+    password: 'oauth:', // for connecting to twitch, use https://twitchapps.com/tmi/
+    personal: '', // Personal website of twitch streamer
   },
 
   irc: {
