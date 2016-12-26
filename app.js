@@ -17,13 +17,19 @@ const Bot = {
     this.commands = commands;
     this.nick = '';
     this.commandPattern = new RegExp('^' + this.config.commandChar + '(\\w+) ?(.*)');
-    this.connect();
-    this.messageHandler();
+    if (this.config.irc.connect) {
+      this.connect(); // Connection to normal IRC
+      this.messageHandler(); // Normal messageHandler for IRC
+    }
+
+    this.connect(); // Connection to normal IRC
+    this.messageHandler(); // Normal messageHandler for IRC
   },
   connect() {
-    this.logger.info('connecting to ' + this.config.server + ' ' + this.config.irc.userName);
+    this.logger.info('connecting to ' + this.config.irc.server + ' ' + this.config.irc.userName);
+    this.client
     this.client = new irc.Client(
-      this.config.server,
+      this.config.irc.server,
       this.config.irc.userName,
       {
         ...this.config.irc,

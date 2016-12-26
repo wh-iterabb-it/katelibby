@@ -2,8 +2,9 @@ const config = {
   server: 'localhost',
 
   commandChar: '!',
-  
-  twitch: { 
+
+  twitch: {
+    connect: true, // true == connect, false == no connect to twitch (twitch disabled)
     server: 'irc.chat.twitch.tv',
     userName: 'katelibby', // twitch username of bot
     channels: ['#beautato'], // add #twitchusername

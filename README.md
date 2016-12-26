@@ -6,6 +6,10 @@ katelibby
 
 katelibby is a node IRC bot.
 
+### Installation
+
+`npm install --no-optional`
+
 ### Example Usage
 
 `node ./bin/start --config ./config/config.js`
