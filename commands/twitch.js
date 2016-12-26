@@ -8,9 +8,9 @@ module.exports = (callback, target, from, args) => {
     }
   }
   const status = 'live';
-  callback.say(target, 'https://twitch.com/'+ callback.config.twitch.streamer + ' is currently '+ status);
+  callback.say(target, 'https://twitch.com/' + callback.config.twitch.streamer + ' is currently ' + status);
   callback.say(target, 'Also so make sure to check out ');
-  for (let site in callback.config.twitch.personal) {
-      callback.say(target, callback.config.twitch.personal[site]);
-  }
+  callback.config.twitch.personal.forEach((site) => {
+    callback.say(target, site);
+  });
 };
