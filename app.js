@@ -18,13 +18,28 @@ const Bot = {
     this.nick = '';
     this.commandPattern = new RegExp('^' + this.config.commandChar + '(\\w+) ?(.*)');
     if (this.config.irc.connect) {
-      this.connect(); // Connection to normal IRC
-      this.messageHandler(); // Normal messageHandler for IRC
+      this.twitch_connect(); // Connection to normal twitch
+      // this.twitch_messageHandler(); // Normal messageHandler for twitch
     }
 
     this.connect(); // Connection to normal IRC
     this.messageHandler(); // Normal messageHandler for IRC
   },
+  twitch_connect(){
+    this.logger.info('connecting to ' + this.config.twitch.server + ' ' + this.config.twitch.userName);
+    this.twitch_client
+    this.twitch_client = new irc.Client(
+      this.config.twitch.server,
+      this.config.twitch.userName,
+      {
+        ...this.config.twitch,
+      });
+    this.twitch_client.on('registered', (message) => {
+      this.logger.info(message);
+      this.nick = message.args[0];
+    });
+    this.logger.info('twitch connected');
+  }, // we will clean this up later
   connect() {
     this.logger.info('connecting to ' + this.config.irc.server + ' ' + this.config.irc.userName);
     this.client
@@ -39,6 +54,27 @@ const Bot = {
       this.nick = message.args[0];
     });
     this.logger.info('connected');
+  },
+  twitch_messageHandler() {
+    this.twitch_client.on('message', (from, to, text, message) => {
+      const target = (to === this.nick ? from : to);
+      const match = text.match(this.commandPattern);
+      this.logger.info(message);
+      if (match) {
+        const command = match[1];
+        const args = match[2];
+        if (command in commands) {
+          const response = commands[command](this, target, from, args);
+          if (response) { this.logger.info(response); }
+        } else {
+          this.say(target, 'Sorry, I do not know that command');
+        }
+      } else if (this.isURL(text)) {
+        this.getTitle(this.isURL(text), to);
+      } else if (this.isSUB(text)) {
+        this.say(target, this.getSub(this.isSUB(text)));
+      }
+    });
   },
   messageHandler() {
     this.client.on('message', (from, to, text, message) => {
@@ -63,8 +99,8 @@ const Bot = {
   },
   say(to, message) {
     this.logger.info('say: ' + to + ' ' + message);
-    const newText = irc.colors.wrap('cyan', message);
-    this.client.say(to, newText);
+    // const newText = irc.colors.wrap('cyan', message);
+    this.client.say(to, message);
   },
   isURL(str) {
     if (str.length < 2083 && (str.match(urlRegex))) {
