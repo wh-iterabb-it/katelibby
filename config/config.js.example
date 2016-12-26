@@ -1,11 +1,20 @@
 const config = {
   server: 'localhost',
 
-  port: '6667',
+  commandChar: '!',
 
-  commandChar: '@',
+  twitch: {
+    connect: true, // true == connect, false == no connect to twitch (twitch disabled)
+    server: 'irc.chat.twitch.tv',
+    userName: 'katelibby', // twitch username of bot
+    streamer: 'beautato',
+    channels: ['#beautato'], // add #twitchusername
+    password: 'oauth:', // for connecting to twitch, use https://twitchapps.com/tmi/
+    personal: '', // Personal website of twitch streamer
+  },
 
   irc: {
+    server: 'localhost',
     userName: 'kate',
     realName: 'Kate Libby',
     port: 6667,
@@ -14,7 +23,7 @@ const config = {
     showErrors: false,
     autoRejoin: false,
     autoConnect: true,
-    channels: ['#general,#dangerroom'],
+    channels: ['#general, #dangerroom'],
     secure: false,
     selfSigned: false,
     certExpired: false,
