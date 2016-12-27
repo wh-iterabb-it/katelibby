@@ -19,7 +19,7 @@ const Bot = {
     this.commandPattern = new RegExp('^' + this.config.commandChar + '(\\w+) ?(.*)');
     if (this.config.irc.connect) {
       this.twitch_connect(); // Connection to normal twitch
-      // this.twitch_messageHandler(); // Normal messageHandler for twitch
+      this.twitch_messageHandler(); // Normal messageHandler for twitch
     }
 
     this.connect(); // Connection to normal IRC

@@ -36,6 +36,8 @@ katelibby is a node IRC bot.
 
 `!in`       - remind you of something at a different time
 
+`!uptime`   - Calculates the amount of uptime of Kate
+
 `!w `       - Returns weather from underground weather,  !w only allows 500 calls a day and 10 a minute
 
 `!woot`     - returns the latest woot sale
