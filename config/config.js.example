@@ -11,10 +11,6 @@ const config = {
     channels: ['#beautato'], // add #twitchusername
     clientid: '', // Client ID requires for all api calls https://blog.twitch.tv/client-id-required-for-kraken-api-calls-afbb8e95f843#.u4j475w2y
     password: 'oauth:', // for connecting to twitch, use https://twitchapps.com/tmi/
-    personal: [
-      'http://www.yoursite.com',
-      'https://www.twitter.com/beaubouchard',
-    ], // Personal website of twitch streamer, can include as many sites as you want
   },
 
   irc: {
