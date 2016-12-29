@@ -19,7 +19,7 @@ export function sanitize(data) {
     data = '';
   }
 
-  if (data.isArray() && data.length === 1) {
+  if (Array.isArray(data) && data.length === 1) {
     clean = data[0];
   } else {
     clean = data;

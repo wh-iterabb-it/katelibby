@@ -85,23 +85,23 @@ module.exports = (callback, target, from, args) => {
   request(url, (error, response, xml) => {
     if (!error && response.statusCode === 200) {
       parseString(xml, (err, data) => {
-        const services = ['subway', 'bus', 'BT', 'LIRR', 'MetroNorth'];
-        let service;
-        services.map((serviceName) => {
-          const currentService = data.service[serviceName][0].line.map((row) => {
-            return {
-              name: sanitize(row.name),
-              status: sanitize(row.status),
-              html: sanitize(row.text),
-              date: sanitize(row.Date),
-              time: sanitize(row.Time),
-            };
-          });
-          service[serviceName] = currentService;
-          return null;
-        });
-        const subway = service.subway;
-        const line = subway.map((currentLine) => {
+        // let services = ['subway', 'bus', 'BT', 'LIRR', 'MetroNorth'];
+        // services = services.map((serviceName) => {
+          // let currentService = data.service.subway.line.map((row) => {
+          //   return {
+          //     name: sanitize(row.name),
+          //     status: sanitize(row.status),
+          //     html: sanitize(row.text),
+          //     date: sanitize(row.Date),
+          //     time: sanitize(row.Time),
+          //   };
+          // });
+          // return currentService;
+        // });
+        const subway = sanitize(data.service.subway);
+        console.log(subway);
+        const line = subway.line.map((currentLine) => {
+          // response[serviceName] = clean(data.service[serviceName][0].line);
           if (currentLine.name === getLineKey(args)) {
             return {
               name: sanitize(currentLine.name),
