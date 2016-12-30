@@ -1,9 +1,6 @@
-import request from 'request';
-import { parseString } from 'xml2js';
+import Mta from 'mta-gtfs';
 import { sanitize } from '../utils/sanitize';
 import irc from 'irc';
-
-const url = 'http://web.mta.info/status/serviceStatus.txt';
 
 const line_colors = {
   '123': 'light_red',
@@ -81,45 +78,28 @@ module.exports = (callback, target, from, args) => {
         }
     }
   }
-
-  request(url, (error, response, xml) => {
-    if (!error && response.statusCode === 200) {
-      parseString(xml, (err, data) => {
-        // let services = ['subway', 'bus', 'BT', 'LIRR', 'MetroNorth'];
-        // services = services.map((serviceName) => {
-          // let currentService = data.service.subway.line.map((row) => {
-          //   return {
-          //     name: sanitize(row.name),
-          //     status: sanitize(row.status),
-          //     html: sanitize(row.text),
-          //     date: sanitize(row.Date),
-          //     time: sanitize(row.Time),
-          //   };
-          // });
-          // return currentService;
-        // });
-        const subway = sanitize(data.service.subway);
-        console.log(subway);
-        const line = subway.line.map((currentLine) => {
-          // response[serviceName] = clean(data.service[serviceName][0].line);
-          if (currentLine.name === getLineKey(args)) {
-            return {
-              name: sanitize(currentLine.name),
-              status: sanitize(currentLine.status),
-              html: sanitize(currentLine.text),
-              date: sanitize(currentLine.Date),
-              time: sanitize(currentLine.Time),
-            };
-          }
-          return null;
-        });
-        const color = getColorForLine(getLineKey(args));
-        let outstr = getLineKey(args) + ': ' + line.status + '\n' + line.text;
+  const mta = new Mta({
+    key: 'MY-MTA-API-KEY-HERE', // only needed for mta.schedule() method
+    feed_id: 1,                  // optional, default = 1
+  });
+  mta.status('subway').then((subway) => {
+    const lineName = getLineKey(args);
+    const color = getColorForLine(lineName);
+    subway.map((currentLine) => {
+      if (currentLine.name === lineName) {
+        let outStatus = sanitize(currentLine.name) + ': ' +
+          sanitize(currentLine.status);
+        let outText = sanitize(currentLine.text);
         if (color) {
-          outstr = irc.colors.wrap(color, getLineKey(args)) + ': ' + line.status + '\n' + line.text;
+          outStatus = irc.colors.wrap(color, outStatus);
+          outText = irc.colors.wrap(color, outText);
         }
-        callback.say(target, outstr);
-      });
-    }
+        callback.say(target, outStatus);
+        if (outText.length > 0) {
+          callback.say(target, outText);
+        }
+      }
+      return null;
+    });
   });
 };
