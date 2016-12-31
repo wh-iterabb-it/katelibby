@@ -1,14 +1,5 @@
 import entities from 'entities';
 
-export function sanitize(text) {
-  if (typeof text !== 'undefined') {
-    text = text.replace(/<\/?(br *\/?)>/gi, '\r\n');
-    text = text.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, '');
-    text = entities.decodeHTML(text);
-    return text;
-  }
-}
-
 export function toHHMMSS(inctime) {
   const sec_num = parseInt(inctime, 10);
   let hours = Math.floor(sec_num / 3600);
@@ -19,4 +10,43 @@ export function toHHMMSS(inctime) {
   if (seconds < 10) { seconds = '0' + seconds; }
   const time = hours + ':' + minutes + ':' + seconds;
   return time;
+}
+
+export function sanitize(data) {
+  let clean;
+
+  if (!Boolean(data)) {
+    data = '';
+  }
+
+  if (Array.isArray(data) && data.length === 1) {
+    clean = data[0];
+  } else {
+    clean = data;
+  }
+
+  // Change empty objects into strings
+  if (Object.keys(clean).length === 0 && JSON.stringify(clean) === JSON.stringify({})) {
+    clean = '';
+  }
+
+  clean = entities.decodeHTML(clean);
+
+  // change html br to rn
+  clean = clean.replace(/<\/?(br *\/?)>/gi, '\r\n');
+
+  let lines = clean.split('\r\n');
+
+  lines.forEach((l) => {
+    l = l.trim();
+  });
+
+  // remove empty lines, or null
+  lines = lines.filter((value) => {
+    return !(value === '' || value === null);
+  });
+
+  clean = lines.join('\n');
+
+  return clean;
 }

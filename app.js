@@ -3,7 +3,7 @@ import commands from './commands';
 import config from './helpers/config_helper';
 import urlRegex from './utils/url_regex';
 import logger from './utils/logger';
-import { randColor, color } from './utils/text_color';
+// import { randColor, color } from './utils/text_color';
 import irc from 'irc';
 import request from 'request';
 import entities from 'entities';
@@ -25,9 +25,8 @@ const Bot = {
     this.connect(); // Connection to normal IRC
     this.messageHandler(); // Normal messageHandler for IRC
   },
-  twitch_connect(){
+  twitch_connect() {
     this.logger.info('connecting to ' + this.config.twitch.server + ' ' + this.config.twitch.userName);
-    this.twitch_client
     this.twitch_client = new irc.Client(
       this.config.twitch.server,
       this.config.twitch.userName,
@@ -42,7 +41,6 @@ const Bot = {
   }, // we will clean this up later
   connect() {
     this.logger.info('connecting to ' + this.config.irc.server + ' ' + this.config.irc.userName);
-    this.client
     this.client = new irc.Client(
       this.config.irc.server,
       this.config.irc.userName,
