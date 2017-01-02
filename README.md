@@ -32,6 +32,8 @@ katelibby is a node IRC bot.
 
 `!luck`     - Test your luck, and see how good it is
 
+`!mtastatus`- Gets MTA status of subway
+
 `!in`       - remind you of something at a different time
 
 `!uptime`   - Calculates the amount of uptime of Kate
