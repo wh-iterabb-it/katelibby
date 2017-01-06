@@ -30,5 +30,5 @@ module.exports = (callback, target, from, args) => {
       }
     }
   });
-  callback.say(target, 'searching ...');
+  // callback.say(target, 'searching ...');
 };

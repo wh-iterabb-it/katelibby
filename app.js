@@ -17,62 +17,36 @@ const Bot = {
     this.commands = commands;
     this.nick = '';
     this.commandPattern = new RegExp('^' + this.config.commandChar + '(\\w+) ?(.*)');
-    if (this.config.irc.connect) {
-      this.twitch_connect(); // Connection to normal twitch
-      this.twitch_messageHandler(); // Normal messageHandler for twitch
-    }
-
     this.connect(); // Connection to normal IRC
     this.messageHandler(); // Normal messageHandler for IRC
   },
-  twitch_connect() {
-    this.logger.info('connecting to ' + this.config.twitch.server + ' ' + this.config.twitch.userName);
-    this.twitch_client = new irc.Client(
-      this.config.twitch.server,
-      this.config.twitch.userName,
-      {
-        ...this.config.twitch,
-      });
-    this.twitch_client.on('registered', (message) => {
-      this.logger.info(message);
-      this.nick = message.args[0];
-    });
-    this.logger.info('twitch connected');
-  }, // we will clean this up later
   connect() {
-    this.logger.info('connecting to ' + this.config.irc.server + ' ' + this.config.irc.userName);
-    this.client = new irc.Client(
-      this.config.irc.server,
-      this.config.irc.userName,
-      {
-        ...this.config.irc,
+    if (this.config.twitch.connect) {
+      this.logger.info('connecting to ' + this.config.twitch.irc.server + ' ' + this.config.twitch.irc.userName);
+      this.client = new irc.Client(
+        this.config.twitch.irc.server,
+        this.config.twitch.irc.userName,
+        {
+          ...this.config.twitch.irc,
+        });
+      this.client.on('registered', (message) => {
+        this.logger.info(message);
+        this.nick = message.args[0];
       });
-    this.client.on('registered', (message) => {
-      this.logger.info(message);
-      this.nick = message.args[0];
-    });
+    } else {
+      this.logger.info('connecting to ' + this.config.irc.server + ' ' + this.config.irc.userName);
+      this.client = new irc.Client(
+        this.config.irc.server,
+        this.config.irc.userName,
+        {
+          ...this.config.irc,
+        });
+      this.client.on('registered', (message) => {
+        this.logger.info(message);
+        this.nick = message.args[0];
+      });
+    }
     this.logger.info('connected');
-  },
-  twitch_messageHandler() {
-    this.twitch_client.on('message', (from, to, text, message) => {
-      const target = (to === this.nick ? from : to);
-      const match = text.match(this.commandPattern);
-      this.logger.info(message);
-      if (match) {
-        const command = match[1];
-        const args = match[2];
-        if (command in commands) {
-          const response = commands[command](this, target, from, args);
-          if (response) { this.logger.info(response); }
-        } else {
-          this.say(target, 'Sorry, I do not know that command');
-        }
-      } else if (this.isURL(text)) {
-        this.getTitle(this.isURL(text), to);
-      } else if (this.isSUB(text)) {
-        this.say(target, this.getSub(this.isSUB(text)));
-      }
-    });
   },
   messageHandler() {
     this.client.on('message', (from, to, text, message) => {

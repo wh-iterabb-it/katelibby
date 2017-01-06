@@ -4,13 +4,34 @@ const config = {
   commandChar: '!',
 
   twitch: {
-    connect: true, // true == connect, false == no connect to twitch (twitch disabled)
-    server: 'irc.chat.twitch.tv',
-    userName: 'katelibby', // twitch username of bot
-    streamer: 'beautato',
-    channels: ['#beautato'], // add #twitchusername
-    clientid: '', // Client ID requires for all api calls https://blog.twitch.tv/client-id-required-for-kraken-api-calls-afbb8e95f843#.u4j475w2y
-    password: 'oauth:', // for connecting to twitch, use https://twitchapps.com/tmi/
+  connect: true, // true == connect, false == no connect to twitch (twitch disabled)
+  streamer: 'beautato',
+  clientid: '' // Client ID requires for all api calls https://blog.twitch.tv/client-id-required-for-kraken-api-calls-afbb8e95f843#.u4j475w2y
+    irc: {
+      server: 'irc.chat.twitch.tv', // irc.chat.twitch.tv
+      userName: 'katelibby', // twitch username of bot
+      realName: 'katelibby',
+      channels: ['#beautato'], // add #twitchusername
+      password: '', // for connecting to twitch, use https://twitchapps.com/tmi/,
+      port: 6667,
+      localAddress: null,
+      debug: false,
+      showErrors: false,
+      autoRejoin: false,
+      autoConnect: true,
+      secure: false,
+      selfSigned: false,
+      certExpired: false,
+      floodProtection: false,
+      floodProtectionDelay: 1000,
+      sasl: false,
+      retryCount: 0,
+      retryDelay: 2000,
+      stripColors: false,
+      channelPrefixes: "&#",
+      messageSplit: 512,
+      encoding: ''
+    },
   },
 
   irc: {
