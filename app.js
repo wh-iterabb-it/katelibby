@@ -3,12 +3,10 @@ import commands from './commands';
 import config from './helpers/config_helper';
 import urlRegex from './utils/url_regex';
 import logger from './utils/logger';
-// import { sanitize } from './utils/sanitize';
-import { randColor, color } from './utils/text_color';
+// import { randColor, color } from './utils/text_color';
 import irc from 'irc';
 import request from 'request';
 import entities from 'entities';
-
 
 // this may be moved to a new client file later
 // factory functions are hardly useful but i wanted use them
@@ -19,21 +17,35 @@ const Bot = {
     this.commands = commands;
     this.nick = '';
     this.commandPattern = new RegExp('^' + this.config.commandChar + '(\\w+) ?(.*)');
-    this.connect();
-    this.messageHandler();
+    this.connect(); // Connection to normal IRC
+    this.messageHandler(); // Normal messageHandler for IRC
   },
   connect() {
-    this.logger.info('connecting to ' + this.config.server + ' ' + this.config.irc.userName);
-    this.client = new irc.Client(
-      this.config.server,
-      this.config.irc.userName,
-      {
-        ...this.config.irc,
+    if (this.config.twitch.connect) {
+      this.logger.info('connecting to ' + this.config.twitch.irc.server + ' ' + this.config.twitch.irc.userName);
+      this.client = new irc.Client(
+        this.config.twitch.irc.server,
+        this.config.twitch.irc.userName,
+        {
+          ...this.config.twitch.irc,
+        });
+      this.client.on('registered', (message) => {
+        this.logger.info(message);
+        this.nick = message.args[0];
       });
-    this.client.on('registered', (message) => {
-      this.logger.info(message);
-      this.nick = message.args[0];
-    });
+    } else {
+      this.logger.info('connecting to ' + this.config.irc.server + ' ' + this.config.irc.userName);
+      this.client = new irc.Client(
+        this.config.irc.server,
+        this.config.irc.userName,
+        {
+          ...this.config.irc,
+        });
+      this.client.on('registered', (message) => {
+        this.logger.info(message);
+        this.nick = message.args[0];
+      });
+    }
     this.logger.info('connected');
   },
   messageHandler() {
@@ -59,8 +71,8 @@ const Bot = {
   },
   say(to, message) {
     this.logger.info('say: ' + to + ' ' + message);
-    const newText = irc.colors.wrap('cyan', message);
-    this.client.say(to, newText);
+    // const newText = irc.colors.wrap('cyan', message);
+    this.client.say(to, message);
   },
   isURL(str) {
     if (str.length < 2083 && (str.match(urlRegex))) {
