@@ -6,6 +6,10 @@ katelibby
 
 katelibby is a node IRC bot.
 
+### Installation
+
+`npm install --no-optional`
+
 ### Example Usage
 
 `node ./bin/start --config ./config/config.js`
@@ -28,9 +32,11 @@ katelibby is a node IRC bot.
 
 `!luck`     - Test your luck, and see how good it is
 
-`!mtastatus`- returns the MTA status of the certain line.
+`!mtastatus`- Gets MTA status of subway
 
 `!in`       - remind you of something at a different time
+
+`!uptime`   - Calculates the amount of uptime of Kate
 
 `!w `       - Returns weather from underground weather,  !w only allows 500 calls a day and 10 a minute
 
