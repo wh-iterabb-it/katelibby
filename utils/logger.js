@@ -1,7 +1,8 @@
 import { Logger, transports } from 'winston';
 
-export let name = new Date();
-name = './logs/' + name.toISOString() + '.log';
+const date = new Date();
+export const name = './logs/' + date.toISOString() + '.log';
+
 const logger = new (Logger)({
   transports: [
     // new (transports.Console)({
