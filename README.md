@@ -18,6 +18,15 @@ katelibby is a node IRC bot.
 
 Currently katelibby bot is supported for IRC, Twitch and Slack connections. 
 
+#### Basic IRC Usage
+
+
+
+#### Twitch Usage
+
+
+#### Slack Usage
+
 
 ### Command Reference
 ---
