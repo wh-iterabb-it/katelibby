@@ -32,7 +32,7 @@ function connect(callback) {
   callback.logger.info('connected');
 }
 
-function onMessage(from, to, text, message, callback) {
+function initMessage(from, to, text, message, callback) {
   const target = (to === callback.nick ? from : to);
   const match = text.match(callback.commandPattern);
   callback.logger.info(message);
@@ -52,6 +52,11 @@ function onMessage(from, to, text, message, callback) {
   }
 }
 
+function onMessage(from, to, text, message, callback) {
+  const target = (to === callback.nick ? from : to);
+  callback.say(target, 'test ' + target + '!');
+}
+
 function onKick(from, to, text, message, callback) {
   const target = (to === callback.nick ? from : to);
   callback.say(target, 'Goodbye ' + target + '!');
@@ -69,6 +74,7 @@ module.exports = (callback) => {
     onMessage(from, to, text, message, callback);
   });
   callback.client.on('join', (from, to, text, message) => {
+    initMessage(from, to, text, message, callback);
     onJoin(from, to, text, message, callback);
   });
   callback.client.on('kick', (from, to, text, message) => {
