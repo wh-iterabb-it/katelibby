@@ -14,6 +14,19 @@ katelibby is a node IRC bot.
 
 `node ./bin/start --config ./config/config.js`
 
+### Configuration
+
+Currently katelibby bot is supported for IRC, Twitch and Slack connections. 
+
+#### Basic IRC Usage
+
+
+
+#### Twitch Usage
+
+
+#### Slack Usage
+
 
 ### Command Reference
 ---
