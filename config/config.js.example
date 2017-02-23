@@ -55,6 +55,12 @@ const config = {
     key: 'steelbeams'
   },
 
+  // World of warcraft API to check on characters.
+  // https://dev.battle.net/io-docs
+  wow: {
+    key: 'steelbeams',
+  },
+
   debug: true,
   showErrors: true,
 
