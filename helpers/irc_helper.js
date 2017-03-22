@@ -3,14 +3,29 @@ import commands from '../commands';
 import config from './config_helper';
 
 function connect(callback) {
-  if (config.twitch.connect) {
+  if (config.twitch.connect) { // Twitch Connection
     callback.logger.info('connecting to ' + config.twitch.irc.server +
     ' ' + config.twitch.irc.userName);
     callback.client = new irc.Client(
-      config.twitch.irc.server,
-      config.twitch.irc.userName,
+      config.twitch.server,
+      config.irc.userName,
       {
-        ...config.twitch.irc,
+        config.irc.password,
+        ...config.irc,
+      });
+    callback.client.on('registered', (message) => {
+      callback.logger.info(message);
+      callback.nick = message.args[0];
+    });
+  } else if (config.slack.connect) { // Slack Connection
+    callback.logger.info('connecting to ' + config.slack.server +
+    ' ' + config.twitch.irc.userName);
+    callback.client = new irc.Client(
+      config.slack.server,
+      config.irc.userName,
+      {
+         config.slack.password,
+        ...config.irc,
       });
     callback.client.on('registered', (message) => {
       callback.logger.info(message);
