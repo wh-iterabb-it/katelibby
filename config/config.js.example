@@ -46,19 +46,13 @@ const config = {
 
   // Giphy API key
   giphy: {
-    key: 'steelbeams'
+    key: ''
   },
 
   // Weather Underground API key
   // only allows 500 calls a day and 10 a minute
   wunderground: {
-    key: 'steelbeams'
-  },
-
-  // World of warcraft API to check on characters.
-  // https://dev.battle.net/io-docs
-  wow: {
-    key: 'steelbeams',
+    key: ''
   },
 
   debug: true,
