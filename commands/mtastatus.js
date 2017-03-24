@@ -1,6 +1,7 @@
 import Mta from 'mta-gtfs';
 import { sanitize } from '../utils/sanitize';
 import irc from 'irc';
+import striptags from 'striptags';
 
 const line_colors = {
   '123': 'light_red',
@@ -88,8 +89,8 @@ module.exports = (callback, target, from, args) => {
     subway.map((currentLine) => {
       if (currentLine.name === lineName) {
         let outStatus = sanitize(currentLine.name) + ': ' +
-          sanitize(currentLine.status);
-        let outText = sanitize(currentLine.text);
+          sanitize(striptags(currentLine.status));
+        let outText = sanitize(striptags(currentLine.text));
         if (color) {
           outStatus = irc.colors.wrap(color, outStatus);
           outText = irc.colors.wrap(color, outText);
