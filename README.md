@@ -62,7 +62,7 @@ channels: ['#destiny'],
 
 `!8ball`    - Ask a question, get an answer
 
-`catfacts`  - Get a random catfact in chat
+`catfacts`  - Get a random cat fact in chat
 
 `!fortune`  - Check your fortune
 
@@ -75,6 +75,8 @@ channels: ['#destiny'],
 `!in`       - Has kate send your message as a reminder to you at a certain time.
 
 `!luck`     - Test your luck, and see how good it is
+
+`!ronswanson`- Get a random Ron Swanson quote 
 
 `!mtastatus`- Gets MTA status of subway
 
