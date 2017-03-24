@@ -10,7 +10,7 @@ function connect(callback) {
       config.twitch.server,
       config.irc.userName,
       {
-        config.irc.password,
+        'password': config.twitch.password,
         ...config.irc,
       });
     callback.client.on('registered', (message) => {
@@ -24,7 +24,7 @@ function connect(callback) {
       config.slack.server,
       config.irc.userName,
       {
-         config.slack.password,
+        'password': config.slack.password,
         ...config.irc,
       });
     callback.client.on('registered', (message) => {
@@ -47,7 +47,8 @@ function connect(callback) {
   callback.logger.info('connected');
 }
 
-function initMessage(from, to, text, message, callback) {
+// intializes the message handler for the remander of the instance.
+function onMessage(from, to, text, message, callback) {
   const target = (to === callback.nick ? from : to);
   const match = text.match(callback.commandPattern);
   callback.logger.info(message);
@@ -67,10 +68,10 @@ function initMessage(from, to, text, message, callback) {
   }
 }
 
-function onMessage(from, to, text, message, callback) {
-  const target = (to === callback.nick ? from : to);
-  callback.say(target, 'test ' + target + '!');
-}
+// function onMessage(from, to, text, message, callback) {
+//   const target = (to === callback.nick ? from : to);
+//   callback.say(target, 'test ' + target + '!');
+// }
 
 function onKick(from, to, text, message, callback) {
   const target = (to === callback.nick ? from : to);
@@ -79,7 +80,7 @@ function onKick(from, to, text, message, callback) {
 
 function onJoin(from, to, text, message, callback) {
   const target = (to === callback.nick ? from : to);
-  callback.say(target, 'Welcome ' + target + '!');
+  callback.say(target, 'Hello  ' + target + '!');
 }
 
 module.exports = (callback) => {
@@ -89,7 +90,6 @@ module.exports = (callback) => {
     onMessage(from, to, text, message, callback);
   });
   callback.client.on('join', (from, to, text, message) => {
-    initMessage(from, to, text, message, callback);
     onJoin(from, to, text, message, callback);
   });
   callback.client.on('kick', (from, to, text, message) => {
