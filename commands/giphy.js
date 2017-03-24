@@ -13,25 +13,29 @@ module.exports = (callback, target, from, args) => {
         return 'help';
     }
   }
-  const url = api_url + querystring.stringify({
-    q: args,
-    api_key: callback.config.giphy.key,
-    limit: 10,
-    offset: 0,
-  });
-  request({ url, json: true }, (error, response, body) => {
-    if (!error && response.statusCode === 200) {
-      if (typeof body.data[0] === 'undefined') {
-        callback.say(target, 'Are you trying to make me crash?');
-      } else {
-        const num = Math.floor(Math.random() * (body.data.length));
-
-        if (num > 1) {
-          callback.say(target, num + ':' + body.data[num].images.original.url);
+  if (callback.config.giphy.key.length < 1) {
+    callback.say(target, 'Please add an API key to the configuration file.');
+  } else {
+    const url = api_url + querystring.stringify({
+      q: args,
+      api_key: callback.config.giphy.key,
+      limit: 10,
+      offset: 0,
+    });
+    request({ url, json: true }, (error, response, body) => {
+      if (!error && response.statusCode === 200) {
+        if (typeof body.data[0] === 'undefined') {
+          callback.say(target, 'Are you trying to make me crash?');
         } else {
-          callback.say(target, 'No!');
+          const num = Math.floor(Math.random() * (body.data.length));
+
+          if (num > 1) {
+            callback.say(target, num + ':' + body.data[num].images.original.url);
+          } else {
+            callback.say(target, 'No!');
+          }
         }
       }
-    }
-  });
+    });
+  }
 };
