@@ -18,10 +18,9 @@ module.exports = (callback, target, from, args) => {
       }
       callback.logger.info('response returned with statuscode: ' +
         res.statusCode);
-        console.log(res);
       if (res.links && res.links.length) {
-        if (res.links[0].title.match(/Images for/i) != null) {
-          callback.say(target, res.links[1].title + ' - ' + res.links[0].href);
+        if (res.links[0].title.match(/(Images|News)/i) != null) {
+          callback.say(target, res.links[1].title + ' - ' + res.links[1].href);
           callback.say(target, res.links[1].description);
         } else {
           // link.href is an alias for link.link

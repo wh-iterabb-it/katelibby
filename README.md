@@ -54,8 +54,6 @@ For example to connect to [Destiny](http://twitch.com/destiny)'s stream channel 
 channels: ['#destiny'],
 ```
 
-
-
 #### Slack Usage
 
 
@@ -63,6 +61,8 @@ channels: ['#destiny'],
 ---
 
 `!8ball`    - Ask a question, get an answer
+
+`catfacts`  - Get a random catfact in chat
 
 `!fortune`  - Check your fortune
 
