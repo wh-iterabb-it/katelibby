@@ -29,6 +29,17 @@ node ./bin/start --config /home/username/config/config.js
 Currently katelibby bot is supported for IRC, Twitch and Slack connections.
 Simply copy the `./config/config.js.example` and rename it as `./config/config.js`.
 
+
+#### Basic IRC Usage
+
+By default the bot is setup to run looking for an irc server at `localhost`,
+Simply change the `server` field to reflect which irc server you would like to connect to.
+Also Kate can connect to multiple channels at the same time, by default it will connect to `#general` and a test channel called [#dangerroom](https://en.wikipedia.org/wiki/Danger_Room). Simply add more channels to the array separated by a comma.
+```    
+channels: ['#general, #dangerroom'],
+```
+
+### Advanced Configuration
 Several of the commands depend on having API keys in the configuration file.
 To use the `!giphy` command go to their [api page](https://api.giphy.com/) to get a key.
 Put that key in the `config.js`,
@@ -49,15 +60,6 @@ giphy: {
 },
 ```
 
-#### Basic IRC Usage
-
-By default the bot is setup to run looking for an irc server at `localhost`,
-Simply change the `server` field to reflect which irc server you would like to connect to.
-Also Kate can connect to multiple channels at the same time, by default it will connect to `#general` and a test channel called [#dangerroom](https://en.wikipedia.org/wiki/Danger_Room). Simply add more channels to the array separated by a comma.
-```    
-channels: ['#general, #dangerroom'],
-```
-
 #### Twitch Usage
 
 The connection to twitch is controlled in the config, change the boolean field `connect` to `true` for twitch.
@@ -74,8 +76,6 @@ channels: ['#destiny'],
 ```
 
 #### Slack Usage
-
-#### Advanced Configuration 
 
 
 ### Command Reference
