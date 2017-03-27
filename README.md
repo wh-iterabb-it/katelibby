@@ -40,23 +40,25 @@ channels: ['#general, #dangerroom'],
 ```
 
 ### Advanced Configuration
-Several of the commands depend on having API keys in the configuration file.
-To use the `!giphy` command go to their [api page](https://api.giphy.com/) to get a key.
-Put that key in the `config.js`,
-```  
-// Weather Underground API key
-// only allows 500 calls a day and 10 a minute
-wunderground: {
-  key: 'keyhere',
-},
-```
 
-To get current weather by location, go to weather underground's [api page](https://www.wunderground.com/weather/api/) to get started, make an account and get a key.
+Several of the commands depend on having API keys in the configuration file.
+To use the `!giphy` command go to the giphy [api page](https://api.giphy.com/) to get a key.
 Put that key in the `config.js`,
 ```
 // Giphy API key
 giphy: {
   key: 'keyhere'
+},
+```
+
+To get current weather by location, go to weather underground's [api page](https://www.wunderground.com/weather/api/) to get started, make an account and get a key.
+Put that key in the `config.js`,
+
+```  
+// Weather Underground API key
+// only allows 500 calls a day and 10 a minute
+wunderground: {
+  key: 'keyhere',
 },
 ```
 
@@ -76,6 +78,16 @@ channels: ['#destiny'],
 ```
 
 #### Slack Usage
+
+To connect to slack you need to [activate a gateway](https://get.slack.help/hc/en-us/articles/201727913-Connect-to-Slack-over-IRC-and-XMPP) which requires administrative rights. After you complete enabling the gateway you will receive a password which you will put in the `config.js` file.
+
+```
+slack: {
+  connect: true,
+```
+
+
+
 
 
 ### Command Reference
