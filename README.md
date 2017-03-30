@@ -29,25 +29,6 @@ node ./bin/start --config /home/username/config/config.js
 Currently katelibby bot is supported for IRC, Twitch and Slack connections.
 Simply copy the `./config/config.js.example` and rename it as `./config/config.js`.
 
-Several of the commands depend on having API keys in the configuration file.
-To use the `!giphy` command go to their [api page](https://api.giphy.com/) to get a key.
-Put that key in the `config.js`,
-```  
-// Weather Underground API key
-// only allows 500 calls a day and 10 a minute
-wunderground: {
-  key: 'keyhere',
-},
-```
-
-To get current weather by location, go to weather underground's [api page](https://www.wunderground.com/weather/api/) to get started, make an account and get a key.
-Put that key in the `config.js`,
-```
-// Giphy API key
-giphy: {
-  key: 'keyhere'
-},
-```
 
 #### Basic IRC Usage
 
@@ -56,6 +37,29 @@ Simply change the `server` field to reflect which irc server you would like to c
 Also Kate can connect to multiple channels at the same time, by default it will connect to `#general` and a test channel called [#dangerroom](https://en.wikipedia.org/wiki/Danger_Room). Simply add more channels to the array separated by a comma.
 ```    
 channels: ['#general, #dangerroom'],
+```
+
+### Advanced Configuration
+
+Several of the commands depend on having API keys in the configuration file.
+To use the `!giphy` command go to the giphy [api page](https://api.giphy.com/) to get a key.
+Put that key in the `config.js`,
+```
+// Giphy API key
+giphy: {
+  key: 'keyhere'
+},
+```
+
+To get current weather by location, go to weather underground's [api page](https://www.wunderground.com/weather/api/) to get started, make an account and get a key.
+Put that key in the `config.js`,
+
+```  
+// Weather Underground API key
+// only allows 500 calls a day and 10 a minute
+wunderground: {
+  key: 'keyhere',
+},
 ```
 
 #### Twitch Usage
@@ -75,7 +79,15 @@ channels: ['#destiny'],
 
 #### Slack Usage
 
-#### Advanced Configuration 
+To connect to slack you need to [activate a gateway](https://get.slack.help/hc/en-us/articles/201727913-Connect-to-Slack-over-IRC-and-XMPP) which requires administrative rights. After you complete enabling the gateway you will receive a password which you will put in the `config.js` file.
+
+```
+slack: {
+  connect: true,
+```
+
+
+
 
 
 ### Command Reference

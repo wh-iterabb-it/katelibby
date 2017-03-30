@@ -19,7 +19,7 @@ module.exports = (callback, target, from, args) => {
       callback.logger.info('response returned with statuscode: ' +
         res.statusCode);
       if (res.links && res.links.length) {
-        if (res.links[0].title.match(/(Images|News)/i) != null) {
+        if (res.links[0].title.match(/(Images|News|Def)/i) != null) {
           callback.say(target, res.links[1].title + ' - ' + res.links[1].href);
           callback.say(target, res.links[1].description);
         } else {
