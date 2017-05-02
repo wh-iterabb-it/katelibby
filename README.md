@@ -6,6 +6,8 @@ katelibby
 
 katelibby is a node IRC bot.
 
+*Katelibby is still in development, after it has tests created it will have a production mode*
+
 ### Installation
 
 ```
