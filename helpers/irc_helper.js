@@ -11,7 +11,7 @@ function connect(callback) {
       config.irc.userName,
       {
         'password': config.twitch.password,
-        ...config.irc,
+        ...config.twitch.irc,
       });
     callback.client.on('registered', (message) => {
       callback.logger.info(message);
@@ -25,7 +25,7 @@ function connect(callback) {
       config.irc.userName,
       {
         'password': config.slack.password,
-        ...config.irc,
+        ...config.slack.irc,
       });
     callback.client.on('registered', (message) => {
       callback.logger.info(message);

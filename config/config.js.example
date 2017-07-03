@@ -1,5 +1,4 @@
 const config = {
-  server: 'localhost',
 
   commandChar: '!',
 
@@ -21,15 +20,15 @@ const config = {
 
   irc: {
     server: 'localhost',
+    port: 6667,
     userName: 'kate',
     realName: 'Kate Libby',
-    port: 6667,
     localAddress: null,
     debug: false,
     showErrors: false,
     autoRejoin: false,
     autoConnect: true,
-    channels: ['#general, #dangerroom'],
+    channels: ['#general', '#dangerroom'],
     secure: false,
     selfSigned: false,
     certExpired: false,
