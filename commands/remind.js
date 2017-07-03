@@ -1,5 +1,6 @@
 import chrono from 'chrono-node';
 import schedule from 'node-schedule';
+// import moment from 'moment';
 
 module.exports = (callback, target, from, args) => {
   if (typeof args !== 'undefined') {
@@ -16,9 +17,9 @@ module.exports = (callback, target, from, args) => {
   const parseResults = chrono.parse(args);
   const parseResult = parseResults && parseResults[0] ? parseResults[0] : null;
   if (parseResult) {
-    const when = parseResult.startDate;
+    const when = parseResult.start.assign('timezoneOffset', 'EST');
     const reminder = args.slice(parseResult.index +
-      parseResult.text.length + 2).trim();
+      parseResult.text.length + 1).trim();
 
     const nEvent = schedule.scheduleJob(when, () => {
       callback.say(target, from + ': ' + reminder);
