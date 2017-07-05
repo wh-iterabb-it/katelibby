@@ -21,8 +21,8 @@ function connect(callback) {
     callback.logger.info('connecting to ' + config.slack.server +
     ' ' + config.twitch.irc.userName);
     callback.client = new irc.Client(
-      config.slack.server,
-      config.irc.userName,
+      config.slack.irc.server,
+      config.slack.irc.userName,
       {
         'password': config.slack.password,
         ...config.slack.irc,
