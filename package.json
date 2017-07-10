@@ -56,7 +56,11 @@
     "eslint-plugin-import": "2.6.1",
     "eslint-plugin-react": "7.1.0",
     "mocha": "3.4.2"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/wh-iterabb-it/katelibby/issues"
+  },
+  "homepage": "https://github.com/wh-iterabb-it/katelibby#readme",
   "babel": {
     "plugins": [
       "syntax-trailing-function-commas",
