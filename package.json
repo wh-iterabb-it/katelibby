@@ -12,6 +12,12 @@
     "Eric Norris <https://github.com/ericnorris>",
     "Eric Turner <https://github.com/codemuch>"
   ],
+  "scripts": {
+    "test": "npm run build && mocha --compilers js:babel-core/register",
+    "start": "",
+    "start-dev": "node ./bin/start",
+    "build": "babel src -d build"
+  },
   "dependencies": {
     "babel-core": "6.18.0",
     "bluebird": "3.4.6",
