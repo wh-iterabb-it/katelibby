@@ -1,0 +1,30 @@
+const config = {
+
+  commandChar: '!',
+
+  twitch: {
+    connect: false,
+  },
+
+  slack: {
+    connect: false, 
+  },
+
+  irc: {
+    server: 'localhost',
+    userName: 'kate',
+    realName: 'Kate Libby',
+    port: 6667,
+    channels: ['#general','#random'],
+  },
+
+  giphy: {
+    key: ''
+  },
+
+  wunderground: {
+    key: ''
+  },
+};
+
+module.exports = config;

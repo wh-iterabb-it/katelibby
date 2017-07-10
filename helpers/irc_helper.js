@@ -11,7 +11,7 @@ function connect(callback) {
       config.irc.userName,
       {
         'password': config.twitch.password,
-        ...config.irc,
+        ...config.twitch.irc,
       });
     callback.client.on('registered', (message) => {
       callback.logger.info(message);
@@ -21,11 +21,11 @@ function connect(callback) {
     callback.logger.info('connecting to ' + config.slack.server +
     ' ' + config.twitch.irc.userName);
     callback.client = new irc.Client(
-      config.slack.server,
-      config.irc.userName,
+      config.slack.irc.server,
+      config.slack.irc.userName,
       {
         'password': config.slack.password,
-        ...config.irc,
+        ...config.slack.irc,
       });
     callback.client.on('registered', (message) => {
       callback.logger.info(message);
@@ -73,26 +73,51 @@ function onMessage(from, to, text, message, callback) {
 //   callback.say(target, 'test ' + target + '!');
 // }
 
-function onKick(from, to, text, message, callback) {
-  const target = (to === callback.nick ? from : to);
-  callback.say(target, 'Goodbye ' + target + '!');
+function onKick(channel, nick, by, reason, message, callback) {
+  callback.say(target, 'Goodbye !');
 }
 
-function onJoin(from, to, text, message, callback) {
-  const target = (to === callback.nick ? from : to);
+function onJoin(channel, nick, message, callback) {
+  const target = (nick === callback.nick ? channel : nick);
   callback.say(target, 'Hello  ' + target + '!');
+}
+
+function onTopic(channel, topic, nick, message, callback) {
+  const target = (to === callback.nick ? from : to);
+  callback.say(target, 'Topic:  ' + target + ' ' + topic);
 }
 
 module.exports = (callback) => {
   connect(callback);
 
+  /** function (nick, to, text, message) { }
+   * Emitted when a message is sent.  
+   * to can be either a nick (which is most likely this clients nick and means a private message), or a channel (which means a message to that channel).
+   * See the raw event for details on the message object.
+   */
   callback.client.on('message', (from, to, text, message) => {
     onMessage(from, to, text, message, callback);
   });
-  callback.client.on('join', (from, to, text, message) => {
-    onJoin(from, to, text, message, callback);
+
+  /** function (channel, nick, message) { }
+   * Emitted when a user joins a channel (including when the client itself joins a channel).
+   * See the raw event for details on the message object.
+   */
+  callback.client.on('join', (channel, nick, message) => {
+    onJoin(channel, nick, message, callback);
   });
-  callback.client.on('kick', (from, to, text, message) => {
-    onKick(from, to, text, message, callback);
+  /** function (channel, nick, by, reason, message) { }
+   * Emitted when a user is kicked from a channel. See the raw event for details on the message object.
+   */
+  callback.client.on('kick', (channel, nick, by, reason, message) => {
+    onKick(channel, nick, by, reason, message, callback);
+  });
+
+  /** function (channel, topic, nick, message) { }
+   * Emitted when the server sends the channel topic on joining a channel, or when a user changes 
+   * the topic on a channel. See the raw event for details on the message object. 
+   */
+  callback.client.on('topic', (channel, topic, nick, message) => {
+    onMessage(channel, topic, nick, message, callback);
   });
 };
