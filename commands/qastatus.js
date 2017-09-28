@@ -1,3 +1,6 @@
+import Github from '../lib/github';
+import config from '../helpers/config_helper';
+
 module.exports = (callback, target, from, args) => {
   if (typeof args !== 'undefined') {
     switch (args) {
