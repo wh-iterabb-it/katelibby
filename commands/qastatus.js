@@ -13,7 +13,8 @@ module.exports = (callback, target, from, args) => {
   }
   
   // Get all PRs from the repo,
-
+  Github.authorize();
+  let allPrs = Github.getOpenPRs();
 /**
  * Group the PRs into these categories
   * - QA Failed
@@ -21,6 +22,9 @@ module.exports = (callback, target, from, args) => {
   * - Needs QA
   * based on their respective labels
  */
+
+   
+  
 
   callback.say(target, 'tacobell');
 };
