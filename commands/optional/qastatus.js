@@ -1,4 +1,4 @@
-labels.preqa.nameimport githubAPI from 'github';
+import githubAPI from 'github';
 
 import config from '../helpers/config_helper';
 import logger from '../utils/logger';
