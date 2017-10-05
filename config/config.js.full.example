@@ -8,6 +8,7 @@ const config = {
       token: '', // this will be the auth token you use for github
     },
     owner: 'owner-of-repo', // the github org which owns a repo
+    repo: 'name-of-repo', // default repo to use with the github queries
     connect: {
         // optional
       debug: true,
