@@ -24,7 +24,7 @@ module.exports = (callback, target, from, args) => {
     'It doesn’t matter how long you’ve lived in New York. It’s still fun to look up and pretend all the buildings are giant severed robot penises.” (Episode 5.12, “Operation Righteous Cowboy Lightning”)',
     'Ugh, I hate January. It’s dark and freezing and everyone’s wearing bulky coats. You can do some serious subway flirting before you realize the guy is homeless.” (Episode 4.11, “Winter Madness”)',
     'For instance, Jack taught me not to wear tan slacks with a tan turtleneck. I thought it looked nice, but he, rightly, pointed out that it made me look like a giant condom.” (Episode 5.11, “Mrs. Donaghy”)',
-    'I pretty much just do whatever Oprah tells me to.” (Episode 1.17, “The Fighting Irish”)
+    'I pretty much just do whatever Oprah tells me to.” (Episode 1.17, “The Fighting Irish”)',
     'Okay, fine, maybe I’m a little old-fashioned. I’m sorry I’m a real woman and not some over-sexed New York nympho like those sluts on Everybody Loves Raymond.” (Episode 5.5, “Reaganing”)',
     'If I have learned anything from my Sims family: When a child doesn’t see his father enough he starts to jump up and down, then his mood level will drop until he pees himself.” (Episode 3.21, “Mamma Mia”)',
     'Tracy took advantage of my white guilt, which is supposed to be used only for good, like overtipping and supporting Barack Obama.” (Episode 1.5, “Jack-Tor”)',
