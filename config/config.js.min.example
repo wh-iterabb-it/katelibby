@@ -2,6 +2,27 @@ const config = {
 
   commandChar: '!',
 
+  github: {
+    auth: {
+      type: 'oauth',
+      token: '',
+    },
+    owner: 'owner-of-repo',
+    repo: 'name-of-repo',
+    connect: {
+        // optional
+      debug: true,
+      protocol: 'https',
+      host: 'api.github.com',
+      pathPrefix: '/api/v3',
+      headers: {
+          'user-agent': ''
+      },
+      followRedirects: false,
+      timeout: 5000
+    }
+  },
+
   twitch: {
     connect: false,
   },
