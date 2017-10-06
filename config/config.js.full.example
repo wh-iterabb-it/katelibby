@@ -2,6 +2,27 @@ const config = {
 
   commandChar: '!',
 
+  github: {
+    auth: {
+      type: 'oauth',
+      token: '', // this will be the auth token you use for github
+    },
+    owner: 'owner-of-repo', // the github org which owns a repo
+    repo: 'name-of-repo', // default repo to use with the github queries
+    connect: {
+        // optional
+      debug: true,
+      protocol: 'https',
+      host: 'api.github.com',
+      pathPrefix: '/api/v3',
+      headers: {
+          'user-agent': '' // custom useragent
+      },
+      followRedirects: false, // default: true; there's currently an issue with non-get redirects, so allow ability to disable follow-redirects
+      timeout: 5000
+    }
+  },
+
   twitch: {
     connect: false, // true == connect, false == no connect to twitch (twitch disabled)
     streamer: 'streamernamehere',
