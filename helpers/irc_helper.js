@@ -17,6 +17,40 @@ function connect(callback) {
   callback.logger.info('connected');
 }
 
+function connectTwitch(callback) {
+  // Twitch Connection
+  callback.logger.info('connecting to ' + config.twitch.irc.server +
+  ' ' + config.twitch.irc.userName);
+  callback.client = new irc.Client(
+    config.twitch.server,
+    config.irc.userName,
+    {
+      'password': config.twitch.password,
+      ...config.twitch.irc,
+    });
+      
+  callback.client.on('registered', (message) => {
+    callback.logger.info(message);
+    callback.nick = message.args[0];
+  });
+}
+
+function connectSlack(callback) {
+  // Slack Connection
+  callback.logger.info('connecting to ' + config.slack.server +
+  ' ' + config.twitch.irc.userName);
+  callback.client = new irc.Client(
+    config.slack.irc.server,
+    config.slack.irc.userName,
+    {
+      'password': config.slack.password,
+      ...config.slack.irc,
+    });
+  callback.client.on('registered', (message) => {
+    callback.logger.info(message);
+    callback.nick = message.args[0];
+  });
+}
 // intializes the message handler for the remander of the instance.
 function onMessage(from, to, text, message, callback) {
   const target = (to === callback.nick ? from : to);
