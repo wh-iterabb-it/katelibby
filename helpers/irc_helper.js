@@ -61,10 +61,10 @@ function onMessage(from, to, text, message, callback) {
     } else {
       callback.say(target, 'Sorry, I do not know that command');
     }
-  } else if (callback.isURL(text)) {
-    callback.getTitle(callback.isURL(text), to);
-  } else if (callback.isSUB(text)) {
-    callback.say(target, callback.getSub(callback.isSUB(text)));
+  // } else if (callback.isURL(text)) {
+  //  callback.getTitle(callback.isURL(text), to);
+  // } else if (callback.isSUB(text)) {
+  //  callback.say(target, callback.getSub(callback.isSUB(text)));
   }
 }
 
