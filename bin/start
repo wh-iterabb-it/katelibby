@@ -33,6 +33,8 @@ function start(id) {
 }
 
 throng({
-  workers: 1,
-  start,
+    workers: 1
+  }, (id) => { 
+    start(id);
+  }
 });
