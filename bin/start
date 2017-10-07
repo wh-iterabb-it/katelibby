@@ -1,3 +1,4 @@
+
 #!/usr/bin/env node --use_strict
 
 require('babel-core/register');
@@ -7,7 +8,10 @@ const throng = require('throng');
 
 const config = require('../helpers/config_helper').default;
 const logger = require('../utils/logger').default;
+
+
 const kate = require('../app.js');
+
 
 function start(id) {
   logger.info(`Starting Worker ${id}`);
@@ -21,7 +25,7 @@ function start(id) {
     }
   });
 
-  // typical SIGTERM message handler
+  // typical throng SIGTERM message handler
   process.on('SIGTERM', () => {
     logger.info(`worker ${id} exiting...`);
     process.exit(1);
@@ -29,8 +33,6 @@ function start(id) {
 }
 
 throng({
-    workers: 1
-  }, (id) => { 
-    start(id);
-  }
+  workers: 1,
+  start,
 });
