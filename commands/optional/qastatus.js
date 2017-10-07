@@ -183,7 +183,7 @@ module.exports = (callback, target, from, args) => {
               }, (err, ras) => {
                 ras.data.forEach((label,idx, array) => {
                   if(label.name === labels.preqa.name){
-                    callback.say(target, labels.preqa.symbol +' '+ pr.title.replace(/-/g, ' ')) + 
+                    callback.say(target, labels.preqa.symbol +' '+ pr.title.replace(/-/g, ' ') + 
                       'https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
                   }
                   if (idx === array.length - 1) { 
