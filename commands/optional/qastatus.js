@@ -13,7 +13,6 @@ import logger from '../utils/logger';
  *    repo: config.github.repo,
  */
 
-
 /** 
  * const teams - Acceptable ticket prefixes
  * If you want to add some sort of prefix, so you can sort the tickets by name, 
@@ -86,7 +85,7 @@ module.exports = (callback, target, from, args) => {
             }, (err, ras) => {
               ras.data.forEach((label,idx, array) => {
                 if(label.name === labels.qapass.name){
-                  callback.say(target, labels.qapass.symbol + pr.title.replace(/-/g, ' ') +
+                  callback.say(target, labels.qapass.symbol + ' ' + pr.title.replace(/-/g, ' ') +
                     ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
                 }
                 if (idx === array.length - 1) { 
@@ -183,7 +182,7 @@ module.exports = (callback, target, from, args) => {
               }, (err, ras) => {
                 ras.data.forEach((label,idx, array) => {
                   if(label.name === labels.preqa.name){
-                    callback.say(target, labels.preqa.symbol +' '+ pr.title.replace(/-/g, ' ') + 
+                    callback.say(target, labels.preqa.symbol + ' ' + pr.title.replace(/-/g, ' ') + 
                       ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
                   }
                   if (idx === array.length - 1) { 
