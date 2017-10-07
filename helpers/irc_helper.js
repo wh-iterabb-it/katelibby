@@ -81,10 +81,10 @@ function onKick(channel, nick, by, reason, message, callback) {
   callback.say(target, 'Goodbye !');
 }
 
-/*function onJoin(channel, nick, message, callback) {
-  const target = (nick === callback.nick ? channel : nick);
-  callback.say(target, 'Hello  ' + target + '!');
-}*/
+function onJoin(channel, nick, message, callback) {
+  // const target = (nick === callback.nick ? channel : nick);
+  // callback.say(target, 'Hello  ' + target + '!');
+}
 
 function onTopic(channel, topic, nick, message, callback) {
   const target = (to === callback.nick ? from : to);
