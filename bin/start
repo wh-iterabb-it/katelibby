@@ -1,4 +1,3 @@
-
 #!/usr/bin/env node --use_strict
 
 require('babel-core/register');
