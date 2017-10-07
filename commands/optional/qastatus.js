@@ -87,7 +87,7 @@ module.exports = (callback, target, from, args) => {
               ras.data.forEach((label,idx, array) => {
                 if(label.name === labels.qapass.name){
                   callback.say(target, labels.qapass.symbol + pr.title.replace(/-/g, ' ') +
-                    'https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
+                    ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
                 }
                 if (idx === array.length - 1) { 
                   resolve(1);
@@ -120,7 +120,7 @@ module.exports = (callback, target, from, args) => {
                 ras.data.forEach((label,idx, array) => {
                   if(label.name === labels.qafail.name){
                     callback.say(target, labels.qafail.symbol +' '+ pr.title.replace(/-/g, ' ') +
-                      'https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
+                      ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
                   }
                   if (idx === array.length - 1) { 
                     resolve(1);
@@ -152,7 +152,7 @@ module.exports = (callback, target, from, args) => {
                 ras.data.forEach((label,idx, array) => {
                   if(label.name === labels.inqa.name){
                     callback.say(target, labels.inqa.symbol +' '+ pr.title.replace(/-/g, ' ') +
-                      'https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
+                      ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
                   }
                   if (idx === array.length - 1) { 
                     resolve(1);
@@ -184,7 +184,7 @@ module.exports = (callback, target, from, args) => {
                 ras.data.forEach((label,idx, array) => {
                   if(label.name === labels.preqa.name){
                     callback.say(target, labels.preqa.symbol +' '+ pr.title.replace(/-/g, ' ') + 
-                      'https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
+                      ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
                   }
                   if (idx === array.length - 1) { 
                     resolve(1);
