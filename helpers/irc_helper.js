@@ -81,10 +81,10 @@ function onKick(channel, nick, by, reason, message, callback) {
   callback.say(target, 'Goodbye !');
 }
 
-function onJoin(channel, nick, message, callback) {
+/*function onJoin(channel, nick, message, callback) {
   const target = (nick === callback.nick ? channel : nick);
   callback.say(target, 'Hello  ' + target + '!');
-}
+}*/
 
 function onTopic(channel, topic, nick, message, callback) {
   const target = (to === callback.nick ? from : to);
@@ -94,7 +94,7 @@ function onTopic(channel, topic, nick, message, callback) {
 module.exports = (callback) => {
   connect(callback);
 
-  /** function (nick, to, text, message) { }
+  /**
    * Emitted when a message is sent.  
    * to can be either a nick (which is most likely this clients nick and means a private message), or a channel (which means a message to that channel).
    * See the raw event for details on the message object.
