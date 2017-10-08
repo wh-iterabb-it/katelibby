@@ -10,7 +10,7 @@ module.exports = (callback, target, from, args) => {
         callback.say(target, 'Syntax is ' + callback.config.commandChar +
         'in { time, date, or amount of time to pass } { thing to remind you of }');
         callback.say(target, 'Example: ' + callback.config.commandChar +
-        'in 4:20pm tomorrow Blaze it!');
+        'in noon tomorrow Lunch Time!');
         return 'help';
     }
   }
