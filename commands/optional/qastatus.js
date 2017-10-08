@@ -19,7 +19,7 @@ import logger from '../utils/logger';
  * add additional things to the array, such as 'teamname1', 'teamname2', ect
  * this way you can sort between teams with the command
  */
-const teams = ['ALL'];
+const teams = ['ALL','team1','team2'];
 const labels = {
   preqa: {
     name: 'Ready for QA',
