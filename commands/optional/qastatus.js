@@ -69,6 +69,8 @@ module.exports = (callback, target, from, args) => {
   } else {
     var formula = '('+args.toUpperCase()+'-)';
   }
+  
+  // setup a promise chain that will run once for each label word
   var qaPass = new Promise((resolve, reject) => {
     instance.pullRequests.getAll({
       owner: config.github.owner,

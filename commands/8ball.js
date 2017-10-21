@@ -9,7 +9,7 @@ module.exports = (callback, target, from, args) => {
     }
   }
   const li = [
-    '45 seconds full throttle',
+    // '45 seconds full throttle',
     'It is certain',
     'It is decidedly so',
     'Without a doubt',
@@ -26,7 +26,7 @@ module.exports = (callback, target, from, args) => {
     'Better not tell you now',
     'Cannot predict now',
     'Concentrate and ask again',
-    'I am sorry, too high to respond',
+    // 'I am sorry, too high to respond',
     'I think we both know the answer to that',
     'Hah!',
     'Don\'t count on it',
