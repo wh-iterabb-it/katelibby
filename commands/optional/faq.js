@@ -19,7 +19,6 @@ module.exports = (callback, target, from, args) => {
     'The next release will be deployed later',
     'We plan on releasing the next release soon',
     'The next release comes out at exactly {{ DATABASE ERROR TABLE RELEASE TIME NOT FOUND }}',
-    'Remember good code can not be rushed, next release will be soon',
   ];
   callback.say(target, li[Math.floor(Math.random() * li.length)]);
   callback.say(target, 'faq')]);
