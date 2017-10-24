@@ -9,6 +9,7 @@ const config = {
     },
     owner: 'owner-of-repo',
     repo: 'name-of-repo',
+    release_branch: 'name-of-release-branch',
     connect: {
         // optional
       debug: true,
@@ -28,7 +29,7 @@ const config = {
   },
 
   slack: {
-    connect: false, 
+    connect: false,
   },
 
   irc: {
