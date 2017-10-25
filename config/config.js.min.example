@@ -9,7 +9,6 @@ const config = {
     },
     owner: 'owner-of-repo',
     repo: 'name-of-repo',
-    release_tag: 'name-of-release-tag',
     connect: {
         // optional
       debug: true,

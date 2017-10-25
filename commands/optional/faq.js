@@ -4,6 +4,7 @@ import config from '../helpers/config_helper';
 import logger from '../utils/logger';
 
 const ooo_msg = 'http://';
+const release_url = 'https://';
 
 module.exports = (callback, target, from, args) => {
   if (typeof args !== 'undefined') {
@@ -25,10 +26,9 @@ module.exports = (callback, target, from, args) => {
         });
 
         let currentRelease = new Promise((resolve, reject) => {
-          instance.repos.getReleaseByTag({
+          instance.repos.getLatestRelease({
             owner: config.github.owner,
             repo: config.github.repo,
-            tag: config.github.release_tag,
           }, (err, res) => {
             if (!err) {
               logger.info('request complete, return');
