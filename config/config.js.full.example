@@ -9,6 +9,7 @@ const config = {
     },
     owner: 'owner-of-repo', // the github org which owns a repo
     repo: 'name-of-repo', // default repo to use with the github queries
+    release_branch: 'name-of-release-branch',
     connect: {
         // optional
       debug: true,
