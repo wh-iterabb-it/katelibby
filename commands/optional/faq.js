@@ -1,6 +1,7 @@
 import githubAPI from 'github';
 
 import config from '../helpers/config_helper';
+import logger from '../utils/logger';
 
 const ooo_msg = 'http://';
 
@@ -53,6 +54,14 @@ module.exports = (callback, target, from, args) => {
         ];
         callback.say(target, li[Math.floor(Math.random() * li.length)]);
         return 'deploy';
+      default:
+        callback.say(target, 'I do not know that subject');
+        callback.say(target, 'Please type `!faq help` to get help.');
+        return 'error';
     }
+  } else {
+    callback.say(target, 'I do not know that subject');
+    callback.say(target, 'Please type `!faq help` to get help.');
   }
+  return 'error';
 };
