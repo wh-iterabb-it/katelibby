@@ -25,14 +25,15 @@ module.exports = (callback, target, from, args) => {
         });
 
         let currentRelease = new Promise((resolve, reject) => {
-          instance.repos.getBranch({
+          instance.repos.getReleaseByTag({
             owner: config.github.owner,
             repo: config.github.repo,
-            branch: config.github.release_branch,
+            tag: config.github.release_tag,
           }, (err, res) => {
             if (!err) {
               logger.info('request complete, return');
-              callback.say(target, res.data.commit.message);
+              callback.say(target, res.data.name);
+              callback.say(target, res.data.body);
               resolve(0);
               return 'release';
             } else {
