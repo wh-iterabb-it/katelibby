@@ -28,7 +28,7 @@ const config = {
   },
 
   slack: {
-    connect: false, 
+    connect: false,
   },
 
   irc: {
