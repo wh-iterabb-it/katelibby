@@ -1,6 +1,6 @@
 import { toHHMMSS } from '../utils/sanitize';
 import pjson from '../package.json';
-console.log(pjson.version);
+
 module.exports = (callback, target, from, args) => {
   if (typeof args !== 'undefined') {
     switch (args.toLowerCase()) {
