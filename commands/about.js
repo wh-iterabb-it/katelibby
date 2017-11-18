@@ -4,8 +4,6 @@ import pjson from '../package.json';
 module.exports = (callback, target, from, args) => {
   if (typeof args !== 'undefined') {
     switch (args.toLowerCase()) {
-      case 'help':
-
       case 'uptime':
         let time = process.uptime();
         let uptime = toHHMMSS(time + '');
