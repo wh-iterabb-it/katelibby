@@ -3,6 +3,29 @@ import githubAPI from 'github';
 import config from '../helpers/config_helper';
 import logger from '../utils/logger';
 
+function getJiraRegex () {
+  const teams = ['ALL','team1','team2'];
+
+  let regex = '((';
+
+  for (i = 0; i < teams.length; i++) {
+    let team_characters = teams[i].split('');
+    for (u = 0; u < team_characters.length; u++) {
+      regex += '[';
+      regex += team_characters[u].toUpperCase();
+      regex += team_characters[u].toLowerCase();
+      regex += ']';
+    };
+    if (i != teams.length - 1) {
+      regex += '|';
+    }
+  }
+  regex += '+)([-|\\ ]+)([0-9]+))';
+
+  console.log(regex);
+  return regex;
+}
+
 /** 
  * Github - qastatus command
  * This will fetch the QA status from open PRs in a specified github repo. 
@@ -20,6 +43,9 @@ import logger from '../utils/logger';
  * this way you can sort between teams with the command
  */
 const teams = ['ALL','team1','team2'];
+
+
+
 const labels = {
   preqa: {
     name: 'Ready for QA',
