@@ -11,7 +11,7 @@
     "Beau Bouchard <https://github.com/BeauBouchard>",
     "Eric Norris <https://github.com/ericnorris>",
     "Eric Turner <https://github.com/codemuch>",
-    "Ash Kamel <https://github.com/ajkamel>
+    "Ash Kamel <https://github.com/ajkamel>"
   ],
   "scripts": {
     "test": "npm run build && mocha --compilers js:babel-core/register",
