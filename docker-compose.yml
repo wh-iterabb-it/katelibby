@@ -1,0 +1,10 @@
+version: "3"
+services:
+  katelibby:
+    container_name: katelibby
+    build: .
+    command: ["npm", "run-script", "start"]
+    ports:
+      - "6001"
+    volumes:
+      - ${PWD}/var/service
