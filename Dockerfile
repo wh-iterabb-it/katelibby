@@ -11,8 +11,8 @@ COPY package.json /tmp/
 
 RUN cd /tmp && npm install
 
-WORKDIR /var/www
-COPY . /var/www
+WORKDIR /var/service
+COPY . /var/service
 
 RUN mv /tmp/node_modules node_modules
 
