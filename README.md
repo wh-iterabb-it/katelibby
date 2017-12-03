@@ -1,6 +1,8 @@
 katelibby
 =========
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/wh-iterabb-it/katelibby.svg)](https://greenkeeper.io/)
+
 
 ### Description:
 
