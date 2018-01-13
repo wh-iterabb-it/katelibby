@@ -28,7 +28,7 @@ module.exports = (callback, target, from, args) => {
       "-": '',
       "_": '',
      };
-    const reg = /[&<>"'/]/ig;
+    const reg = /[&<>"'/.*-_]/ig;
     const clean = args.replace(reg, (match)=>(map[match]));
     const url = api_url + clean + '.json';
     request(url, (error, response, body) => {
