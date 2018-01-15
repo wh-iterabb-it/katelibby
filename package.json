@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "test": "npm run build && mocha --compilers js:babel-core/register",
-    "start": "",
+    "start": "node ./bin/start",
     "start-dev": "node ./bin/start",
     "build": "babel src -d build"
   },
