@@ -16,6 +16,6 @@ COPY . /var/service
 
 RUN mv /tmp/node_modules node_modules
 
-EXPOSE 5872
+EXPOSE 3554
 
 CMD ["npm", "start"]
