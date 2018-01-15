@@ -5,6 +5,6 @@ services:
     build: .
     command: ["npm", "run-script", "start"]
     ports:
-      - "5872"
+      - "3554"
     volumes:
       - ${PWD}/var/service
