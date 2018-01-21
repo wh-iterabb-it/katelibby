@@ -1,4 +1,5 @@
 import irc from 'irc';
+
 import commands from '../commands';
 import config from './config_helper';
 
@@ -28,7 +29,7 @@ function connectTwitch(callback) {
       'password': config.twitch.password,
       ...config.twitch.irc,
     });
-      
+
   callback.client.on('registered', (message) => {
     callback.logger.info(message);
     callback.nick = message.args[0];
@@ -54,6 +55,10 @@ function connectSlack(callback) {
 // intializes the message handler for the remander of the instance.
 function onMessage(from, to, text, message, callback) {
   const target = (to === callback.nick ? from : to);
+  detectCommand(from, target, text, message, callback);
+}
+
+function detectCommand(from, target, text, message, callback) {
   const match = text.match(callback.commandPattern);
   callback.logger.info(message);
   if (match) {
@@ -70,6 +75,10 @@ function onMessage(from, to, text, message, callback) {
   // } else if (callback.isSUB(text)) {
   //  callback.say(target, callback.getSub(callback.isSUB(text)));
   }
+}
+
+function detectURL(from, target, text, message, callback) {
+
 }
 
 // function onMessage(from, to, text, message, callback) {
@@ -95,7 +104,7 @@ module.exports = (callback) => {
   connect(callback);
 
   /**
-   * Emitted when a message is sent.  
+   * Emitted when a message is sent.
    * to can be either a nick (which is most likely this clients nick and means a private message), or a channel (which means a message to that channel).
    * See the raw event for details on the message object.
    */
@@ -118,8 +127,8 @@ module.exports = (callback) => {
   });
 
   /**
-   * Emitted when the server sends the channel topic on joining a channel, or when a user changes 
-   * the topic on a channel. See the raw event for details on the message object. 
+   * Emitted when the server sends the channel topic on joining a channel, or when a user changes
+   * the topic on a channel. See the raw event for details on the message object.
    */
   callback.client.on('topic', (channel, topic, nick, message) => {
     onMessage(channel, topic, nick, message, callback);
