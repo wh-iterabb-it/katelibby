@@ -2,60 +2,67 @@ import irc from 'irc';
 
 import commands from '../commands';
 import config from './config_helper';
+import logger from '../utils/logger';
+import urlRegex from '../utils/url_regex';
 
 function connect(callback) {
-  callback.logger.info('connecting to ' + config.irc.server + ' ' + config.irc.userName);
+  let server = config.irc.server || 'localhost';
+  let username = config.irc.userName || 'kate';
+  let realname = config.irc.realName || 'Kate Libby';
+  let password = config.irc.password || false;
+  if(detectTwitch()) {
+    logger.info(` - detected twitch ...`);
+    logger.info(` - attempting to use twitch configuration`);
+    // server = config.twitch.server || config.irc.server;
+    // username = config.twitch.irc.userName || config.irc.userName;
+    // realname = config.twitch.irc.realName || config.irc.realName;
+    // password = config.twitch.password || config.irc.password;
+  } else if(detectSlack()) {
+    logger.info(` - detected slack ...`);
+    logger.info(` - attempting to use slack configuration`);
+    // server = config.slack.server || config.irc.server;
+    // username = config.slack.irc.userName || config.irc.userName;
+    // realname = config.slack.irc.realName || config.irc.realName;
+    // password = config.slack.password || config.irc.password;
+  }
+  logger.info(` - connecting to ${server} ...`);
+  logger.info(` - bot username ${username}`);
+  logger.info(` - bot realname ${realname}`);
   callback.client = new irc.Client(
-    config.irc.server,
-    config.irc.userName,
+    server,
+    username,
     {
+      'password': password,
       ...config.irc,
     });
   callback.client.on('registered', (message) => {
     callback.logger.info(message);
     callback.nick = message.args[0];
   });
-  callback.logger.info('connected');
+  callback.logger.info(' ✅ connected');
+
 }
 
-function connectTwitch(callback) {
-  // Twitch Connection
-  callback.logger.info('connecting to ' + config.twitch.irc.server +
-  ' ' + config.twitch.irc.userName);
-  callback.client = new irc.Client(
-    config.twitch.server,
-    config.irc.userName,
-    {
-      'password': config.twitch.password,
-      ...config.twitch.irc,
-    });
-
-  callback.client.on('registered', (message) => {
-    callback.logger.info(message);
-    callback.nick = message.args[0];
-  });
+function detectTwitch() {
+  const twitchRegex = new RegExp("\\b" + "twitch.tv" + "\\b");
+  if (twitchRegex.test(config.irc.server)) {
+    logger.debug(` - detected twitch url in config.irc.server`);
+    return true;
+  } else {
+    logger.debug(` - no twitch url detected in config.irc.server`);
+    return false;
+  }
 }
 
-function connectSlack(callback) {
-  // Slack Connection
-  callback.logger.info('connecting to ' + config.slack.server +
-  ' ' + config.twitch.irc.userName);
-  callback.client = new irc.Client(
-    config.slack.irc.server,
-    config.slack.irc.userName,
-    {
-      'password': config.slack.password,
-      ...config.slack.irc,
-    });
-  callback.client.on('registered', (message) => {
-    callback.logger.info(message);
-    callback.nick = message.args[0];
-  });
-}
-// intializes the message handler for the remander of the instance.
-function onMessage(from, to, text, message, callback) {
-  const target = (to === callback.nick ? from : to);
-  detectCommand(from, target, text, message, callback);
+function detectSlack() {
+  const slackRegex = new RegExp("\\b" + "slack.com" + "\\b");
+  if (slackRegex.test(config.irc.server)) {
+    logger.debug(` - detected slack url in config.irc.server`);
+    return true;
+  } else {
+    logger.debug(` - no slack url detected in config.irc.server`);
+    return false;
+  }
 }
 
 function detectCommand(from, target, text, message, callback) {
@@ -65,20 +72,70 @@ function detectCommand(from, target, text, message, callback) {
     const command = match[1];
     const args = match[2];
     if (command in commands) {
+      logger.debug(` - command: '${command}' detected ...`);
       const response = commands[command](callback, target, from, args);
       if (response) { callback.logger.info(response); }
     } else {
       callback.say(target, 'Sorry, I do not know that command');
     }
-  // } else if (callback.isURL(text)) {
-  //  callback.getTitle(callback.isURL(text), to);
-  // } else if (callback.isSUB(text)) {
-  //  callback.say(target, callback.getSub(callback.isSUB(text)));
   }
 }
 
 function detectURL(from, target, text, message, callback) {
+  if(isURL(text)) {
+    getTitle(isURL(text), target);
+  }
+}
 
+function detectReddit(from, target, text, message, callback) {
+  if(isSUB(text)) {
+    callback.say(target, getSub(isSUB(text)));
+  }
+}
+
+function isURL(str) {
+  if (str.length < 2083 && (str.match(urlRegex))) {
+    const match = str.match(urlRegex);
+    return match[0];
+  }
+  return false;
+}
+
+
+function isSUB(str) {
+  if (str.length < 2083 && (str.match(/\/r\/([^\s\/]+)/i))) {
+    const match = str.match(/\/r\/([^\s\/]+)/i);
+    return match[0];
+  }
+  return false;
+}
+
+function getSub(sub) {
+  return 'Are you talking about http://www.reddit.com' + sub + '/ ?';
+}
+
+function getTitle(nurl, target) {
+  const durl = (nurl.indexOf('http') !== 0 ? 'http://' + nurl : nurl);
+  const titleRegex = /(<\s*title[^>]*>(.+?)<\s*\/\s*title)>/ig;
+  request(durl, (error, response, body) => {
+    if (!error && response.statusCode === 200) {
+      const match = titleRegex.exec(body);
+      if (match && match[2]) {
+        const decodedTitle = entities.decodeHTML(match[2]);
+        say(target, '[' + decodedTitle + ']');
+      }
+    }
+  });
+}
+
+// intializes the message handler for the remander of the instance.
+function onMessage(from, to, text, message, callback) {
+  const target = (to === callback.nick ? from : to);
+  detectCommand(from, target, text, message, callback);
+  if(!detectSlack()) {
+    detectURL(from, target, text, message, callback);
+    detectReddit(from, target, text, message, callback);
+  }
 }
 
 // function onMessage(from, to, text, message, callback) {

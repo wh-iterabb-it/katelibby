@@ -64,7 +64,7 @@ const config = {
       password: 'xxx',
       secure: false, // very important for connecting
       realName: 'Kate Libby',
-      channels: ['#general', '#dangerroom'],
+      channels: ['#general', '#dangerroom'], // by default, you are in every channel you joined
       localAddress: null,
       debug: false,
       showErrors: false,
