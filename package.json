@@ -58,7 +58,7 @@
     "babel-plugin-transform-exponentiation-operator": "6.24.1",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "chai": "4.1.2",
-    "eslint": "4.15.0",
+    "eslint": "4.16.0",
     "eslint-config-airbnb": "16.1.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-import": "2.8.0",
