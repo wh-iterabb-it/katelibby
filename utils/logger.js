@@ -5,14 +5,14 @@ export const name = './logs/' + date.toISOString() + '.log';
 
 const logger = new (Logger)({
   transports: [
-    // new (transports.Console)({
-    //   'timestamp': true,
-    //   'level': 'info',
-    // }),
-    new (transports.File)({
-      filename: name,
+    new (transports.Console)({
+      'timestamp': true,
       'level': 'info',
     }),
+    // new (transports.File)({
+    //   filename: name,
+    //   'level': 'info',
+    // }),
   ],
 });
 
