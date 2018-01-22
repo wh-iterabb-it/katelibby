@@ -1,6 +1,6 @@
 import entities from 'entities';
 
-export function sanitize(data) {
+export default function sanitize(data) {
   let clean;
 
   if (!data) {
