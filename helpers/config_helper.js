@@ -1,18 +1,23 @@
-import program from 'commander';
+import path from 'path';
 
-let configFile = '../config/config';
+import logger from '../utils/logger';
+import program from './command_helper';
 
-program
-  .version('0.0.1')
-  .option('--config <path>', 'set config path')
-  .parse(process.argv);
+let config = {};
 
-// load config file
+let configFile = path.join(__dirname, '../', 'config/config.js');
+
 if (program.config) {
   configFile = program.config;
 }
 
-// load config file
-const config = require(configFile);
+try {
+  config = require(configFile);
+  logger.debug(`configuration loaded...`);
+  logger.debug(` - loading configuration from ${configFile}...`);
+} catch (e) {
+  logger.error(` X config not found ${configFile}`);
+
+}
 
 export default config;

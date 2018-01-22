@@ -1,37 +1,18 @@
 #!/usr/bin/env node --use_strict
 
-require('babel-core/register');
+require('babel-register');
 require('object.entries').shim();
-
-const throng = require('throng');
-
-const config = require('../helpers/config_helper').default;
-const logger = require('../utils/logger').default;
-
 
 const kate = require('../app.js');
 
+kate.start();
 
-function start(id) {
-  logger.info(`Starting Worker ${id}`);
-  
-  kate.start();
-  
-  process.on('message', msg => {
-    if (msg === 'shutdown') {
-      logger.info(`worker ${id} shutting down...`);
-      process.exit(0);
-    }
-  });
+process.on('message', msg => {
+  if (msg === 'shutdown') {
+    process.exit(0);
+  }
+});
 
-  // typical throng SIGTERM message handler
-  process.on('SIGTERM', () => {
-    logger.info(`worker ${id} exiting...`);
-    process.exit(1);
-  });
-}
-
-throng({
-  workers: 1,
-  start,
+process.on('SIGTERM', () => {
+  process.exit(1);
 });

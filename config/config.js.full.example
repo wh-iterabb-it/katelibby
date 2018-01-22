@@ -64,7 +64,7 @@ const config = {
       password: 'xxx',
       secure: false, // very important for connecting
       realName: 'Kate Libby',
-      channels: ['#general', '#dangerroom'],
+      channels: ['#general', '#dangerroom'], // by default, you are in every channel you joined
       localAddress: null,
       debug: false,
       showErrors: false,
@@ -122,26 +122,6 @@ const config = {
 
   debug: true,
   showErrors: true,
-
-  database: {
-    username: 'root',
-    password: '', // you know why this is blank
-    schema: '', // you know why this is blank
-    connection: {
-      host: process.env.host ? '127.0.0.1' : 'localhost',
-      dialect: 'mysql',
-      logging: false,
-      pool: {
-        max: 1,
-        min: 1,
-        idle: 1000,
-      },
-      retry: {\
-        match: 'ER_LOCK_DEADLOCK',
-        max: 3,
-      },
-    },
-  },
 };
 
 module.exports = config;

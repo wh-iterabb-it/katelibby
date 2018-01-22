@@ -1,6 +1,8 @@
 katelibby
 =========
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/wh-iterabb-it/katelibby.svg)](https://greenkeeper.io/) [![Travis Badge](https://travis-ci.org/wh-iterabb-it/katelibby.svg?branch=development)](https://travis-ci.org/wh-iterabb-it/katelibby)
+
 
 ### Description:
 
