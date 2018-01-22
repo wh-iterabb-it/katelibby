@@ -1,21 +1,22 @@
+/* eslint-disable */
 import githubAPI from 'github';
 
 import config from '../helpers/config_helper';
 import logger from '../utils/logger';
 
-function getJiraRegex () {
-  const teams = ['ALL','team1','team2'];
+function getJiraRegex() {
+  const teams = ['ALL', 'team1', 'team2'];
 
   let regex = '((';
 
   for (i = 0; i < teams.length; i++) {
-    let team_characters = teams[i].split('');
+    const team_characters = teams[i].split('');
     for (u = 0; u < team_characters.length; u++) {
       regex += '[';
       regex += team_characters[u].toUpperCase();
       regex += team_characters[u].toLowerCase();
       regex += ']';
-    };
+    }
     if (i != teams.length - 1) {
       regex += '|';
     }
@@ -26,9 +27,9 @@ function getJiraRegex () {
   return regex;
 }
 
-/** 
+/**
  * Github - qastatus command
- * This will fetch the QA status from open PRs in a specified github repo. 
+ * This will fetch the QA status from open PRs in a specified github repo.
  * You will need to make sure you setup the missing fields in the github namespace
  *    type: config.github.auth.type,
  *    token: config.github.auth.token
@@ -36,21 +37,20 @@ function getJiraRegex () {
  *    repo: config.github.repo,
  */
 
-/** 
+/**
  * const teams - Acceptable ticket prefixes
- * If you want to add some sort of prefix, so you can sort the tickets by name, 
+ * If you want to add some sort of prefix, so you can sort the tickets by name,
  * add additional things to the array, such as 'teamname1', 'teamname2', ect
  * this way you can sort between teams with the command
  */
-const teams = ['ALL','team1','team2'];
-
+const teams = ['ALL', 'team1', 'team2'];
 
 
 const labels = {
   preqa: {
     name: 'Ready for QA',
     symbol: ':grey_question:',
-  }, 
+  },
   inqa: {
     name: 'In QA',
     symbol: ':pray:',
@@ -76,152 +76,152 @@ module.exports = (callback, target, from, args) => {
         callback.say(target, labels.inqa.symbol + ' ' + labels.inqa.name);
         callback.say(target, labels.qafail.symbol + ' ' + labels.qafail.name);
         callback.say(target, labels.qapass.symbol + ' ' + labels.qapass.name);
-      return 'help';
+        return 'help';
     }
-  } 
-  if(!teams.includes(args.toUpperCase().trim())) {
+  }
+  if (!teams.includes(args.toUpperCase().trim())) {
     callback.say(target, 'listen buddy, you gotta pick a name from the list... ' + teams.join(', '));
     return 'vsauce';
   }
   // Get all PRs from the repo,
-  let instance = new githubAPI( ...config.github.connect );
+  const instance = new githubAPI(...config.github.connect);
   instance.authenticate({
     type: config.github.auth.type,
-    token: config.github.auth.token
+    token: config.github.auth.token,
   });
-  callback.say(target, 'Finding all results for \`'+ args.toUpperCase() + '\`');
-  if(args.toUpperCase().trim() === 'ALL') { 
+  callback.say(target, 'Finding all results for \`' + args.toUpperCase() + '\`');
+  if (args.toUpperCase().trim() === 'ALL') {
     var formula = '(-)';
   } else {
-    var formula = '('+args.toUpperCase()+'-)';
+    var formula = '(' + args.toUpperCase() + '-)';
   }
-  
+
   // setup a promise chain that will run once for each label word
-  var qaPass = new Promise((resolve, reject) => {
+  const qaPass = new Promise((resolve, reject) => {
     instance.pullRequests.getAll({
       owner: config.github.owner,
-      repo: config.github.repo
+      repo: config.github.repo,
     }, (err, res) => {
       if (!err) {
         logger.info('request complete, return');
         res.data.forEach((pr) => {
-          if(pr.title.match(formula)) {
+          if (pr.title.match(formula)) {
             instance.issues.getIssueLabels({
               owner: config.github.owner,
               repo: config.github.repo,
-              number: pr.number
+              number: pr.number,
             }, (err, ras) => {
-              ras.data.forEach((label,idx, array) => {
-                if(label.name === labels.qapass.name){
+              ras.data.forEach((label, idx, array) => {
+                if (label.name === labels.qapass.name) {
                   callback.say(target, labels.qapass.symbol + ' ' + pr.title.replace(/-/g, ' ') +
-                    ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
+                    ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/' + pr.number);
                 }
-                if (idx === array.length - 1) { 
+                if (idx === array.length - 1) {
                   resolve(1);
                 }
               }); // end of forEach
             }); // end of getIssueLabels
           } // if match formula
-        });  // end of foreach PR
+        }); // end of foreach PR
       } else { // if error
-        logger.info( `getOpenPRs has errored: ${err.toJSON()}`);
+        logger.info(`getOpenPRs has errored: ${err.toJSON()}`);
       } // else Error
     });
   }); // qaPass promise
 
   qaPass.then(() => { // ------------------------
-    return new Promise((resolve, reject) => { 
+    return new Promise((resolve, reject) => {
       instance.pullRequests.getAll({
         owner: config.github.owner,
-        repo: config.github.repo
+        repo: config.github.repo,
       }, (err, res) => {
         if (!err) {
           logger.info('request complete, return');
           res.data.forEach((pr) => {
-            if(pr.title.match(formula)) {
+            if (pr.title.match(formula)) {
               instance.issues.getIssueLabels({
                 owner: config.github.owner,
                 repo: config.github.repo,
-                number: pr.number
+                number: pr.number,
               }, (err, ras) => {
-                ras.data.forEach((label,idx, array) => {
-                  if(label.name === labels.qafail.name){
-                    callback.say(target, labels.qafail.symbol +' '+ pr.title.replace(/-/g, ' ') +
-                      ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
+                ras.data.forEach((label, idx, array) => {
+                  if (label.name === labels.qafail.name) {
+                    callback.say(target, labels.qafail.symbol + ' ' + pr.title.replace(/-/g, ' ') +
+                      ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/' + pr.number);
                   }
-                  if (idx === array.length - 1) { 
+                  if (idx === array.length - 1) {
                     resolve(1);
                   }
                 }); // end of forEach
               }); // end of getIssueLabels
             } // if match formula
-          });  // end of foreach PR
+          }); // end of foreach PR
         } else { // if error
-          logger.info( `getOpenPRs has errored: ${err.toJSON()}`);
+          logger.info(`getOpenPRs has errored: ${err.toJSON()}`);
         } // else Error
       });// getAll
     }); // new promise
   }).then(() => { // end of QA fail ------------------------
-    return new Promise((resolve, reject) => { 
+    return new Promise((resolve, reject) => {
       instance.pullRequests.getAll({
         owner: config.github.owner,
-        repo: config.github.repo
+        repo: config.github.repo,
       }, (err, res) => {
         if (!err) {
           logger.info('request complete, return');
           res.data.forEach((pr) => {
-            if(pr.title.match(formula)) {
+            if (pr.title.match(formula)) {
               instance.issues.getIssueLabels({
                 owner: config.github.owner,
                 repo: config.github.repo,
-                number: pr.number
+                number: pr.number,
               }, (err, ras) => {
-                ras.data.forEach((label,idx, array) => {
-                  if(label.name === labels.inqa.name){
-                    callback.say(target, labels.inqa.symbol +' '+ pr.title.replace(/-/g, ' ') +
-                      ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
+                ras.data.forEach((label, idx, array) => {
+                  if (label.name === labels.inqa.name) {
+                    callback.say(target, labels.inqa.symbol + ' ' + pr.title.replace(/-/g, ' ') +
+                      ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/' + pr.number);
                   }
-                  if (idx === array.length - 1) { 
+                  if (idx === array.length - 1) {
                     resolve(1);
                   }
                 }); // end of forEach
               }); // end of getIssueLabels
             } // if match formula
-          });  // end of foreach PR
+          }); // end of foreach PR
         } else { // if error
-          logger.info( `getOpenPRs has errored: ${err.toJSON()}`);
+          logger.info(`getOpenPRs has errored: ${err.toJSON()}`);
         } // else Error
       });// getAll
     }); // new promise
   }).then(() => { // End of In QA ------------------------
-    return new Promise((resolve, reject) => { 
+    return new Promise((resolve, reject) => {
       instance.pullRequests.getAll({
         owner: config.github.owner,
-        repo: config.github.repo
+        repo: config.github.repo,
       }, (err, res) => {
         if (!err) {
           logger.info('request complete, return');
           res.data.forEach((pr) => {
-            if(pr.title.match(formula)) {
+            if (pr.title.match(formula)) {
               instance.issues.getIssueLabels({
                 owner: config.github.owner,
                 repo: config.github.repo,
-                number: pr.number
+                number: pr.number,
               }, (err, ras) => {
-                ras.data.forEach((label,idx, array) => {
-                  if(label.name === labels.preqa.name){
-                    callback.say(target, labels.preqa.symbol + ' ' + pr.title.replace(/-/g, ' ') + 
-                      ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/'+pr.number);
+                ras.data.forEach((label, idx, array) => {
+                  if (label.name === labels.preqa.name) {
+                    callback.say(target, labels.preqa.symbol + ' ' + pr.title.replace(/-/g, ' ') +
+                      ' https://github.com/' + config.github.owner + '/' + config.github.repo + '/pull/' + pr.number);
                   }
-                  if (idx === array.length - 1) { 
+                  if (idx === array.length - 1) {
                     resolve(1);
                   }
                 }); // end of forEach
               }); // end of getIssueLabels
             } // if match formula
-          });  // end of foreach PR
+          }); // end of foreach PR
         } else { // if error
-          logger.info( `getOpenPRs has errored: ${err.toJSON()}`);
+          logger.info(`getOpenPRs has errored: ${err.toJSON()}`);
         } // else Error
       });// getAll
     }); // new promise

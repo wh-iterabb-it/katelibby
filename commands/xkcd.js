@@ -1,4 +1,5 @@
 import request from 'request';
+
 module.exports = (callback, target, from, args) => {
   if (typeof args !== 'undefined') {
     switch (args) {
@@ -9,8 +10,8 @@ module.exports = (callback, target, from, args) => {
         return 'help';
     }
   }
-  const api_url = 'https://xkcd.com/info.0.json';
-  request(api_url, (error, response, body) => {
+  const apiUrl = 'https://xkcd.com/info.0.json';
+  request(apiUrl, (error, response, body) => {
     if (!error && response.statusCode === 200) {
       const json = JSON.parse(body);
       if (typeof json.num === 'undefined') {

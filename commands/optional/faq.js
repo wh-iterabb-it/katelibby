@@ -1,3 +1,4 @@
+/* eslint-disable */
 import githubAPI from 'github';
 
 import config from '../helpers/config_helper';
@@ -19,13 +20,13 @@ module.exports = (callback, target, from, args) => {
         return 'help';
       case 'release':
         // Authenticate with Github
-        let instance = new githubAPI(...config.github.connect);
+        const instance = new githubAPI(...config.github.connect);
         instance.authenticate({
           type: config.github.auth.type,
-          token: config.github.auth.token
+          token: config.github.auth.token,
         });
 
-        let currentRelease = new Promise((resolve, reject) => {
+        const currentRelease = new Promise((resolve, reject) => {
           instance.repos.getLatestRelease({
             owner: config.github.owner,
             repo: config.github.repo,

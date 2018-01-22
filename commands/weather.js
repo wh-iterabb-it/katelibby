@@ -13,10 +13,10 @@ module.exports = (callback, target, from, args) => {
   if (callback.config.wunderground.key.length < 1) {
     callback.say(target, 'Please add an API key to the configuration file.');
   } else {
-    const api_key = callback.config.wunderground.key;
-    const api_url = 'http://api.wunderground.com/api/' +
-      api_key + '/conditions/q/';
-    const url = api_url + args + '.json';
+    const apiKey = callback.config.wunderground.key;
+    const apiUrl = 'http://api.wunderground.com/api/' +
+      apiKey + '/conditions/q/';
+    const url = apiUrl + args + '.json';
     request(url, (error, response, body) => {
       if (!error && response.statusCode === 200) {
         const json = JSON.parse(body);

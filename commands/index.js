@@ -19,4 +19,5 @@ fs
 commands.g = require('./google');
 commands.in = require('./remind');
 commands.w = require('./weather');
+
 module.exports = commands;
