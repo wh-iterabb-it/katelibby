@@ -1,8 +1,11 @@
 katelibby
 =========
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/wh-iterabb-it/katelibby.svg)](https://greenkeeper.io/) [![Travis Badge](https://travis-ci.org/wh-iterabb-it/katelibby.svg?branch=development)](https://travis-ci.org/wh-iterabb-it/katelibby)
-
+[![Greenkeeper badge](https://badges.greenkeeper.io/wh-iterabb-it/katelibby.svg)](https://greenkeeper.io/)
+[![Travis Badge](https://travis-ci.org/wh-iterabb-it/katelibby.svg?branch=development)](https://travis-ci.org/wh-iterabb-it/katelibby)
+[![Dependency Status](https://img.shields.io/david/wh-iterabb-it/katelibby.svg?style=flat)](https://david-dm.org/wh-iterabb-it/katelibby#info=Dependencies)
+[![devDependency Status](https://img.shields.io/david/dev/wh-iterabb-it/katelibby.svg?style=flat)](https://david-dm.org/wh-iterabb-it/katelibby#info=devDependencies)
+[![Coverage Status](https://coveralls.io/repos/github/wh-iterabb-it/katelibby/badge.svg?branch=development)](https://coveralls.io/github/wh-iterabb-it/katelibby?branch=development)
 
 ### Description:
 
