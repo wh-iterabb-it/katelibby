@@ -4,8 +4,6 @@ require('babel-register');
 require('object.entries').shim();
 
 const kate = require('../app.js');
-const config = require('../helpers/config_helper').default;
-const logger = require('../utils/logger').default;
 
 kate.start();
 
@@ -15,7 +13,6 @@ process.on('message', msg => {
   }
 });
 
-// typical throng SIGTERM message handler
 process.on('SIGTERM', () => {
   process.exit(1);
 });
