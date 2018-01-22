@@ -11,7 +11,7 @@ chai.use(sinonChai);
 
 const expect = chai.expect;
 
-describe('IRC Helper', () => {
+describe('IRC Helper Tests', () => {
   describe('detectSlack method', () => {
     it('should return true when slack.com is in string', () => {
       const resp = irc.detectSlack('blahblah.slack.com');

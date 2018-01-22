@@ -3,9 +3,9 @@
 require('babel-register');
 require('object.entries').shim();
 
-const kate = require('../app.js');
+const kate = require('../app.js').default;
 
-kate.start();
+kate.init();
 
 process.on('message', msg => {
   if (msg === 'shutdown') {
