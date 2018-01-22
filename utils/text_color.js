@@ -1,11 +1,6 @@
 import irc from 'irc';
 
 class color {
-
-  constructor() {
-
-  }
-
   static getColors() {
     return [
       'white',
