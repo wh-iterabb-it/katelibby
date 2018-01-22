@@ -1,4 +1,6 @@
 import irc from 'irc';
+import request from 'request';
+import entities from 'entities';
 
 import commands from '../commands';
 import config from './config_helper';

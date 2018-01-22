@@ -14,13 +14,13 @@
     "Ash Kamel <https://github.com/ajkamel>"
   ],
   "scripts": {
-    "test": "npm run build && mocha --compilers js:babel-core/register",
+    "test": "node_modules/.bin/mocha test/. --require babel-register --recursive",
+    "lint": "node_modules/.bin/eslint --fix .",
     "start": "",
-    "start-dev": "node ./bin/start",
-    "build": "babel src -d build"
+    "start-dev": "node ./bin/start"
   },
   "dependencies": {
-    "babel-core": "6.26.0",
+    "babel-register": "6.26.0",
     "bluebird": "3.5.1",
     "bluebird-retry": "0.11.0",
     "cheerio": "0.22.0",
@@ -45,43 +45,21 @@
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
-    "babel-eslint": "8.2.0",
-    "babel-preset-es2015": "6.24.1",
-    "babel-plugin-syntax-trailing-function-commas": "6.22.0",
-    "babel-plugin-transform-async-to-generator": "6.24.1",
-    "babel-plugin-transform-class-properties": "6.24.1",
-    "babel-plugin-transform-decorators-legacy": "1.3.4",
-    "babel-plugin-transform-es2015-destructuring": "6.23.0",
-    "babel-plugin-transform-es2015-modules-commonjs": "6.26.0",
-    "babel-plugin-transform-es2015-parameters": "6.24.1",
-    "babel-plugin-transform-es2015-spread": "6.22.0",
-    "babel-plugin-transform-exponentiation-operator": "6.24.1",
-    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-eslint": "8.0.3",
+    "babel-preset-env": "1.6.0",
     "chai": "4.1.2",
     "eslint": "4.16.0",
     "eslint-config-airbnb": "16.1.0",
-    "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.5.1",
+    "mocha": "5.0.0",
     "pm2": "2.7.1",
-    "mocha": "5.0.0"
+    "sinon": "4.2.0",
+    "sinon-chai": "2.14.0"
   },
   "bugs": {
     "url": "https://github.com/wh-iterabb-it/katelibby/issues"
   },
-  "homepage": "https://github.com/wh-iterabb-it/katelibby#readme",
-  "babel": {
-    "plugins": [
-      "syntax-trailing-function-commas",
-      "transform-async-to-generator",
-      "transform-class-properties",
-      "transform-decorators-legacy",
-      "transform-es2015-destructuring",
-      "transform-es2015-modules-commonjs",
-      "transform-es2015-parameters",
-      "transform-es2015-spread",
-      "transform-exponentiation-operator",
-      "transform-object-rest-spread"
-    ]
-  }
+  "homepage": "https://github.com/wh-iterabb-it/katelibby#readme"
 }
