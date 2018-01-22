@@ -1,6 +1,6 @@
 {
   "name": "katelibby",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Kate Libby ircbot",
   "repository": {
     "type": "git",
@@ -15,8 +15,7 @@
   ],
   "scripts": {
     "test": "node_modules/.bin/mocha test/. --require babel-register --recursive",
-    "lint": "",
-    "lint-real": "node_modules/.bin/eslint --fix .",
+    "lint": "node_modules/.bin/eslint --fix .",
     "start": "",
     "start-dev": "node ./bin/start"
   },

@@ -13,11 +13,10 @@ if (program.config) {
 
 try {
   config = require(configFile);
-  logger.debug(`configuration loaded...`);
+  logger.debug('configuration loaded...');
   logger.debug(` - loading configuration from ${configFile}...`);
 } catch (e) {
   logger.error(` X config not found ${configFile}`);
-
 }
 
 export default config;

@@ -12,19 +12,19 @@ class App {
     this.setupIRC();
   }
 
-  static setLogger(logger) {
-    this.logger = logger;
-    return logger;
+  static setLogger(incLogger) {
+    this.logger = incLogger;
+    return this.logger;
   }
 
-  static setCommands(commands) {
-    this.commands = commands;
-    return commands;
+  static setCommands(incCommands) {
+    this.commands = incCommands;
+    return this.commands;
   }
 
-  static setConfig(config) {
-    this.config = config;
-    return config;
+  static setConfig(incConfig) {
+    this.config = incConfig;
+    return this.config;
   }
 
   static setCommandPattern(commandChar) {
