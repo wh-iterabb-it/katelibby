@@ -169,10 +169,10 @@ class ircHelper {
   // intializes the message handler for the remander of the instance.
   static onMessage(from, to, text, message, callback) {
     const target = (to === callback.nick ? from : to);
-    detectCommand(from, target, text, message, callback);
-    if(!detectSlack()) {
-      detectURL(from, target, text, message, callback);
-      detectReddit(from, target, text, message, callback);
+    ircHelper.detectCommand(from, target, text, message, callback);
+    if(!ircHelper.detectSlack()) {
+      ircHelper.detectURL(from, target, text, message, callback);
+      ircHelper.detectReddit(from, target, text, message, callback);
     }
   }
 
