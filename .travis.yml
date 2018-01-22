@@ -6,5 +6,8 @@ before_install:
   - npm install -g npm
 script:
   - "npm run-script lint"
-  - "npm run-script test-coverage"
   - "npm test"
+  after_success:
+    - npm run coveralls
+    - rm -Rf .nyc_output/
+    - rm -Rf coverage/
