@@ -6,4 +6,5 @@ before_install:
   - npm install -g npm
 script:
   - "npm run-script lint"
+  - "npm run-script test-coverage"
   - "npm test"

@@ -1,0 +1,2 @@
+service_name: $COVERALLS_SERVICE_NAME
+repo_token: $COVERALLS_REPO_TOKEN
