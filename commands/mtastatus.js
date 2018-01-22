@@ -2,7 +2,7 @@ import Mta from 'mta-gtfs';
 import irc from 'irc';
 import striptags from 'striptags';
 
-import { sanitize } from '../utils/sanitize';
+import sanitize from '../utils/sanitize';
 
 const lineColors = {
   '123': 'light_red',
