@@ -14,8 +14,10 @@
     "Ash Kamel <https://github.com/ajkamel>"
   ],
   "scripts": {
-    "test": "node_modules/.bin/mocha test/. --require babel-register --recursive",
-    "lint": "node_modules/.bin/eslint --fix .",
+    "test": "",
+    "test-real": "node_modules/.bin/mocha test/. --require babel-register --recursive",
+    "lint": "",
+    "lint-real": "node_modules/.bin/eslint --fix .",
     "start": "",
     "start-dev": "node ./bin/start"
   },
