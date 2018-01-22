@@ -1,7 +1,7 @@
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
 
-import { sanitize } from '../../utils/sanitize';
+import sanitize from '../../utils/sanitize';
 
 chai.should();
 
