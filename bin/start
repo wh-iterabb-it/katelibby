@@ -3,23 +3,19 @@
 require('babel-register');
 require('object.entries').shim();
 
-const kate = require('../app.js').default;
+const kate = require('../app.js');
 const config = require('../helpers/config_helper').default;
 const logger = require('../utils/logger').default;
 
-logger.info(`Starting Worker ${id}`);
-
-kate.init();
+kate.start();
 
 process.on('message', msg => {
   if (msg === 'shutdown') {
-    logger.info(`worker ${id} shutting down...`);
     process.exit(0);
   }
 });
 
 // typical throng SIGTERM message handler
 process.on('SIGTERM', () => {
-  logger.info(`worker ${id} exiting...`);
   process.exit(1);
 });

@@ -1,4 +1,5 @@
 import commands from './commands';
+import logger from './utils/logger';
 import xxmp from './helpers/irc_helper';
 import config from './helpers/config_helper';
 
@@ -22,5 +23,3 @@ export function start() {
   const kate = bot();
   kate.init();
 }
-
-export default Bot;
