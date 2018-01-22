@@ -1,9 +1,10 @@
 import Mta from 'mta-gtfs';
-import { sanitize } from '../utils/sanitize';
 import irc from 'irc';
 import striptags from 'striptags';
 
-const line_colors = {
+import { sanitize } from '../utils/sanitize';
+
+const lineColors = {
   '123': 'light_red',
   '456': 'dark_green',
   '7': 'magenta',
@@ -18,8 +19,8 @@ const line_colors = {
 };
 
 function getColorForLine(line) {
-  if (typeof line_colors[line] !== 'undefined') {
-    return line_colors[line];
+  if (typeof lineColors[line] !== 'undefined') {
+    return lineColors[line];
   }
   return null;
 }
@@ -74,14 +75,14 @@ module.exports = (callback, target, from, args) => {
          'mtastatus { line }');
         return 'help';
       default:
-        if (!Boolean(getLineKey(args))) {
+        if (!getLineKey(args)) {
           callback.say(target, 'You must specify a valid line!');
         }
     }
   }
   const mta = new Mta({
     key: 'MY-MTA-API-KEY-HERE', // only needed for mta.schedule() method
-    feed_id: 1,                  // optional, default = 1
+    feed_id: 1, // optional, default = 1
   });
   mta.status('subway').then((subway) => {
     const lineName = getLineKey(args);

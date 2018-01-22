@@ -1,7 +1,7 @@
 import querystring from 'querystring';
 import request from 'request';
 
-const api_url = 'http://api.giphy.com/v1/gifs/search?';
+const apiUrl = 'http://api.giphy.com/v1/gifs/search?';
 
 module.exports = (callback, target, from, args) => {
   if (typeof args !== 'undefined') {
@@ -16,9 +16,9 @@ module.exports = (callback, target, from, args) => {
   if (callback.config.giphy.key.length < 1) {
     callback.say(target, 'Please add an API key to the configuration file.');
   } else {
-    const url = api_url + querystring.stringify({
+    const url = apiUrl + querystring.stringify({
       q: args,
-      api_key: callback.config.giphy.key,
+      api_key: callback.config.giphy.key,  // eslint-disable-line
       limit: 10,
       offset: 0,
     });

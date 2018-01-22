@@ -1,15 +1,13 @@
 import chai from 'chai';
-import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import logger from '../../utils/logger';
 import irc from '../../helpers/irc_helper';
 
 chai.should();
 
 chai.use(sinonChai);
 
-const expect = chai.expect;
+const { expect } = chai;
 
 describe('IRC Helper Tests', () => {
   describe('detectSlack method', () => {
@@ -38,20 +36,20 @@ describe('IRC Helper Tests', () => {
 
   describe('isSUB method', () => {
     it('should return false when a string is not a subreddit', () => {
-      const testString = "http://reddit.com/u/tacos";
+      const testString = 'http://reddit.com/u/tacos';
       const resp = irc.isSUB(testString);
       expect(resp).be.false;
     });
 
     it('should return false when nothing or empty string is passed in', () => {
-      const testString = "";
+      const testString = '';
       const resp = irc.isSUB(testString);
       expect(resp).be.false;
     });
 
     it('should return a subreddit when valid regex is passed in', () => {
-      const testString = "http://reddit.com/r/me_irl";
-      const expected = "/r/me_irl";
+      const testString = 'http://reddit.com/r/me_irl';
+      const expected = '/r/me_irl';
       const resp = irc.isSUB(testString);
       expect(resp).to.equal(expected);
     });
@@ -59,14 +57,14 @@ describe('IRC Helper Tests', () => {
 
   describe('isURL method', () => {
     it('should return false if not a valid url', () => {
-      const testString = "Remember that website? something .com or www. http:// something?";
+      const testString = 'Remember that website? something .com or www. http:// something?';
       const resp = irc.isURL(testString);
       expect(resp).be.false;
     });
 
     it('should return a url if it is a valid url', () => {
-      const testString = "You guys talking about http://www.google.com ?";
-      const expected = "http://www.google.com";
+      const testString = 'You guys talking about http://www.google.com ?';
+      const expected = 'http://www.google.com';
       const resp = irc.isURL(testString);
       expect(resp).to.equal(expected);
     });

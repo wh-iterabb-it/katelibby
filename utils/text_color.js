@@ -20,9 +20,9 @@ const colors = [
   'reset',
 ];
 
-export function color(text, inc_color) {
-  if (typeof colors[inc_color] !== 'undefined') {
-    const newText = irc.colors.wrap(inc_color, text);
+export function color(text, incColor) {
+  if (typeof colors[incColor] !== 'undefined') {
+    const newText = irc.colors.wrap(incColor, text);
     return newText;
   }
   return null;
