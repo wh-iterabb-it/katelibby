@@ -9,7 +9,7 @@ const Bot = {
     this.commands = commands;
     this.nick = '';
     this.commandPattern = new RegExp('^' + config.commandChar + '(\\w+) ?(.*)');
-    xxmp(this);
+    const irc = new xxmp(this);
   },
   say(to, message) {
     this.logger.info('say: ' + to + ' ' + message);
