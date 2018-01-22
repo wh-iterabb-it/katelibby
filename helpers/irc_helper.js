@@ -139,6 +139,7 @@ class ircHelper {
     return false;
   }
 
+
   static isSUB(str) {
     if (str.length < 2083 && (str.match(/\/r\/([^\s\/]+)/i))) {
       const match = str.match(/\/r\/([^\s\/]+)/i);

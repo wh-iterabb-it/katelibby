@@ -71,6 +71,4 @@ describe('IRC Helper', () => {
       expect(resp).to.equal(expected);
     });
   });
-
-
 });
