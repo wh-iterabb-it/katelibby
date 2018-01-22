@@ -19,6 +19,8 @@ katelibby is a node IRC bot.
 npm install --no-optional
 ```
 
+*because of an iconv subdependancy*
+
 ### Example Usage
 
 Basic usage
