@@ -7,6 +7,7 @@ const Bot = {
   init() {
     this.logger = logger;
     this.commands = commands;
+    this.config = config;
     this.nick = '';
     this.commandPattern = new RegExp('^' + config.commandChar + '(\\w+) ?(.*)');
     const irc = new xxmp(this);
