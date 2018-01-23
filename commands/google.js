@@ -32,7 +32,6 @@ module.exports = (callback, target, from, args) => {
       }
     });
   } catch (e) {
-    callback.logger.error('google  failed' + e);
     callback.say(target, 'And what do we say to death?'); //  Not today
   }
 };
