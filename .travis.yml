@@ -11,5 +11,5 @@ script:
   - "npm run-script cover"
 after_success:
   - rm coverage.lcov
- notifications:
+notifications:
     slack: $SLACK_NAME
