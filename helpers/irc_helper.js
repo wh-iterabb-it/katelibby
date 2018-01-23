@@ -194,19 +194,18 @@ class ircHelper {
     logger.info(` + onMessage ${target} ${message}`);
   }
 
-  static onKick(channel, nick, by, reason, message, callback) {
-    const target = (to === callback.nick ? from : to);
-    logger.info(` + onKick ${target}`);
-  }
+  // static onKick(channel, to, by, reason, message, callback) {
+  //   const target = (to === callback.nick ? from : to);
+  //   logger.info(` + onKick ${target}`);
+  // }
 
-  static onJoin(channel, nick, message, callback) {
-    const target = (nick === callback.nick ? channel : nick);
-    logger.info(` + onJoin Channel ${target}`);
+  static onJoin(channel, to, message, callback) {
+    const target = (to === callback.nick ? channel : to);
+    logger.debug(` + onJoin Channel ${target} ${message} ${callback}`);
   }
 
   static onTopic(channel, topic, nick, message, callback) {
-    const target = (to === callback.nick ? from : to);
-    logger.info(` + onTopic ${target} ${topic}`);
+    logger.info(` + onTopic ${topic} ${nick} ${message} ${callback}`);
   }
 }
 

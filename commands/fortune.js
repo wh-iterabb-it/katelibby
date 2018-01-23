@@ -70,7 +70,7 @@ module.exports = (callback, target, from, args) => {
     'in hindsight, \'Oh well\', is better than \'what if.\'', // nsfw
   ];
 
-  if(callback.nsfw) {
+  if (callback.nsfw) {
     li = li.concat(liNSFW);
   }
 

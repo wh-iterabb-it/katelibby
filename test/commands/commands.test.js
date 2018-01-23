@@ -2,16 +2,11 @@ import chai from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import irc from '../../helpers/irc_helper';
-
 import commands from '../../commands';
-
 
 chai.should();
 
 chai.use(sinonChai);
-
-const { expect } = chai;
 
 describe('Command Test', () => {
   let callback = {};
@@ -36,9 +31,9 @@ describe('Command Test', () => {
           realName: () => {
             return 'kate';
           },
-        }
+        },
       },
-      commands: commands,
+      commands,
     };
   });
 

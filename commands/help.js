@@ -10,7 +10,9 @@ module.exports = (callback, target, from, args) => {
     }
   }
   const msg = 'Hello, I am ' + callback.config.irc.realName + ', a bot. My commands are: ';
-  const commands = Object.keys(callback.commands).map((command) => { return callback.config.commandChar + command; }).join(' ');
+  const commands = Object.keys(callback.commands).map((command) => {
+    return callback.config.commandChar + command;
+  }).join(' ');
 
   callback.say(target, msg + commands);
   callback.say(target, 'You can also type ' + callback.config.commandChar +

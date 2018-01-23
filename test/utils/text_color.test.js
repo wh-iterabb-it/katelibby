@@ -13,13 +13,13 @@ describe('Text Color Utility Tests', () => {
   describe('colorize method', () => {
     it('should return null if invalid color', () => {
       const expected = null;
-      const resp = color.colorize('text','tacoColor');
+      const resp = color.colorize('text', 'tacoColor');
       expect(resp).to.equal(expected);
     });
 
     it('should return valid color format of string for irc', () => {
       const expected = '\u000305text\u000f';
-      const resp = color.colorize('text','dark_red');
+      const resp = color.colorize('text', 'dark_red');
       expect(resp).to.equal(expected);
     });
   });
@@ -43,7 +43,7 @@ describe('Text Color Utility Tests', () => {
         'light_cyan',
         'light_blue',
         'light_magenta',
-        'reset'
+        'reset',
       ];
       const resp = color.getColors();
       expect(resp).to.eql(expected);
@@ -69,7 +69,7 @@ describe('Text Color Utility Tests', () => {
         '\u000311text\u000f', // light_cyan
         '\u000312text\u000f', // light_blue
         '\u000313text\u000f', // light_magenta
-        '\u000ftext\u000f' // reset
+        '\u000ftext\u000f', // reset
       ];
 
       const expectedSet = new Set(expected);
