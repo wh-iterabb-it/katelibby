@@ -21,6 +21,12 @@ describe('Command Test', () => {
       nsfw: sandbox.stub(),
       say: sandbox.stub(),
       config: {
+        wunderground: {
+          key: '',
+        },
+        giphy: {
+          key: '',
+        },
         commandChar: () => {
           return '!';
         },
@@ -205,27 +211,135 @@ describe('Command Test', () => {
   });
 
   describe('google command', () => {
-    // it('should call say with no args', () => {
-    //   const target = '#general';
-    //   const from = 'beautato';
-    //   const args = '';
-    //   commands.google(callback, target, from, args);
-    //   callback.say.should.have.been.calledWith();
-    // });
-    //
-    // it('should call say with any args', () => {
-    //   const target = '#general';
-    //   const from = 'beautato';
-    //   const args = 'taco';
-    //   commands.google(callback, target, from, args);
-    //   callback.say.should.have.been.calledWith();
-    // });
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.google(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
 
     it('should call say with help as args', () => {
       const target = '#general';
       const from = 'beautato';
       const args = 'help';
       commands.google(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+  });
+
+  describe('giphy command', () => {
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.giphy(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+
+    it('should call say with help as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'help';
+      commands.giphy(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+  });
+
+  describe('mtastatus command', () => {
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.mtastatus(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+
+    it('should call say with help as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'help';
+      commands.mtastatus(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+  });
+
+  describe('remind command', () => {
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.remind(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+
+    it('should call say with help as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'help';
+      commands.remind(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+  });
+
+  describe('weather command', () => {
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.weather(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+
+    it('should call say with help as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'help';
+      commands.weather(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+
+    it('should call say with test as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'test';
+      commands.weather(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+  });
+
+  describe('woot command', () => {
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.woot(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
+    });
+
+    it('should call say with help as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'help';
+      commands.woot(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+  });
+
+  describe('xkcd command', () => {
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.xkcd(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
+    });
+
+    it('should call say with help as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'help';
+      commands.xkcd(callback, target, from, args);
       callback.say.should.have.been.calledWith();
     });
   });

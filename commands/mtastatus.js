@@ -79,29 +79,31 @@ module.exports = (callback, target, from, args) => {
           callback.say(target, 'You must specify a valid line!');
         }
     }
-  }
-  const mta = new Mta({
-    key: 'MY-MTA-API-KEY-HERE', // only needed for mta.schedule() method
-    feed_id: 1, // optional, default = 1
-  });
-  mta.status('subway').then((subway) => {
-    const lineName = getLineKey(args);
-    const color = getColorForLine(lineName);
-    subway.map((currentLine) => {
-      if (currentLine.name === lineName) {
-        let outStatus = sanitize(currentLine.name) + ': ' +
-          sanitize(striptags(currentLine.status));
-        let outText = sanitize(striptags(currentLine.text));
-        if (color) {
-          outStatus = irc.colors.wrap(color, outStatus);
-          outText = irc.colors.wrap(color, outText);
-        }
-        callback.say(target, outStatus);
-        if (outText.length > 0) {
-          callback.say(target, outText);
-        }
-      }
-      return null;
+    const mta = new Mta({
+      key: 'MY-MTA-API-KEY-HERE', // only needed for mta.schedule() method
+      feed_id: 1, // optional, default = 1
     });
-  });
+    mta.status('subway').then((subway) => {
+      const lineName = getLineKey(args);
+      const color = getColorForLine(lineName);
+      subway.map((currentLine) => {
+        if (currentLine.name === lineName) {
+          let outStatus = sanitize(currentLine.name) + ': ' +
+            sanitize(striptags(currentLine.status));
+          let outText = sanitize(striptags(currentLine.text));
+          if (color) {
+            outStatus = irc.colors.wrap(color, outStatus);
+            outText = irc.colors.wrap(color, outText);
+          }
+          callback.say(target, outStatus);
+          if (outText.length > 0) {
+            callback.say(target, outText);
+          }
+        }
+        return null;
+      });
+    });
+  } else {
+    callback.say(target, 'You must specify a valid line!');
+  }
 };
