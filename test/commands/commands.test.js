@@ -33,6 +33,9 @@ describe('Command Test', () => {
           userName: () => {
             return 'kate';
           },
+          realName: () => {
+            return 'kate';
+          },
         }
       },
       commands: commands,
@@ -170,6 +173,32 @@ describe('Command Test', () => {
       const from = 'beautato';
       const args = 'help';
       commands.help(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+  });
+
+  describe('google command', () => {
+    // it('should call say with no args', () => {
+    //   const target = '#general';
+    //   const from = 'beautato';
+    //   const args = '';
+    //   commands.google(callback, target, from, args);
+    //   callback.say.should.have.been.calledWith();
+    // });
+    //
+    // it('should call say with any args', () => {
+    //   const target = '#general';
+    //   const from = 'beautato';
+    //   const args = 'taco';
+    //   commands.google(callback, target, from, args);
+    //   callback.say.should.have.been.calledWith();
+    // });
+
+    it('should call say with help as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'help';
+      commands.google(callback, target, from, args);
       callback.say.should.have.been.calledWith();
     });
   });
