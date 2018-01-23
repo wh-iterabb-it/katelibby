@@ -43,6 +43,14 @@ describe('Command Test', () => {
   });
 
   describe('fortune command', () => {
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.fortune(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+
     it('should call say with no args', () => {
       const target = '#general';
       const from = 'beautato';
@@ -79,6 +87,14 @@ describe('Command Test', () => {
   });
 
   describe('8ball command', () => {
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.eight(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+
     it('should call say with no args', () => {
       const target = '#general';
       const from = 'beautato';
@@ -105,6 +121,14 @@ describe('Command Test', () => {
   });
 
   describe('about command', () => {
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.about(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
+    });
+
     it('should call say with no args', () => {
       const target = '#general';
       const from = 'beautato';
@@ -147,6 +171,14 @@ describe('Command Test', () => {
   });
 
   describe('help command', () => {
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.help(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+
     it('should call say with no args', () => {
       const target = '#general';
       const from = 'beautato';
