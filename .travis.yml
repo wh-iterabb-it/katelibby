@@ -10,6 +10,5 @@ script:
   - "npm test"
   - "npm run-script cover"
 after_success:
-  - rm -Rf .nyc_output/
-  - rm -Rf coverage/
+  - rm coverage.lcov
   
