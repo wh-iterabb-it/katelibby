@@ -12,4 +12,4 @@ script:
 after_success:
   - rm coverage.lcov
 notifications:
-  slack: $SLACK_NAME
+  slack: wh-iterabb-it:Oues6tMxq8e6V0LTslDhKjVR
