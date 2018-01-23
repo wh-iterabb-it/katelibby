@@ -1,2 +1,2 @@
 service_name: travis-ci
-repo_token: $TRAVIS_JOB_ID
+service_job_id: $TRAVIS_JOB_ID
