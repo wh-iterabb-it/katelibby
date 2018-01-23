@@ -1,6 +1,12 @@
 const config = {
 
+  app: {
+    nsfw: false // true allows nsfw content
+  },
+
   commandChar: '!',
+  debug: true,
+  showErrors: true,
 
   github: {
     auth: {
@@ -119,9 +125,6 @@ const config = {
   wunderground: {
     key: ''
   },
-
-  debug: true,
-  showErrors: true,
 };
 
 module.exports = config;

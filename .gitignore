@@ -1,4 +1,13 @@
+
+
+# Node things
 node_modules/
+package-lock.json
+
+# App things
 *config.js
 logs/
-package-lock.json
+
+# Coverall things
+*coveralls.yml
+.nyc_output/
