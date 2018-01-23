@@ -19,7 +19,7 @@ class color {
       'light_cyan',
       'light_blue',
       'light_magenta',
-      'reset'
+      'reset',
     ];
   }
 

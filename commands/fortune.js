@@ -8,30 +8,25 @@ module.exports = (callback, target, from, args) => {
         return 'help';
     }
   }
-  const li = [
+  let li = [
     'You will make a fortune with your friend.',
-    'Consolidate rather than expand your business in the near future.',
     'Everything will now come your way.',
     'You have at your command the wisdom of the ages.',
     'You have a deep appreciation of the arts and music.',
     'The great joy in life is doing what people say you cannot do.',
-    'Invest in Bitcoins, I see great profits in your future.',
+    'Invest in Crypto, I see great profits in your future.', // btc=$725 ETH=$7.21 Nov 27, 2016
     'When you squeeze and orange, orange juice comes out - because that is whats inside',
     'Every exit is an entrance to new experiences',
     'Today is the tomorrow we worried about yesterday',
     'There are no limitations to the mind except those we aknowledge.',
     'Old dreams never die they just get filed away.',
     'If you want the rainbow, you have to tolerate the rain.',
-    'Man is born to live and not prepare to live',
+    'Humans are born to live and not prepare to live',
     'To courageously shoulder the responsibility of ones mistake is character.',
-    'Dont blow out other peoples candles, it wont make yours brighter.',
-    'in hindsight, Oh well, is better than what if.',
     'measure twice, cut once',
     'keep cool, never freeze -mayonnaise jar',
     'always underpromise and overdeliver',
     'Never half-ass 2 things. Whole ass 1 thing.',
-    'I am sorry, too high to respond',
-    "Krishna be praised, can't a girl get a little peace and quiet",
     'Courtesy is contagious',
     'Sometimes when you get denied at the front door, the back door is unlocked',
     'Constant grinding can turn an iron rod into a needle.',
@@ -44,7 +39,6 @@ module.exports = (callback, target, from, args) => {
     'A fool is one who values advice spoken from stars and chance.',
     'Birds are entangled by their feet and men by their tongues.',
     'Starting down the right path is pointless, if you are just going to take a wrong turn at the first fork.',
-    'The possibility of a career change is near.',
     '404 fortune not found',
     'Great works are performed not by strength, but by perserverance',
     'All men should try to learn before they die what they are running from, and to, and why.',
@@ -67,5 +61,18 @@ module.exports = (callback, target, from, args) => {
     'Alas, the onion you eat is some one elses water lily',
     'Why ask for advice if you wont take any',
   ];
+
+  const liNSFW = [
+    'The possibility of a career change is near.', // nsfw?
+    'Consolidate rather than expand your business in the near future.', // nsfw
+    'I am sorry, too high to respond', // nsfw
+    'Dont blow out other peoples candles, it wont make yours brighter.',
+    'in hindsight, \'Oh well\', is better than \'what if.\'', // nsfw
+  ];
+
+  if (callback.nsfw) {
+    li = li.concat(liNSFW);
+  }
+
   callback.say(target, li[Math.floor(Math.random() * li.length)]);
 };
