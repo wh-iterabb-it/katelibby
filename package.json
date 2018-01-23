@@ -16,7 +16,7 @@
   "scripts": {
     "test": "node_modules/.bin/mocha test/. --require babel-register --recursive",
     "coverall": "nyc npm test && nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls",
-    "cover": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov ./node_modules/.bin/codecov",
+    "cover": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov",
     "lint": "node_modules/.bin/eslint --fix --format codeframe .",
     "start": "",
     "start-dev": "node ./bin/start"
