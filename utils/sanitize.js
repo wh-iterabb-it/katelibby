@@ -8,7 +8,7 @@ export default function sanitize(data) {
   }
 
   if (Array.isArray(data) && data.length === 1) {
-    clean = myData[0]; // eslint-disable-line
+    clean = data[0]; // eslint-disable-line
   } else {
     clean = data;
   }
