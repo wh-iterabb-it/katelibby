@@ -85,7 +85,7 @@ describe('Command Test', () => {
     it('should call say with help as args', () => {
       const target = '#general';
       const from = 'beautato';
-      const args = 'help';
+      const args = ' help';
       callback.nsfw = true;
       commands.fortune(callback, target, from, args);
       callback.say.should.have.been.calledWith();
@@ -120,7 +120,7 @@ describe('Command Test', () => {
     it('should call say with help as args', () => {
       const target = '#general';
       const from = 'beautato';
-      const args = 'help';
+      const args = ' help';
       commands.eight(callback, target, from, args);
       callback.say.should.have.been.calledWith();
     });
@@ -154,7 +154,7 @@ describe('Command Test', () => {
     it('should call say with help as args', () => {
       const target = '#general';
       const from = 'beautato';
-      const args = 'help';
+      const args = ' help';
       commands.about(callback, target, from, args);
       callback.say.should.have.been.calledWith();
     });
@@ -204,7 +204,7 @@ describe('Command Test', () => {
     it('should call say with help as args', () => {
       const target = '#general';
       const from = 'beautato';
-      const args = 'help';
+      const args = ' help';
       commands.help(callback, target, from, args);
       callback.say.should.have.been.calledWith();
     });
@@ -240,7 +240,7 @@ describe('Command Test', () => {
     it('should call say with help as args', () => {
       const target = '#general';
       const from = 'beautato';
-      const args = 'help';
+      const args = ' help';
       commands.giphy(callback, target, from, args);
       callback.say.should.have.been.calledWith();
     });
@@ -259,6 +259,22 @@ describe('Command Test', () => {
       const target = '#general';
       const from = 'beautato';
       const args = 'help';
+      commands.mtastatus(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+
+    it('should call say with valid subway line as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = ' a';
+      commands.mtastatus(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+
+    it('should call say with invalid line as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'tacobell';
       commands.mtastatus(callback, target, from, args);
       callback.say.should.have.been.calledWith();
     });
@@ -323,6 +339,78 @@ describe('Command Test', () => {
       const args = 'help';
       commands.woot(callback, target, from, args);
       callback.say.should.have.been.calledWith();
+    });
+
+    it('should call say with computers as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'computers';
+      commands.woot(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
+    });
+
+    it('should call say with wine as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'wine';
+      commands.woot(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
+    });
+
+    it('should call say with sellout as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'sellout';
+      commands.woot(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
+    });
+
+    it('should call say with home as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'home';
+      commands.woot(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
+    });
+
+    it('should call say with tools as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'tools';
+      commands.woot(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
+    });
+
+    it('should call say with accessories as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'accessories';
+      commands.woot(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
+    });
+
+    it('should call say with sports as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'sports';
+      commands.woot(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
+    });
+
+    it('should call say with kids as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'kids';
+      commands.woot(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
+    });
+
+    it('should call say with shirt as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = 'shirt';
+      commands.woot(callback, target, from, args);
+      callback.say.should.not.have.been.calledWith();
     });
   });
 
