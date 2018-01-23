@@ -34,5 +34,11 @@ describe('Format Utility Tests', () => {
       const resp = format(0);
       expect(resp).to.equal(expected);
     });
+
+    it('should return 0 when 0 seconds passed in', () => {
+      const expected = '01:01:06';
+      const resp = format(3666);
+      expect(resp).to.equal(expected);
+    });
   });
 });
