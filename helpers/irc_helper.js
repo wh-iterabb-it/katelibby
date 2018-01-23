@@ -140,7 +140,11 @@ class ircHelper {
     return false;
   }
 
-
+  /**
+   * getSub
+   * used with getSub, this will find sytax `/r/subreddit` mentions
+   * and turn them into a url, perhaps will be refact into modules later
+   */
   static isSUB(str) {
     if (str.length < 2083 && (str.match(/\/r\/([^\s/]+)/i))) {
       const match = str.match(/\/r\/([^\s/]+)/i);
@@ -149,10 +153,19 @@ class ircHelper {
     return false;
   }
 
+  /**
+   * getSub
+   * used with isSUB, it puts the detected subreddit, into a url link
+   */
   static getSub(sub) {
     return 'Are you talking about http://www.reddit.com' + sub + '/ ?';
   }
 
+  /**
+   * getTitle
+   * makes a request to retrieve the <title> of a site
+   * Disabled by default if you are on slack
+   */
   static getTitle(nurl, target, callback) {
     const durl = (nurl.indexOf('http') !== 0 ? 'http://' + nurl : nurl);
     const titleRegex = /(<\s*title[^>]*>(.+?)<\s*\/\s*title)>/ig;
@@ -167,7 +180,10 @@ class ircHelper {
     });
   }
 
-  // intializes the message handler for the remander of the instance.
+  /**
+   * onMessage
+   * intializes the message handler for the remander of the instance.
+   */
   static onMessage(from, to, text, message, callback) {
     const target = (to === callback.nick ? from : to);
     ircHelper.detectCommand(from, target, text, message, callback);
@@ -175,27 +191,23 @@ class ircHelper {
       ircHelper.detectURL(target, text, callback);
       ircHelper.detectReddit(from, target, text, message, callback);
     }
+    logger.info(` + onMessage ${target} ${message}`);
   }
 
-  // static onMessage(from, to, text, message, callback) {
-  //   const target = (to === callback.nick ? from : to);
-  //   callback.say(target, 'test ' + target + '!');
-  // }
+  static onKick(channel, nick, by, reason, message, callback) {
+    const target = (to === callback.nick ? from : to);
+    logger.info(` + onKick ${target}`);
+  }
 
-  // static onKick(channel, nick, by, reason, message, callback) {
-  //   const target = (to === callback.nick ? from : to);
-  //   callback.say(target, 'Goodbye !');
-  // }
+  static onJoin(channel, nick, message, callback) {
+    const target = (nick === callback.nick ? channel : nick);
+    logger.info(` + onJoin Channel ${target}`);
+  }
 
-  // static onJoin(channel, nick, message, callback) {
-  //   const target = (nick === callback.nick ? channel : nick);
-  //   callback.say(target, 'Hello  ' + target + '!');
-  // }
-
-  // static onTopic(channel, topic, nick, message, callback) {
-  //   const target = (to === callback.nick ? from : to);
-  //   callback.say(target, 'Topic:  ' + target + ' ' + topic);
-  // }
+  static onTopic(channel, topic, nick, message, callback) {
+    const target = (to === callback.nick ? from : to);
+    logger.info(` + onTopic ${target} ${topic}`);
+  }
 }
 
 export default ircHelper;
