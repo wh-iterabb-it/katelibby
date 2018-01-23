@@ -8,7 +8,8 @@ before_install:
 script:
   - "npm run-script lint"
   - "npm test"
+  - "npm run-script cover"
 after_success:
-  - npm run cover
   - rm -Rf .nyc_output/
   - rm -Rf coverage/
+  
