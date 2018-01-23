@@ -10,6 +10,12 @@ class App {
     this.setConfig(config);
     this.setCommandPattern(config.commandChar);
     this.setupIRC();
+    this.setNSFW(config.app.nsfw);
+  }
+
+  static setNSFW(incNSFW) {
+    this.nsfw = incNSFW;
+    return this.nsfw;
   }
 
   static setLogger(incLogger) {

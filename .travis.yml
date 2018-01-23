@@ -1,13 +1,14 @@
 language: node_js
 node_js:
   - "8"
+  - "7"
 before_install:
   - sudo apt-get -y install libicu-dev
   - npm install -g npm
 script:
   - "npm run-script lint"
   - "npm test"
+  - "npm run-script cover"
 after_success:
-  - npm run coveralls
-  - rm -Rf .nyc_output/
-  - rm -Rf coverage/
+  - rm coverage.lcov
+  

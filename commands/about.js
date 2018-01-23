@@ -1,4 +1,4 @@
-import { toHHMMSS } from '../utils/sanitize';
+import toHHMMSS from '../utils/format';
 import pjson from '../package.json';
 
 module.exports = (callback, target, from, args) => {

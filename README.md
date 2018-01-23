@@ -5,7 +5,8 @@ katelibby
 [![Travis Badge](https://travis-ci.org/wh-iterabb-it/katelibby.svg?branch=development)](https://travis-ci.org/wh-iterabb-it/katelibby)
 [![Dependency Status](https://img.shields.io/david/wh-iterabb-it/katelibby.svg?style=flat)](https://david-dm.org/wh-iterabb-it/katelibby#info=Dependencies)
 [![devDependency Status](https://img.shields.io/david/dev/wh-iterabb-it/katelibby.svg?style=flat)](https://david-dm.org/wh-iterabb-it/katelibby#info=devDependencies)
-[![Coverage Status](https://coveralls.io/repos/github/wh-iterabb-it/katelibby/badge.svg?branch=development)](https://coveralls.io/github/wh-iterabb-it/katelibby?branch=development)
+[![codecov](https://codecov.io/gh/wh-iterabb-it/katelibby/branch/development/graph/badge.svg)](https://codecov.io/gh/wh-iterabb-it/katelibby)
+
 
 ### Description:
 

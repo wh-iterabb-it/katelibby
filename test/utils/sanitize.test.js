@@ -17,6 +17,13 @@ describe('Sanitize Utility Tests', () => {
       expect(resp).to.equal(expected);
     });
 
+    it('should fix arrays of 1 length to be string', () => {
+      const testData = ['tacos'];
+      const expected = 'tacos';
+      const resp = sanitize(testData);
+      expect(resp).to.equal(expected);
+    });
+
     it('should return empty string if empty object is passed in', () => {
       const testData = {};
       const expected = '';
