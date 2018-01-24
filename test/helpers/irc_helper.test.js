@@ -53,6 +53,17 @@ describe('IRC Helper Tests', () => {
       irc.connect(callback);
       callback.client.should.have.been.calledWith();
     });
+      
+    it('should allow connection after detecting twitch', () => {
+      callback.config.irc.server = 'myslackorg.twitch.tv';
+      irc.connect(callback);
+      callback.client.should.have.been.calledWith();
+    });
+      
+    it('should allow connection with typical irc server address', () => {
+      irc.connect(callback);
+      callback.client.should.have.been.calledWith();
+    });
   });
 
   describe('detectSlack method', () => {
