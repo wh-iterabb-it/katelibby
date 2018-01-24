@@ -56,7 +56,7 @@ class ircHelper {
       // username = config.twitch.irc.userName || config.irc.userName;
       // realname = config.twitch.irc.realName || config.irc.realName;
       // password = config.twitch.password || config.irc.password;
-    } else if (ircHelper.detectSlack(server)) {
+    } else if (ircHelper.detectSlack(this.server)) {
       logger.info(' - detected slack ...');
       logger.info(' - attempting to use slack configuration');
       // server = config.slack.server || config.irc.server;
@@ -64,14 +64,14 @@ class ircHelper {
       // realname = config.slack.irc.realName || config.irc.realName;
       // password = config.slack.password || config.irc.password;
     }
-    logger.info(` - connecting to ${server} ...`);
-    logger.info(` - bot username ${username}`);
-    logger.info(` - bot realname ${realname}`);
+    logger.info(` - connecting to ${this.server} ...`);
+    logger.info(` - bot username ${this.username}`);
+    logger.info(` - bot realname ${this.realname}`);
     callback.client = new irc.Client(
-      server,
-      username,
+      this.server,
+      this.username,
       {
-        'password': password,
+        'password': this.password,
         ...config.irc,
       },
     );
