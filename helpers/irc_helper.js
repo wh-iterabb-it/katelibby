@@ -3,7 +3,6 @@ import request from 'request';
 import entities from 'entities';
 
 import commands from '../commands';
-import config from './config_helper';
 import logger from '../utils/logger';
 import urlRegex from '../utils/url_regex';
 
@@ -45,24 +44,24 @@ class ircHelper {
   }
 
   static connect(callback) {
-    const server = config.irc.server || 'localhost';
-    const username = config.irc.userName || 'kate';
-    const realname = config.irc.realName || 'Kate Libby';
-    const password = config.irc.password || false;
+    const server = callback.config.irc.server || 'localhost';
+    const username = callback.config.irc.userName || 'kate';
+    const realname = callback.config.irc.realName || 'Kate Libby';
+    const password = callback.config.irc.password || false;
     if (ircHelper.detectTwitch(server)) {
       logger.info(' - detected twitch ...');
       logger.info(' - attempting to use twitch configuration');
-      // server = config.twitch.server || config.irc.server;
-      // username = config.twitch.irc.userName || config.irc.userName;
-      // realname = config.twitch.irc.realName || config.irc.realName;
-      // password = config.twitch.password || config.irc.password;
+      // server = callback.config.twitch.server || callback.config.irc.server;
+      // username = callback.config.twitch.irc.userName || callback.config.irc.userName;
+      // realname = callback.config.twitch.irc.realName || callback.config.irc.realName;
+      // password = callback.config.twitch.password || callback.config.irc.password;
     } else if (ircHelper.detectSlack(server)) {
       logger.info(' - detected slack ...');
       logger.info(' - attempting to use slack configuration');
-      // server = config.slack.server || config.irc.server;
-      // username = config.slack.irc.userName || config.irc.userName;
-      // realname = config.slack.irc.realName || config.irc.realName;
-      // password = config.slack.password || config.irc.password;
+      // server = callback.config.slack.server || callback.config.irc.server;
+      // username = callback.config.slack.irc.userName || callback.config.irc.userName;
+      // realname = callback.config.slack.irc.realName || callback.config.irc.realName;
+      // password = callback.config.slack.password || callback.config.irc.password;
     }
     logger.info(` - connecting to ${server} ...`);
     logger.info(` - bot username ${username}`);
@@ -72,7 +71,7 @@ class ircHelper {
       username,
       {
         'password': password,
-        ...config.irc,
+        ...callback.config.irc,
       },
     );
     callback.client.on('registered', (message) => {
