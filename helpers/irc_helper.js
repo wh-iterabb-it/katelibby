@@ -45,10 +45,10 @@ class ircHelper {
   }
 
   static connect(callback) {
-    const server = config.irc.server || 'localhost';
-    const username = config.irc.userName || 'kate';
-    const realname = config.irc.realName || 'Kate Libby';
-    const password = config.irc.password || false;
+    this.server = config.irc.server || 'localhost';
+    this.username = config.irc.userName || 'kate';
+    this.realname = config.irc.realName || 'Kate Libby';
+    this.password = config.irc.password || false;
     if (ircHelper.detectTwitch(server)) {
       logger.info(' - detected twitch ...');
       logger.info(' - attempting to use twitch configuration');
@@ -187,7 +187,7 @@ class ircHelper {
   static onMessage(from, to, text, message, callback) {
     const target = (to === callback.nick ? from : to);
     ircHelper.detectCommand(from, target, text, message, callback);
-    if (!ircHelper.detectSlack()) {
+    if (!ircHelper.detectSlack(this.server)) {
       ircHelper.detectURL(target, text, callback);
       ircHelper.detectReddit(from, target, text, message, callback);
     }
