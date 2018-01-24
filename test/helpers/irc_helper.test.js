@@ -1,4 +1,5 @@
 import chai from 'chai';
+import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
 import irc from '../../helpers/irc_helper';
@@ -10,6 +11,61 @@ chai.use(sinonChai);
 const { expect } = chai;
 
 describe('IRC Helper Tests', () => {
+    let callback = {};
+  let sandbox;
+
+  before(() => {
+    sandbox = sinon.sandbox.create();
+  });
+
+  beforeEach(() => {
+    callback = {
+      client: sandbox.stub(),
+      nsfw: sandbox.stub(),
+      say: sandbox.stub(),
+      config: {
+        wunderground: {
+          key: '',
+        },
+        giphy: {
+          key: '',
+        },
+        commandChar: '!',
+        irc: {
+          userName: 'kate',
+          realName: 'kate',
+          server: 'irc.something.org',
+          port: 6667,
+          password: 'xxx', 
+        },
+      },
+    };
+  });
+
+  afterEach(() => {
+    // Restore sinon sandbox
+    sandbox.restore();
+  });
+  
+  describe('connect method', () => {
+    it('should allow connection after detecting slack', () => {
+      callback.config.irc.server = 'myslackorg.slack.com';
+      irc.connect(callback);
+      callback.client.should.have.been.calledWith();
+    });
+      
+    it('should allow connection after detecting twitch', () => {
+      callback.config.irc.server = 'myslackorg.twitch.tv';
+      irc.connect(callback);
+      callback.client.should.have.been.calledWith();
+    });
+      
+    it('should allow connection with typical irc server address', () => {
+      irc.connect(callback);
+      callback.client.should.have.been.calledWith();
+    });
+  });
+
   describe('detectSlack method', () => {
     it('should return true when slack.com is in string', () => {
       const resp = irc.detectSlack('blahblah.slack.com');
@@ -33,7 +89,7 @@ describe('IRC Helper Tests', () => {
       expect(resp).be.false;
     });
   });
-
+  
   describe('isSUB method', () => {
     it('should return false when a string is not a subreddit', () => {
       const testString = 'http://reddit.com/u/tacos';
