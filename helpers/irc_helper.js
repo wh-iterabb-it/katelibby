@@ -75,10 +75,10 @@ class ircHelper {
       },
     );
     callback.client.on('registered', (message) => {
-      callback.logger.info(message);
+      logger.info(message);
       callback.nick = message.args[0];  // eslint-disable-line
     });
-    callback.logger.info(' ✅ connected');
+    logger.info(' ✅ connected');
   }
 
   static detectTwitch(server) {
