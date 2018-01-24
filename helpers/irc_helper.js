@@ -49,7 +49,7 @@ class ircHelper {
     this.username = config.irc.userName || 'kate';
     this.realname = config.irc.realName || 'Kate Libby';
     this.password = config.irc.password || false;
-    if (ircHelper.detectTwitch(server)) {
+    if (ircHelper.detectTwitch(this.server)) {
       logger.info(' - detected twitch ...');
       logger.info(' - attempting to use twitch configuration');
       // server = config.twitch.server || config.irc.server;
