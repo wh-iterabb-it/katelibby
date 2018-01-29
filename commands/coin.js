@@ -33,8 +33,8 @@ module.exports = (callback, target, from, args) => {
             const volume = body.Markets[0].Volume_24h.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             
             // get the time since last trade
-            const timestamp = moment(body.Markets[0].Timestamp,'DD/MM/YYYY HH:mm:ss');
-            const now = moment(new Date().getTime() / 1000,'DD/MM/YYYY HH:mm:ss');
+            const timestamp = moment.unix(body.Markets[0].Timestamp).format('DD/MM/YYYY HH:mm:ss');
+            const now = moment.unix(new Date().getTime() / 1000).format('DD/MM/YYYY HH:mm:ss');
             const difference = now.diff(timestamp);
             const duration = moment.duration(difference);
             const lastTrade = Math.floor(duration.asHours()) + moment.utc(difference).format(':mm:ss');
