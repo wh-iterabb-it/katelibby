@@ -19,7 +19,7 @@ module.exports = (callback, target, from, args) => {
     if (callback.config.giphy.key.length < 1) {
       callback.say(target, 'Please add an API key to the configuration file.');
     } else {
-      const coin = args.substring(0, 4);
+      const coin = sanitize(args.substring(0, 4));
       const url = `${apiUrl}?key=${apiKey}&label=${coin}btc&fiat=usd`;
       request({ url, json: true }, (error, response, body) => {
         if (!error && response.statusCode === 200) {
