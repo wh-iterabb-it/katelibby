@@ -125,6 +125,13 @@ const config = {
   wunderground: {
     key: ''
   },
+  
+  // World Coin Index API Key
+  // get your key from
+  // https://www.worldcoinindex.com/apiservice/
+  worldcoinindex: {
+    key: ''
+  }
 };
 
 module.exports = config;
