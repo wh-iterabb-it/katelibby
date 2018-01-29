@@ -27,14 +27,14 @@ module.exports = (callback, target, from, args) => {
           if (typeof body.Markets === 'undefined' || typeof body.error !== 'undefined') {
             callback.say(target, 'Are you trying to make me crash?');
           } else {
-            const price = body.Markets[0].Price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            const price = body.Markets[0].Price.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             const label = body.Markets[0].Label.substring(0, 3);
             const name = body.Markets[0].Name;
-            const volume = body.Markets[0].Volume_24h.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            const volume = body.Markets[0].Volume_24h.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             
             // get the time since last trade
-            const timestamp = moment(body.Markets[0].Timestamp,'DD/MM/YYYY HH:mm:ss');
-            const now = moment(new Date().getTime() / 1000,'DD/MM/YYYY HH:mm:ss');
+            const timestamp = moment.unix(body.Markets[0].Timestamp).format('DD/MM/YYYY HH:mm:ss');
+            const now = moment.unix(new Date().getTime() / 1000).format('DD/MM/YYYY HH:mm:ss');
             const difference = now.diff(timestamp);
             const duration = moment.duration(difference);
             const lastTrade = Math.floor(duration.asHours()) + moment.utc(difference).format(':mm:ss');
