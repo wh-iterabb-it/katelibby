@@ -3,7 +3,7 @@ import request from 'request';
 import config from '../helpers/config_helper';
 import sanitize from '../utils/sanitize';
 
-const apiKey = config.worldcoinindex.key;
+
 const apiUrl = 'https://www.worldcoinindex.com/apiservice/ticker';
 
 module.exports = (callback, target, from, args) => {
@@ -16,9 +16,10 @@ module.exports = (callback, target, from, args) => {
     }
   }
   try {
-    if (callback.config.giphy.key.length < 1) {
+    if (callback.config.giphy.key.length < 1 || typeof config.worldcoinindex.key !== 'undefined') {
       callback.say(target, 'Please add an API key to the configuration file.');
     } else {
+      const apiKey = config.worldcoinindex.key;
       const coin = sanitize(args.substring(0, 4));
       const url = `${apiUrl}?key=${apiKey}&label=${coin}btc&fiat=usd`;
       request({ url, json: true }, (error, response, body) => {
