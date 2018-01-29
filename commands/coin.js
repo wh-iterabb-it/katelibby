@@ -20,7 +20,7 @@ module.exports = (callback, target, from, args) => {
       callback.say(target, 'Please add an API key to the configuration file.');
     } else {
       const apiKey = config.worldcoinindex.key;
-      const coin = sanitize(args.substring(0, 4));
+      const coin = sanitize(args.substring(0, 3));
       const url = `${apiUrl}?key=${apiKey}&label=${coin}btc&fiat=usd`;
       request({ url, json: true }, (error, response, body) => {
         if (!error && response.statusCode === 200) {
@@ -29,7 +29,7 @@ module.exports = (callback, target, from, args) => {
           } else {
             if (!body.error) {
               const price = body.Markets[0].Price;
-              const label = body.Markets[0].Label.substring(0, 4);
+              const label = body.Markets[0].Label.substring(0, 3);
               const name = body.Markets[0].Name;
               const volume = body.Markets[0].Volume_24h;
               // const timstamp = body.Markets[0].Timestamp;
