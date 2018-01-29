@@ -1,8 +1,8 @@
 import request from 'request';
+import moment from 'moment';
 
 import config from '../helpers/config_helper';
 import sanitize from '../utils/sanitize';
-
 
 const apiUrl = 'https://www.worldcoinindex.com/apiservice/ticker';
 
