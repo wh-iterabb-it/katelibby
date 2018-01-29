@@ -45,18 +45,18 @@ class ircHelper {
   }
 
   static connect(callback) {
-    const server = config.irc.server || 'localhost';
-    const username = config.irc.userName || 'kate';
-    const realname = config.irc.realName || 'Kate Libby';
-    const password = config.irc.password || false;
-    if (ircHelper.detectTwitch(server)) {
+    this.server = config.irc.server || 'localhost';
+    this.username = config.irc.userName || 'kate';
+    this.realname = config.irc.realName || 'Kate Libby';
+    this.password = config.irc.password || false;
+    if (ircHelper.detectTwitch(this.server)) {
       logger.info(' - detected twitch ...');
       logger.info(' - attempting to use twitch configuration');
       // server = config.twitch.server || config.irc.server;
       // username = config.twitch.irc.userName || config.irc.userName;
       // realname = config.twitch.irc.realName || config.irc.realName;
       // password = config.twitch.password || config.irc.password;
-    } else if (ircHelper.detectSlack(server)) {
+    } else if (ircHelper.detectSlack(this.server)) {
       logger.info(' - detected slack ...');
       logger.info(' - attempting to use slack configuration');
       // server = config.slack.server || config.irc.server;
@@ -64,14 +64,14 @@ class ircHelper {
       // realname = config.slack.irc.realName || config.irc.realName;
       // password = config.slack.password || config.irc.password;
     }
-    logger.info(` - connecting to ${server} ...`);
-    logger.info(` - bot username ${username}`);
-    logger.info(` - bot realname ${realname}`);
+    logger.info(` - connecting to ${this.server} ...`);
+    logger.info(` - bot username ${this.username}`);
+    logger.info(` - bot realname ${this.realname}`);
     callback.client = new irc.Client(
-      server,
-      username,
+      this.server,
+      this.username,
       {
-        'password': password,
+        'password': this.password,
         ...config.irc,
       },
     );
@@ -187,7 +187,7 @@ class ircHelper {
   static onMessage(from, to, text, message, callback) {
     const target = (to === callback.nick ? from : to);
     ircHelper.detectCommand(from, target, text, message, callback);
-    if (!ircHelper.detectSlack()) {
+    if (!ircHelper.detectSlack(this.server)) {
       ircHelper.detectURL(target, text, callback);
       ircHelper.detectReddit(from, target, text, message, callback);
     }

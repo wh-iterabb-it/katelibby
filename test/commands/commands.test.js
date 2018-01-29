@@ -27,6 +27,9 @@ describe('Command Test', () => {
         giphy: {
           key: '',
         },
+        worldcoinindex: {
+          key: '',
+        },
         commandChar: () => {
           return '!';
         },
@@ -242,6 +245,24 @@ describe('Command Test', () => {
       const from = 'beautato';
       const args = ' help';
       commands.giphy(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+  });
+  
+    describe('coin command', () => {
+    it('should call say with undefined args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = undefined;
+      commands.coin(callback, target, from, args);
+      callback.say.should.have.been.calledWith();
+    });
+
+    it('should call say with help as args', () => {
+      const target = '#general';
+      const from = 'beautato';
+      const args = ' help';
+      commands.coin(callback, target, from, args);
       callback.say.should.have.been.calledWith();
     });
   });
