@@ -11,7 +11,7 @@ module.exports = (callback, target, from, args) => {
     switch (args) {
       case 'help':
         callback.say(target, 'Getting the current price USD of a given crypto coin.');
-        callback.say(target, `Syntax is ${callback.config.commandChar} cyber { ETH }`);
+        callback.say(target, `Syntax is ${callback.config.commandChar}coin { ETH }`);
         return 'help';
     }
   }
@@ -27,15 +27,21 @@ module.exports = (callback, target, from, args) => {
           if (typeof body.Markets === 'undefined' || typeof body.error !== 'undefined') {
             callback.say(target, 'Are you trying to make me crash?');
           } else {
-            const price = body.Markets[0].Price;
+            const price = body.Markets[0].Price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
             const label = body.Markets[0].Label.substring(0, 3);
             const name = body.Markets[0].Name;
-            const volume = body.Markets[0].Volume_24h;
-            // const timstamp = body.Markets[0].Timestamp;
-
-            callback.say(target, `${name}`);
-            callback.say(target, `1 ${label} = $ ${price} USD`);
+            const volume = body.Markets[0].Volume_24h.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+            
+            // get the time since last trade
+            const timestamp = moment(body.Markets[0].Timestamp,'DD/MM/YYYY HH:mm:ss');
+            const now = moment(new Date().getTime() / 1000,'DD/MM/YYYY HH:mm:ss');
+            const difference = now.diff(timestamp);
+            const duration = moment.duration(difference);
+            const lastTrade = Math.floor(duration.asHours()) + moment.utc(difference).format(':mm:ss');
+            
+            callback.say(target, `1 ${label} = $ ${price} USD as of ${lastTrade} ago`);
             callback.say(target, `24 Hour Volume $ ${volume} USD`);
+            callback.say(target, `${name} https://coinmarketcap.com/currencies/${name}/`);
           }
         }
       });
