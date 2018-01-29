@@ -24,22 +24,18 @@ module.exports = (callback, target, from, args) => {
       const url = `${apiUrl}?key=${apiKey}&label=${coin}btc&fiat=usd`;
       request({ url, json: true }, (error, response, body) => {
         if (!error && response.statusCode === 200) {
-          if (typeof body.Markets[0] === 'undefined') {
+          if (typeof body.Markets === 'undefined' || typeof body.error !== 'undefined') {
             callback.say(target, 'Are you trying to make me crash?');
           } else {
-            if (!body.error) {
-              const price = body.Markets[0].Price;
-              const label = body.Markets[0].Label.substring(0, 3);
-              const name = body.Markets[0].Name;
-              const volume = body.Markets[0].Volume_24h;
-              // const timstamp = body.Markets[0].Timestamp;
+            const price = body.Markets[0].Price;
+            const label = body.Markets[0].Label.substring(0, 3);
+            const name = body.Markets[0].Name;
+            const volume = body.Markets[0].Volume_24h;
+            // const timstamp = body.Markets[0].Timestamp;
 
-              callback.say(target, `${name}`);
-              callback.say(target, `1 ${label} = $ ${price} USD`);
-              callback.say(target, `24 Hour Volume $ ${volume} USD`);
-            } else {
-              callback.say(target, 'No!');
-            }
+            callback.say(target, `${name}`);
+            callback.say(target, `1 ${label} = $ ${price} USD`);
+            callback.say(target, `24 Hour Volume $ ${volume} USD`);
           }
         }
       });
