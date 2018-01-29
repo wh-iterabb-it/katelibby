@@ -43,7 +43,7 @@ module.exports = (callback, target, from, args) => {
             
             callback.say(target, `1 ${label} = $ ${price} USD as of ${lastTrade} ago`);
             callback.say(target, `24 Hour Volume $ ${volume} USD`);
-            callback.say(target, `${name} https://coinmarketcap.com/currencies/${name}/`);
+            callback.say(target, `${name} https://www.worldcoinindex.com/coin/${name}`);
           }
         }
       });
