@@ -37,7 +37,7 @@ module.exports = (callback, target, from, args) => {
             // get the time since last trade
             const timestamp = moment.unix(body.Markets[0].Timestamp);
             const now = moment.unix(new Date().getTime() / 1000);
-            const difference = now.diff(timestamp).format('DD/MM/YYYY HH:mm:ss');
+            const difference = now.diff(timestamp);
             const duration = moment.duration(difference);
             const lastTrade = Math.floor(duration.asHours()) + moment.utc(difference).format(':mm:ss');
             
