@@ -19,19 +19,20 @@ module.exports = (callback, target, from, args) => {
     if (callback.config.giphy.key.length < 1) {
       callback.say(target, 'Please add an API key to the configuration file.');
     } else {
-      const url = `${apiUrl}?key=${apiKey}&label=${}btc&fiat=usd`;
+      const coin = args.substring(0, 4);
+      const url = `${apiUrl}?key=${apiKey}&label=${coin}btc&fiat=usd`;
       request({ url, json: true }, (error, response, body) => {
         if (!error && response.statusCode === 200) {
           if (typeof body.Markets[0] === 'undefined') {
             callback.say(target, 'Are you trying to make me crash?');
           } else {
-            const price = body.Markets[0].Price;
-            const label = body.Markets[0].Label.substring(0, 4);
-            const name = body.Markets[0].Name;
-            const volume = body.Markets[0].Volume_24h;
-            const timstamp = body.Markets[0].Timestamp;
+            if (!body.error) {
+              const price = body.Markets[0].Price;
+              const label = body.Markets[0].Label.substring(0, 4);
+              const name = body.Markets[0].Name;
+              const volume = body.Markets[0].Volume_24h;
+              const timstamp = body.Markets[0].Timestamp;
 
-            if (num > 1) {
               callback.say(target, `${name}`);
               callback.say(target, `1 ${label} = \$ ${price} USD`);
               callback.say(target, `24 Hour Volume \$ ${volume} USD`);
@@ -46,5 +47,3 @@ module.exports = (callback, target, from, args) => {
     callback.say(target, 'And what do we say to death?'); //  Not today
   }
 };
-
-
