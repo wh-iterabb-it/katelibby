@@ -16,7 +16,7 @@ module.exports = (callback, target, from, args) => {
     }
   }
   try {
-    if (callback.config.giphy.key.length < 1 || typeof config.worldcoinindex.key !== 'undefined') {
+    if (callback.config.giphy.key.length < 1) {
       callback.say(target, 'Please add an API key to the configuration file.');
     } else {
       const apiKey = config.worldcoinindex.key;
