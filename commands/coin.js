@@ -31,11 +31,11 @@ module.exports = (callback, target, from, args) => {
               const label = body.Markets[0].Label.substring(0, 4);
               const name = body.Markets[0].Name;
               const volume = body.Markets[0].Volume_24h;
-              const timstamp = body.Markets[0].Timestamp;
+              // const timstamp = body.Markets[0].Timestamp;
 
               callback.say(target, `${name}`);
-              callback.say(target, `1 ${label} = \$ ${price} USD`);
-              callback.say(target, `24 Hour Volume \$ ${volume} USD`);
+              callback.say(target, `1 ${label} = $ ${price} USD`);
+              callback.say(target, `24 Hour Volume $ ${volume} USD`);
             } else {
               callback.say(target, 'No!');
             }
