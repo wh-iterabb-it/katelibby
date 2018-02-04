@@ -1,0 +1,134 @@
+const config = {
+
+  app: {
+    nsfw: false // true allows nsfw content
+  },
+
+  commandChar: '!',
+  debug: true,
+  showErrors: true,
+
+  github: {
+    auth: {
+      type: 'oauth',
+      token: '', // this will be the auth token you use for github
+    },
+    owner: 'owner-of-repo', // the github org which owns a repo
+    repo: 'name-of-repo', // default repo to use with the github queries
+    connect: {
+        // optional
+      debug: true,
+      protocol: 'https',
+      host: 'api.github.com',
+      pathPrefix: '/api/v3',
+      headers: {
+          'user-agent': '' // custom useragent
+      },
+      followRedirects: false, // default: true; there's currently an issue with non-get redirects, so allow ability to disable follow-redirects
+      timeout: 5000
+    }
+  },
+
+  twitch: {
+    connect: false, // true == connect, false == no connect to twitch (twitch disabled)
+    streamer: 'streamernamehere',
+    clientid: '', // Client ID requires for all api calls
+    // https://blog.twitch.tv/client-id-required-for-kraken-api-calls-afbb8e95f843#.u4j475w2y
+    irc: {
+      server: 'irc.chat.twitch.tv',
+      port: 6667,
+      userName: 'kate',
+      password: 'xxx',     // for connecting to twitch, use https://twitchapps.com/tmi/,
+      secure: false, // very important for connecting
+      realName: 'Kate Libby',
+      channels: ['#general', '#dangerroom'],
+      localAddress: null,
+      debug: false,
+      showErrors: false,
+      autoRejoin: false,
+      autoConnect: true,
+      selfSigned: false,
+      certExpired: false,
+      floodProtection: false,
+      floodProtectionDelay: 1000,
+      sasl: false,
+      retryCount: 0,
+      retryDelay: 2000,
+      stripColors: false,
+      channelPrefixes: '&#',
+      messageSplit: 512,
+      encoding: ''
+    },
+  },
+
+  slack: {
+    connect: false, // true == connect, false == no connect to slack
+    irc: {
+      server: 'xxx.irc.slack.com',
+      port: 6667,
+      userName: 'kate',
+      password: 'xxx',
+      secure: false, // very important for connecting
+      realName: 'Kate Libby',
+      channels: ['#general', '#dangerroom'], // by default, you are in every channel you joined
+      localAddress: null,
+      debug: false,
+      showErrors: false,
+      autoRejoin: false,
+      autoConnect: true,
+      selfSigned: false,
+      certExpired: false,
+      floodProtection: false,
+      floodProtectionDelay: 1000,
+      sasl: false,
+      retryCount: 0,
+      retryDelay: 2000,
+      stripColors: false,
+      channelPrefixes: '&#',
+      messageSplit: 512,
+      encoding: ''
+    },
+  },
+
+  irc: {
+    server: 'localhost',
+    port: 6667,
+    userName: 'kate',
+    realName: 'Kate Libby',
+    localAddress: null,
+    debug: false,
+    showErrors: false,
+    autoRejoin: false,
+    autoConnect: true,
+    channels: ['#general', '#dangerroom'],
+    secure: false, // very important for connecting
+    selfSigned: false,
+    certExpired: false,
+    floodProtection: false,
+    floodProtectionDelay: 1000,
+    sasl: false,
+    retryCount: 0,
+    retryDelay: 2000,
+    stripColors: false,
+    channelPrefixes: '&#',
+    messageSplit: 512,
+    encoding: ''
+  },
+
+  // Giphy API key
+  giphy: {
+    key: ''
+  },
+
+  // Weather Underground API key
+  wunderground: {
+    key: ''
+  },
+  
+  // World Coin Index API Key
+  worldcoinindex: {
+    key: ''
+  }
+};
+
+module.exports = config;
