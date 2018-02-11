@@ -43,4 +43,20 @@ describe('App Tests', () => {
       expect(actual).to.equal(expected);
     });
   });
+  
+  describe('setLogger method', () => {
+    it('should return a boolean response', () => {
+      const expected = false;
+      const actual = kate.setLogger(false);
+      expect(actual).to.equal(expected);
+    });
+  });
+  
+  describe('setCommands method', () => {
+    it('should return a boolean response', () => {
+      const expected = false;
+      const actual = kate.setCommands(false);
+      expect(actual).to.equal(expected);
+    });
+  });
 });
