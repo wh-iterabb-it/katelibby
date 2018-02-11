@@ -1,11 +1,6 @@
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
 
-import xxmp from '../helpers/irc_helper';
-import commands from '../commands';
-
-// import logger from '../utils/logger';
-// import irc from '../helpers/irc_helper';
 import kate from '../app';
 
 chai.should();
