@@ -36,10 +36,10 @@ describe('App Tests', () => {
     });
   });
   
-  describe('setupIRC method', () => {
-    it('should return a fresh irc_helper response', () => {
-      const expected = new xxmp(kate);
-      const actual = kate.setupIRC();
+  describe('setNSFW method', () => {
+    it('should return a boolean response', () => {
+      const expected = false;
+      const actual = kate.setNSFW(false);
       expect(actual).to.equal(expected);
     });
   });
