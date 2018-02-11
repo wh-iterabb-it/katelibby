@@ -1,6 +1,8 @@
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
 
+import commands from './commands';
+
 // import logger from '../utils/logger';
 // import irc from '../helpers/irc_helper';
 import kate from '../app';
@@ -29,6 +31,14 @@ describe('App Tests', () => {
       };
       const actual = kate.setConfig(testJson);
       const expected = testJson;
+      expect(actual).to.equal(expected);
+    });
+  });
+  
+  describe('setupIRC method', () => {
+    it('should return a fresh irc_helper response', () => {
+      const expected = new xxmp(kate);
+      const actual = kate.setupIRC();
       expect(actual).to.equal(expected);
     });
   });
