@@ -1,7 +1,8 @@
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
 
-import commands from './commands';
+import xxmp from '../helpers/irc_helper';
+import commands from '../commands';
 
 // import logger from '../utils/logger';
 // import irc from '../helpers/irc_helper';
