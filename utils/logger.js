@@ -44,7 +44,7 @@ const logger = new (Logger)({
         }
 
         let output = [
-          `[${options.timestamp()}][${level}]`
+          `[${options.timestamp()}][${level}]`,
           message,
           meta
         ];
