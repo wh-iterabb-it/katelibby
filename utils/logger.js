@@ -10,34 +10,34 @@ const logger = new (Logger)({
       'timestamp': true,
       'level': level,
       formatter: function (options) {
-        let message = "";
-        let meta = "";
+        let message = '';
+        let meta = '';
         
         if (options.message !== undefined) {
           message = options.message;
         }
 
         if (options.meta && Object.keys(options.meta).length) {
-          meta = "\n\t" + JSON.stringify(options.meta);
+          meta = '\n\t' + JSON.stringify(options.meta);
         }
         
         let level = options.level.toUpperCase();
 
         switch (level) {
-          case "DEBUG":
-            level = chalk.bgYellow(level);
+          case 'DEBUG':
+            { level } = chalk.bgYellow(level);
             break;
 
-          case "INFO":
-            level = chalk.cyan(level);
+          case 'INFO':
+            { level } = chalk.cyan(level);
             break;
 
-          case "WARN":
-            level = chalk.yellow(level);
+          case 'WARN':
+            { level } = chalk.yellow(level);
             break;
 
-          case "ERROR":
-            level = chalk.red(level);
+          case 'ERROR':
+            { level } = chalk.red(level);
             break;
 
           default:
