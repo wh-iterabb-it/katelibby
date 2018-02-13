@@ -1,18 +1,14 @@
 import { Logger, transports } from 'winston';
+import program from '../helpers/command_helper';
 
-const date = new Date();
-export const name = './logs/' + date.toISOString() + '.log';
+const level = program.debug ? 'debug' : 'info';
 
 const logger = new (Logger)({
   transports: [
     new (transports.Console)({
       'timestamp': true,
-      'level': 'info',
+      'level': level,
     }),
-    // new (transports.File)({
-    //   filename: name,
-    //   'level': 'info',
-    // }),
   ],
 });
 

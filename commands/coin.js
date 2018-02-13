@@ -1,17 +1,36 @@
 import request from 'request';
+import moment from 'moment';
 
 import config from '../helpers/config_helper';
 import sanitize from '../utils/sanitize';
 
-
 const apiUrl = 'https://www.worldcoinindex.com/apiservice/ticker';
+
+function formatMoney(incInt) {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
+  const factoredNumber = formatter.format(incInt);
+  return factoredNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function formatLastTrade(intDate) {
+  // get the time since last trade
+  const timestamp = moment.unix(intDate);
+  const now = moment.unix(new Date().getTime() / 1000);
+  const difference = now.diff(timestamp);
+  const duration = moment.duration(difference);
+  return Math.floor(duration.asHours()) + moment.utc(difference).format(':mm:ss');
+}
 
 module.exports = (callback, target, from, args) => {
   if (typeof args !== 'undefined') {
     switch (args) {
       case 'help':
         callback.say(target, 'Getting the current price USD of a given crypto coin.');
-        callback.say(target, `Syntax is ${callback.config.commandChar} cyber { ETH }`);
+        callback.say(target, `Syntax is ${callback.config.commandChar}coin { ETH }`);
         return 'help';
     }
   }
@@ -27,15 +46,15 @@ module.exports = (callback, target, from, args) => {
           if (typeof body.Markets === 'undefined' || typeof body.error !== 'undefined') {
             callback.say(target, 'Are you trying to make me crash?');
           } else {
-            const price = body.Markets[0].Price;
+            const price =  formatMoney(body.Markets[0].Price);
             const label = body.Markets[0].Label.substring(0, 3);
             const name = body.Markets[0].Name;
-            const volume = body.Markets[0].Volume_24h;
-            // const timstamp = body.Markets[0].Timestamp;
+            const volume = formatMoney(body.Markets[0].Volume_24h);
+            const lastTrade = formatLastTrade(body.Markets[0].Timestamp);
 
-            callback.say(target, `${name}`);
-            callback.say(target, `1 ${label} = $ ${price} USD`);
+            callback.say(target, `1 ${label} = $ ${price} USD as of ${lastTrade} ago`);
             callback.say(target, `24 Hour Volume $ ${volume} USD`);
+            callback.say(target, `${name} https://www.worldcoinindex.com/coin/${name}`);
           }
         }
       });

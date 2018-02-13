@@ -1,8 +1,6 @@
 import chai from 'chai';
 import sinonChai from 'sinon-chai';
 
-// import logger from '../utils/logger';
-// import irc from '../helpers/irc_helper';
 import kate from '../app';
 
 chai.should();
@@ -29,6 +27,30 @@ describe('App Tests', () => {
       };
       const actual = kate.setConfig(testJson);
       const expected = testJson;
+      expect(actual).to.equal(expected);
+    });
+  });
+  
+  describe('setNSFW method', () => {
+    it('should return a boolean response', () => {
+      const expected = false;
+      const actual = kate.setNSFW(false);
+      expect(actual).to.equal(expected);
+    });
+  });
+  
+  describe('setLogger method', () => {
+    it('should return a boolean response', () => {
+      const expected = false;
+      const actual = kate.setLogger(false);
+      expect(actual).to.equal(expected);
+    });
+  });
+  
+  describe('setCommands method', () => {
+    it('should return a boolean response', () => {
+      const expected = false;
+      const actual = kate.setCommands(false);
       expect(actual).to.equal(expected);
     });
   });
