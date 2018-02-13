@@ -1,4 +1,5 @@
 import { Logger, transports } from 'winston';
+import chalk from 'chalk';
 import program from '../helpers/command_helper';
 
 const level = program.debug ? 'debug' : 'info';
