@@ -20,7 +20,7 @@ const logger = new (Logger)({
           meta = "\n\t" + JSON.stringify(options.meta);
         }
         
-        const level = options.level.toUpperCase();
+        let level = options.level.toUpperCase();
 
         switch (level) {
           case "DEBUG":
