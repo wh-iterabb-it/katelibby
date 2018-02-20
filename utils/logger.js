@@ -25,19 +25,19 @@ const logger = new (Logger)({
 
         switch (level) {
           case 'DEBUG':
-            { level } = chalk.bgYellow(level);
+            level = chalk.bgYellow(level);
             break;
 
           case 'INFO':
-            { level } = chalk.cyan(level);
+            level = chalk.cyan(level);
             break;
 
           case 'WARN':
-            { level } = chalk.yellow(level);
+            level = chalk.yellow(level);
             break;
 
           case 'ERROR':
-            { level } = chalk.red(level);
+            level = chalk.red(level);
             break;
 
           default:
