@@ -116,7 +116,7 @@
     "xml2js": "0.4.19"
   },
   "devDependencies": {
-    "babel-eslint": "8.0.3",
+    "babel-eslint": "8.2.2",
     "babel-plugin-syntax-trailing-function-commas": "6.22.0",
     "babel-plugin-transform-async-to-generator": "6.24.1",
     "babel-plugin-transform-class-properties": "6.24.1",
