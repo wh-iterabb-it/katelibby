@@ -7,7 +7,9 @@ const level = program.debug ? 'debug' : 'info';
 const logger = new (Logger)({
   transports: [
     new (transports.Console)({
-      'timestamp': true,
+      timestamp: function () {
+          return dateformat(Date.now(), "yyyy-mm-dd HH:MM:ss.l");
+      },
       'level': level,
       formatter: function (options) {
         let meta = '';
