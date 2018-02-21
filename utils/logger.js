@@ -10,34 +10,27 @@ const logger = new (Logger)({
       'timestamp': true,
       'level': level,
       formatter: function (options) {
-        let message = '';
         let meta = '';
-        
-        if (options.message !== undefined) {
-          message = options.message;
-        }
 
         if (options.meta && Object.keys(options.meta).length) {
           meta = '\n\t' + JSON.stringify(options.meta);
         }
-        
-        let level = options.level.toUpperCase();
-
-        switch (level) {
+        let formattedLevel = options.level.toUpperCase();
+        switch (formattedLevel) {
           case 'DEBUG':
-            level = chalk.bgYellow(level);
+            formattedLevel = chalk.bgYellow(formattedLevel);
             break;
 
           case 'INFO':
-            level = chalk.cyan(level);
+            formattedLevel = chalk.cyan(formattedLevel);
             break;
 
           case 'WARN':
-            level = chalk.yellow(level);
+            formattedLevel = chalk.yellow(formattedLevel);
             break;
 
           case 'ERROR':
-            level = chalk.red(level);
+            formattedLevel = chalk.red(formattedLevel);
             break;
 
           default:
@@ -45,8 +38,8 @@ const logger = new (Logger)({
         }
 
         let output = [
-          `[${options.timestamp()}][${level}]`,
-          message,
+          `[${options.timestamp()}][${formattedLevel}]`,
+          options.message,
           meta
         ];
 
