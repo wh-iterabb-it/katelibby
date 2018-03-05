@@ -1,6 +1,6 @@
 {
   "name": "katelibby",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Kate Libby ircbot",
   "repository": {
     "type": "git",
@@ -103,7 +103,7 @@
     "entities": "1.1.1",
     "google": "2.1.0",
     "github": "13.1.0",
-    "irc": "wh-iterabb-it/node-irc#master",
+    "irc": "wh-iterabb-it/node-irc#development",
     "read": "1.0.7",
     "request": "2.83.0",
     "mta-gtfs": "1.1.0",
