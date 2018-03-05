@@ -26,19 +26,19 @@ const logger = new (Logger)({
         let formattedLevel = options.level.toUpperCase();
         switch (formattedLevel) {
           case 'DEBUG':
-            formattedLevel = `[${chalk.hex(debugColor).(formattedLevel)}][ 🎺 ]`;
+            formattedLevel = `[${chalk.hex(debugColor)(formattedLevel)}][ 🎺 ]`;
             break;
 
           case 'INFO':
-            formattedLevel = `[ ${chalk.hex(infoColor).(formattedLevel)}][ • ]`;
+            formattedLevel = `[ ${chalk.hex(infoColor)(formattedLevel)}][ • ]`;
             break;
 
           case 'WARN':
-            formattedLevel = `[ ${chalk.hex(warnColor).(formattedLevel)}][ ⚠ ]`;
+            formattedLevel = `[ ${chalk.hex(warnColor)(formattedLevel)}][ ⚠ ]`;
             break;
 
           case 'ERROR':
-            formattedLevel = `[${chalk.hex(errColor).(formattedLevel)}][🔥 ]`;
+            formattedLevel = `[${chalk.hex(errColor)(formattedLevel)}][🔥 ]`;
             break;
 
           default:
