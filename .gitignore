@@ -1,13 +1,13 @@
+# Node ignores
+node_modules
 
+# NPM ignores
+npm-debug.log
 
-# Node things
-node_modules/
-package-lock.json
+# Test Coverage
+test/coverage
+coverage
+.nyc_output
 
-# App things
+# Dev configs
 *config.js
-logs/
-
-# Coverall things
-*coveralls.yml
-.nyc_output/

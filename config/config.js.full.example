@@ -121,14 +121,11 @@ const config = {
   },
 
   // Weather Underground API key
-  // only allows 500 calls a day and 10 a minute
   wunderground: {
     key: ''
   },
   
   // World Coin Index API Key
-  // get your key from
-  // https://www.worldcoinindex.com/apiservice/
   worldcoinindex: {
     key: ''
   }

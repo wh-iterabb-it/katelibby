@@ -2,7 +2,7 @@ module.exports = (callback, target, from, args) => {
   if (typeof args !== 'undefined') {
     switch (args) {
       case 'help':
-        callback.say(target, from + ', you think you are real fucking smart...');
+        callback.say(target, from + ', you think you are real smart...');
         callback.say(target, 'LOL hey guys, what if I got the help on the help command');
         callback.say(target, 'Syntax is ' + callback.config.commandChar +
          '{command} help, to get more info about a specific command 🤔');
