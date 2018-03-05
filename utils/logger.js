@@ -5,6 +5,11 @@ import program from '../helpers/command_helper';
 
 const currentLevel = program.debug ? 'debug' : 'info';
 
+const debugColor = '#8C9440';
+const infoColor = '#C5C8C6';
+const warnColor = '#DE935F'; // error
+const errColor = '#A54242'; // orangered
+
 const logger = new (Logger)({
   transports: [
     new (transports.Console)({
@@ -21,19 +26,19 @@ const logger = new (Logger)({
         let formattedLevel = options.level.toUpperCase();
         switch (formattedLevel) {
           case 'DEBUG':
-            formattedLevel = `[${chalk.cyan(formattedLevel)}][ 🎺 ]`;
+            formattedLevel = `[${chalk.hex(debugColor)(formattedLevel)}][ 🎺 ]`;
             break;
 
           case 'INFO':
-            formattedLevel = `[ ${chalk.white(formattedLevel)}][ • ]`;
+            formattedLevel = `[ ${chalk.hex(infoColor)(formattedLevel)}][ • ]`;
             break;
 
           case 'WARN':
-            formattedLevel = `[ ${chalk.yellow(formattedLevel)}][ ⚠ ]`;
+            formattedLevel = `[ ${chalk.hex(warnColor)(formattedLevel)}][ ⚠ ]`;
             break;
 
           case 'ERROR':
-            formattedLevel = `[${chalk.red(formattedLevel)}][🔥 ]`;
+            formattedLevel = `[${chalk.hex(errColor)(formattedLevel)}][🔥 ]`;
             break;
 
           default:
