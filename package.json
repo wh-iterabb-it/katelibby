@@ -143,7 +143,7 @@
     "nyc": "11.4.1",
     "pm2": "2.10.1",
     "sinon": "4.4.2",
-    "sinon-chai": "2.14.0"
+    "sinon-chai": "3.0.0"
   },
   "bugs": {
     "url": "https://github.com/wh-iterabb-it/katelibby/issues"
