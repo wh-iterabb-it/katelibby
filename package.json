@@ -98,7 +98,7 @@
     "chalk": "2.3.2",
     "cheerio": "0.22.0",
     "chrono-node": "1.3.5",
-    "commander": "2.14.1",
+    "commander": "2.15.0",
     "dateformat": "3.0.3",
     "entities": "1.1.1",
     "google": "2.1.0",
@@ -114,7 +114,7 @@
     "striptags": "3.1.1",
     "throng": "4.0.0",
     "twit": "2.2.9",
-    "winston": "2.4.0",
+    "winston": "2.4.1",
     "xml2js": "0.4.19"
   },
   "devDependencies": {
@@ -138,12 +138,12 @@
     "eslint-plugin-import": "2.9.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.7.0",
-    "mocha": "5.0.2",
+    "mocha": "5.0.4",
     "mocha-lcov-reporter": "1.3.0",
     "nyc": "11.4.1",
     "pm2": "2.10.1",
     "sinon": "4.4.2",
-    "sinon-chai": "2.14.0"
+    "sinon-chai": "3.0.0"
   },
   "bugs": {
     "url": "https://github.com/wh-iterabb-it/katelibby/issues"
