@@ -5,50 +5,24 @@ import config from './helpers/config_helper';
 
 class App {
   static init() {
-    this.setLogger(logger);
-    this.setCommands(commands);
-    this.setConfig(config);
-    this.setCommandPattern(config.commandChar);
-    this.setupIRC();
-    this.setNSFW(config.app.nsfw);
+    const { WebClient } = require('@slack/client');
+
+    // An access token (from your Slack app or custom integration - xoxp, xoxb, or xoxa)
+    const token = process.env.SLACK_TOKEN;
+
+    const web = new WebClient(token);
+
+    // The first argument can be a channel ID, a DM ID, a MPDM ID, or a group ID
+    const channelId = 'C1232456';
+
+    // See: https://api.slack.com/methods/chat.postMessage
+    web.chat.postMessage(channelId, 'Hello there')
+      .then((res) => {
+        // `res` contains information about the posted message
+        console.log('Message sent: ', res.ts);
+      }).catch(console.error);
   }
 
-  static setNSFW(incNSFW) {
-    this.nsfw = incNSFW;
-    return this.nsfw;
-  }
-
-  static setLogger(incLogger) {
-    this.logger = incLogger;
-    return this.logger;
-  }
-
-  static setCommands(incCommands) {
-    this.commands = incCommands;
-    return this.commands;
-  }
-
-  static setConfig(incConfig) {
-    this.config = incConfig;
-    return this.config;
-  }
-
-  static setCommandPattern(commandChar) {
-    const regexString = '^' + commandChar + '(\\w+) ?(.*)';
-    this.commandPattern = new RegExp(regexString);
-    return regexString;
-  }
-
-  static setupIRC() {
-    const irc = new xxmp(this);
-    return irc;
-  }
-
-  static say(to, message) {
-    this.logger.info('say: ' + to + ' ' + message);
-    // const newText = irc.colors.wrap('cyan', message);
-    this.client.say(to, message);
-  }
 }
 
 export default App;

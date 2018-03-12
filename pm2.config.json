@@ -1,7 +1,7 @@
 {
   "apps": [
     {
-      "name": "main-app",
+      "name": "katelibby-bot",
       "script": "bin/start",
       "watch": true,
       "ignore_watch": ["node_modules", "bin", ".git"],

@@ -1,0 +1,15 @@
+const config = {
+
+  app: {
+    nsfw: false // true allows nsfw content
+  },
+
+  slack: {
+    token: process.env.SLACK_TOKEN || '',
+  }
+
+  commandChar: '!',
+
+};
+
+module.exports = config;
