@@ -3,7 +3,7 @@ import chalk from 'chalk';
 
 import program from '../helpers/command_helper';
 
-const { combine, timestamp, label, printf } = format;
+const { combine, timestamp, printf } = format;
 
 const currentLevel = program.debug ? 'debug' : 'info';
 
