@@ -114,7 +114,7 @@
     "striptags": "3.1.1",
     "throng": "4.0.0",
     "twit": "2.2.9",
-    "winston": "3.0.0-rc3",
+    "winston": "3.0.0-rc4",
     "xml2js": "0.4.19"
   },
   "devDependencies": {
