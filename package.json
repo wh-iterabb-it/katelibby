@@ -105,7 +105,7 @@
     "github": "14.0.0",
     "irc": "wh-iterabb-it/node-irc#development",
     "read": "1.0.7",
-    "request": "2.84.0",
+    "request": "2.86.0",
     "mta-gtfs": "1.1.0",
     "moment": "2.22.1",
     "mysql": "2.15.0",
