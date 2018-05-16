@@ -18,7 +18,7 @@
     "Ash Kamel <https://github.com/ajkamel>"
   ],
   "scripts": {
-    "test": "node_modules/.bin/mocha test/. --require babel-register --recursive",
+    "test": "node_modules/.bin/mocha test/. --require @babel/register --recursive",
     "cover": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov",
     "lint": "node_modules/.bin/eslint --format codeframe .",
     "fix-my-shit": "node_modules/.bin/eslint --fix --format codeframe .",
