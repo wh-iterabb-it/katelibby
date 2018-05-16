@@ -2,6 +2,8 @@ import chai from 'chai';
 
 chai.should();
 
+chai.use(sinonChai);
+
 const { expect } = chai;
 
 describe('Utils', () => {

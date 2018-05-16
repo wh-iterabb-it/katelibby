@@ -8,6 +8,7 @@ npm-debug.log
 test/coverage
 coverage
 coverage.*
+coverage.lcov
 .nyc_output
 
 # Dev configs

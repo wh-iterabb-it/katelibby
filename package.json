@@ -1,7 +1,7 @@
 {
   "name": "katelibby",
-  "version": "0.2.4",
-  "description": "Kate Libby ircbot",
+  "version": "1.0.0",
+  "description": "An IRC and Slack Bot",
   "repository": {
     "type": "git",
     "url": "https://github.com/wh-iterabb-it/katelibby"
@@ -20,7 +20,8 @@
   "scripts": {
     "test": "node_modules/.bin/mocha test/. --require babel-register --recursive",
     "cover": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov",
-    "lint": "node_modules/.bin/eslint --fix --format codeframe .",
+    "lint": "node_modules/.bin/eslint --format codeframe .",
+    "fix-my-shit": "node_modules/.bin/eslint --fix --format codeframe .",
     "start": "",
     "start-dev": "node ./bin/start"
   },
@@ -38,19 +39,16 @@
   },
   "dependencies": {
     "@slack/client": "4.0.0",
-    "babel-polyfill": "6.26.0",
-    "babel-register": "6.26.0",
     "bluebird": "3.5.1",
-    "chalk": "2.3.2",
     "commander": "2.15.0",
     "fs": "0.0.1-security",
     "path": "0.12.7",
-    "winston": "3.0.0-rc3"
+    "superagent": "3.8.3",
+    "winston": "3.0.0-rc5"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.47",
-    "@babel/register": "^7.0.0-beta.47",
-    "babel-cli": "6.26.0",
+    "@babel/core": "7.0.0-beta.47",
+    "@babel/register": "7.0.0-beta.47",
     "babel-eslint": "8.2.2",
     "babel-preset-env": "1.6.1",
     "chai": "4.1.2",
