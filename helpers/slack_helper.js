@@ -1,4 +1,7 @@
-const { WebClient, RTMClient, CLIENT_EVENTS, IncomingWebhook } = require('@slack/client');
+const {
+  WebClient, RTMClient, CLIENT_EVENTS, IncomingWebhook,
+} = require('@slack/client');
+
 import logger from '../utils/logger';
 import config from '../helpers/config_helper';
 import commands from '../commands';
@@ -6,20 +9,11 @@ import commands from '../commands';
 class slackHelper {
   constructor(callback) {
     this.appData = {};
-
-    // passes the config' slack token to the connection function
-    // rtm = this.connectRTM(config.slack.token,, {
-    //   dataStore: false,
-    //   useRtmConnect: true,
-    // });
     logger.info('slack helper start');
-    this.rtm = new RTMClient(config.slack.token);
-    // this.rtm = this.setupEvents(this.rtm);
+    this.connect();
     this.commandPattern = this.setCommandPattern(config.commandChar);
     this.onMessage();
     this.rtm.start();
-    this.web = this.connectWeb(config.slack.token);
-
   }
 
   setupEvents() {
@@ -30,26 +24,28 @@ class slackHelper {
 
   /**
    * connect
-   * @param {string} token - the slack token provided from config
    */
-  connect(token) {
-
+  connect() {
+    logger.info('connect');
+    this.connectRTM();
+    this.connectWeb();
   }
 
-  connectRTM(token) {
+  connectRTM() {
+    logger.info('connectRTM');
     // Initialize the RTM client with the recommended settings. Using the defaults for these
     // settings is deprecated.
-
-
-    return rtm;
+    this.rtm = new RTMClient(config.slack.token);
+    // {
+    //   dataStore: false,
+    //   useRtmConnect: true,
+    // }
   }
 
-  connectWeb(token) {
+  connectWeb() {
     logger.info('connectWeb');
     // Initialize a Web API client
-    const web = new WebClient(token);
-
-    return web;
+    this.web = new WebClient(config.slack.token);
   }
 
   /**
@@ -70,10 +66,10 @@ class slackHelper {
    * The Connect handler for when a new connection is established
    */
   onConnect() {
-    logger.info(`Ready`);
+    logger.info('Ready');
   }
 
-  /** 
+  /**
    * onMessage
    * The message handler for incoming messages for the helper
    */
@@ -82,9 +78,9 @@ class slackHelper {
       // For structure of `event`, see https://api.slack.com/events/message
 
       // Skip messages that are from a bot or my own user ID
-      if ( (message.subtype && message.subtype === 'bot_message') ||
+      if ((message.subtype && message.subtype === 'bot_message') ||
            // (!message.subtype && message.user === this.rtm.activeUserId) || // self messages
-           (message.user === undefined) ) {
+           (message.user === undefined)) {
         return;
       }
 
@@ -106,25 +102,29 @@ class slackHelper {
     if (match) {
       const command = match[1];
       const args = match[2];
-      
+
       if (command in commands) {
         logger.info(`Command found: channel: ${message.channel}, user: ${message.user}, command: ${command}`);
-        commands[command](args).then((r) => {
-          this.sendMessage(message.channel, `${r}`);
-          logger.error(r);
-        }).catch((e)=>{
-          this.sendMessage(message.channel, `${r}`);
-          logger.error(e);
+        commands[command](args).then((response) => {
+          this.sendMessage(message.channel, `${response}`);
+          logger.info(response);
+        }).catch((error) => {
+          this.sendMessage(message.channel, `${error}`);
+          logger.error(error);
         });
       } else {
-        this.sendMessage(message.channel, `Sorry I do not know that command.`);
+        this.sendMessage(message.channel, 'Sorry I do not know that command.');
       }
     }
   }
 
-  //
+  /**
+   * sendMessage
+   * used for sending a message to channel or person
+   * @param {string} channelID - Unique Identifier for the channel to message, also can be a user id
+   * @param {string} messageBody - the message to send
+   */
   sendMessage(channelID, messageBody) {
-    // We now have a channel ID to post a message in!
     // use the `sendMessage()` method to send a simple string to a channel using the channel ID
     this.rtm.sendMessage(messageBody, channelID)
       // Returns a promise that resolves when the message is sent
@@ -132,17 +132,17 @@ class slackHelper {
       .catch(logger.error);
   }
 
+  /**
+   * setCommandPattern
+   * @param {char} commandChar - a single character which denotes the start of a command
+   * @return {string} regexString - the regular expression string for the commands to be parsed by
+   */
   setCommandPattern(commandChar) {
     logger.info('setCommandPattern');
     const regexString = `^${commandChar}(\\w+) ?(.*)`;
     this.commandPattern = new RegExp(regexString);
     return regexString;
   }
-
-  commandCheck() {
-
-  }
-
 }
 
 export default slackHelper;

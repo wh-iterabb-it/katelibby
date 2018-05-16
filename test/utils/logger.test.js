@@ -7,7 +7,7 @@ chai.use(sinonChai);
 const { expect } = chai;
 
 describe('Utils', () => {
-  let logger = require('../../utils/logger.js').default;
+  const logger = require('../../utils/logger.js').default;
   // stubbing out some tests for logger
   describe('Logger', () => {
     it('should log debug without errors', () => {

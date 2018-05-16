@@ -1,7 +1,9 @@
 import { createLogger, format, transports } from 'winston';
 import program from '../helpers/command_helper';
 
-const { colorize, combine, timestamp, printf } = format;
+const {
+  colorize, combine, timestamp, printf,
+} = format;
 
 const level = program.debug ? 'debug' : 'info';
 
