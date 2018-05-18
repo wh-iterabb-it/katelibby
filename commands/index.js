@@ -13,7 +13,7 @@ fs
   });
 
 // aliases
-// commands.g = require('./google');
+commands.g = require('./google');
 commands.w = require('./weather');
 
 module.exports = commands;

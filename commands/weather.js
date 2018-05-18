@@ -1,5 +1,6 @@
 import request from 'superagent';
 import config from '../helpers/config_helper';
+import logger from '../utils/logger';
 // only allows 500 calls a day and 10 a minute
 module.exports = (args) => {
   if (config.wunderground.key.length < 1) {
