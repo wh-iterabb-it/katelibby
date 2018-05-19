@@ -41,6 +41,7 @@ class slackHelper {
 
   /**
    * connect
+   * builds all connection objects
    */
   connect() {
     logger.info('connect');
