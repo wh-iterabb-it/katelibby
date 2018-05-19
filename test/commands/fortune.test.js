@@ -13,6 +13,7 @@ describe('Command', () => {
     const expectedHelp = 'Fortune is for getting a cookie fortune in Chat \n\rSyntax is !fortune';
 
     it('should return expected help result when passed help', (done) => {
+      config.app.nsfw = true;
       try {
         commands.fortune('help').then((result) => {
           expect(result).to.equal(expectedHelp);
