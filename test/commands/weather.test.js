@@ -2,9 +2,9 @@ import chai from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import commands from '../../../commands/';
-import logger from '../../../utils/logger';
-import config from '../../../helpers/config_helper';
+import commands from '../../commands/';
+import logger from '../../utils/logger';
+import config from '../../helpers/config_helper';
 
 const { expect } = chai;
 chai.should();
