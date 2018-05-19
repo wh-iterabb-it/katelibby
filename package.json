@@ -95,6 +95,7 @@
     "bluebird": "3.5.1",
     "commander": "2.15.0",
     "fs": "0.0.1-security",
+    "google": "2.1.0",
     "path": "0.12.7",
     "superagent": "3.8.3",
     "winston": "3.0.0-rc5"
@@ -108,15 +109,16 @@
     "codecov": "3.0.2",
     "eslint": "4.19.1",
     "eslint-config-airbnb": "16.1.0",
-    "eslint-plugin-import": "2.11.0",
+    "eslint-plugin-import": "2.12.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.8.2",
-    "mocha": "5.1.1",
+    "mocha": "5.2.0",
+    "nock": "9.2.6",
     "nyc": "11.7.3",
-    "pm2": "2.10.2",
+    "pm2": "2.10.4",
     "sinon": "5.0.5",
     "sinon-chai": "3.0.0",
     "sinon-stub-promise": "4.0.0",
-    "tough-cookie": "^2.3.4"
+    "tough-cookie": "2.3.4"
   }
 }

@@ -22,6 +22,23 @@ class slackHelper {
     this.onMessage();
   }
 
+  thatOtherStuff() {
+    // Log all incoming messages
+    rtm.on('message', (event) => {
+      // Structure of `event`: <https://api.slack.com/events/message>
+      console.log(`Message from ${event.user}: ${event.text}`);
+    })
+
+
+    rtm.on('reaction_removed', (event) => {
+      // Structure of `event`: <https://api.slack.com/events/reaction_removed>
+      console.log(`Reaction removed by ${event.user}: ${event.reaction}`);
+    });
+
+    // Send a message once the connection is ready
+    
+  }
+
   /**
    * connect
    */
@@ -88,6 +105,36 @@ class slackHelper {
 
       // Log the message
       logger.info(`(channel:${message.channel}) ${message.user} says: ${message.text}`);
+    });
+  }
+
+  onReactionAdded() {
+    // Log all reactions
+    rtm.on('reaction_added', (event) => {
+      // Structure of `event`: <https://api.slack.com/events/reaction_added>
+      console.log(`Reaction from ${event.user}: ${event.reaction}`);
+    });
+  }
+
+  onReactionRemoved() {
+    rtm.on('reaction_removed', (event) => {
+      // Structure of `event`: <https://api.slack.com/events/reaction_removed>
+      console.log(`Reaction removed by ${event.user}: ${event.reaction}`);
+    });
+  }
+
+  /**
+   * onReady
+   * The ready handler for when connection is established and readiness 
+   */
+  onReady() {
+    rtm.on('ready', (event) => {
+
+      // Getting a conversation ID is left as an exercise for the reader. It's usually available as the `channel` property
+      // on incoming messages, or in responses to Web API requests.
+
+      // const conversationId = '';
+      // rtm.sendMessage('Hello, world!', conversationId);
     });
   }
 
