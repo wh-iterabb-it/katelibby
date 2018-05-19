@@ -126,6 +126,7 @@ describe('Command', () => {
     });
 
     it('should log a warn when there is no api key', () => {
+      config.wunderground.key = '';
       commands.weather('12345');
       expect(logger.warn).to.have.been.called;
     });

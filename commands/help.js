@@ -1,5 +1,4 @@
 import config from '../helpers/config_helper';
-import commands from './';
 
 module.exports = (args) => {
   if (typeof args !== 'undefined') {
@@ -8,6 +7,7 @@ module.exports = (args) => {
         return Promise.resolve('Syntax is ' + config.commandChar + 
           '{command} help, to get more info about a specific command 🤔');
       default:
+        const commands = require('./');
         const msg = 'Hello, I am ' + config.irc.realName + ', a bot. My commands are: ';
         const commandz = Object.keys(commands).map((command) => {
           return config.commandChar + command;
