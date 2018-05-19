@@ -1,59 +1,25 @@
-import { Logger, transports } from 'winston';
-import chalk from 'chalk';
-import dateformat from 'dateformat';
+import { createLogger, format, transports } from 'winston';
 import program from '../helpers/command_helper';
 
-const currentLevel = program.debug ? 'debug' : 'info';
+const {
+  colorize, combine, timestamp, printf,
+} = format;
 
-const debugColor = '#8C9440';
-const infoColor = '#C5C8C6';
-const warnColor = '#DE935F'; // error
-const errColor = '#A54242'; // orangered
+const level = program.debug ? 'debug' : 'info';
 
-const logger = new (Logger)({
+const currentFormat = printf((options) => {
+  return `${options.timestamp} ${options.level}: ${options.message}`;
+});
+
+const logger = createLogger({
+  'level': level,
+  format: combine(
+    timestamp(),
+    colorize(),
+    currentFormat,
+  ),
   transports: [
-    new (transports.Console)({
-      timestamp() {
-        return dateformat(Date.now(), 'yyyy-mm-dd HH:MM:ss.l');
-      },
-      'level': currentLevel,
-      formatter(options) {
-        let meta = '';
-
-        if (options.meta && Object.keys(options.meta).length) {
-          meta = '\n\t' + JSON.stringify(options.meta);
-        }
-        let formattedLevel = options.level.toUpperCase();
-        switch (formattedLevel) {
-          case 'DEBUG':
-            formattedLevel = `[${chalk.hex(debugColor)(formattedLevel)}][ 🎺 ]`;
-            break;
-
-          case 'INFO':
-            formattedLevel = `[ ${chalk.hex(infoColor)(formattedLevel)}][ • ]`;
-            break;
-
-          case 'WARN':
-            formattedLevel = `[ ${chalk.hex(warnColor)(formattedLevel)}][ ⚠ ]`;
-            break;
-
-          case 'ERROR':
-            formattedLevel = `[${chalk.hex(errColor)(formattedLevel)}][🔥 ]`;
-            break;
-
-          default:
-            break;
-        }
-
-        const output = [
-          `[${options.timestamp()}]${formattedLevel}`,
-          options.message,
-          meta,
-        ];
-
-        return output.join(' ');
-      },
-    }),
+    new (transports.Console)(),
   ],
 });
 

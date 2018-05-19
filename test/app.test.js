@@ -12,46 +12,7 @@ const { expect } = chai;
 describe('App Tests', () => {
   describe('setCommandPattern method', () => {
     it('should return correct commandPattern when passed character', () => {
-      const actual = kate.setCommandPattern('!');
-      const expected = '^!(\\w+) ?(.*)';
-      expect(actual).to.equal(expected);
-    });
-  });
 
-  describe('setConfig method', () => {
-    it('should return correct json for config', () => {
-      const testJson = {
-        irc: {
-          server: 'localhost',
-        },
-      };
-      const actual = kate.setConfig(testJson);
-      const expected = testJson;
-      expect(actual).to.equal(expected);
-    });
-  });
-  
-  describe('setNSFW method', () => {
-    it('should return a boolean response', () => {
-      const expected = false;
-      const actual = kate.setNSFW(false);
-      expect(actual).to.equal(expected);
-    });
-  });
-  
-  describe('setLogger method', () => {
-    it('should return a boolean response', () => {
-      const expected = false;
-      const actual = kate.setLogger(false);
-      expect(actual).to.equal(expected);
-    });
-  });
-  
-  describe('setCommands method', () => {
-    it('should return a boolean response', () => {
-      const expected = false;
-      const actual = kate.setCommands(false);
-      expect(actual).to.equal(expected);
     });
   });
 });
