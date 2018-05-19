@@ -11,13 +11,13 @@ if (program.config) {
   configFile = program.config;
 }
 
-function loadConfig(configFile) {
+function loadConfig(configPath) {
   try {
-    config = require(configFile);
+    config = require(configPath);
   } catch (e) {
-    if (configFile !== path.join(__dirname, '../', 'config/config.js')) {
-    	logger.warn(`config not found ${configFile} attempting example`);
-      loadConfig(path.join(__dirname, '../', 'config/config.js'));
+    if (configPath !== path.join(__dirname, '../', 'config/config.js.example')) {
+    	logger.info(`config not found ${configPath} attempting example`);
+      loadConfig(path.join(__dirname, '../', 'config/config.js.example'));
     }
   }
 }

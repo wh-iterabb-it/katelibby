@@ -4,6 +4,7 @@ import logger from '../utils/logger';
 // only allows 500 calls a day and 10 a minute
 module.exports = (args) => {
   if (config.wunderground.key.length < 1) {
+    logger.warn('Please add an API key to the configuration file.');
     return Promise.resolve('Please add an API key to the configuration file.');
   }
   if (typeof args !== 'undefined') {

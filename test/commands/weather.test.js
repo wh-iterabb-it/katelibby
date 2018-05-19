@@ -11,8 +11,8 @@ const { expect } = chai;
 chai.should();
 chai.use(sinonChai);
 
-describe('Weather Command', () => {
-  describe('w', () => {
+describe('Command', () => {
+  describe('Weather', () => {
     let sandbox;
     const testKey = 'testKey';
     const testZip = '12345';
@@ -115,24 +115,23 @@ describe('Weather Command', () => {
     });
 
     beforeEach(() => {
-      sandbox.stub(logger, 'error');
+      sandbox.stub(logger, 'warn');
     });
 
     afterEach(() => {
       sandbox.restore();
     });
 
-    it('should log an error when there is no api key', () => {
+    it('should log a warn when there is no api key', () => {
       commands.weather('12345');
-      console.log('shit stuff'+config.wunderground.key);
-      expect(logger.error).to.have.been.called;
+      expect(logger.warn).to.have.been.called;
     });
 
     it('should return expected nyc result', () => {
       config.wunderground.key = testKey; // 'testKey' is our key :D
 
       nock('http://api.wunderground.com')
-        .get(`api/${testKey}/conditions/q/${testZip}.json`)
+        .get(`/api/${testKey}/conditions/q/${testZip}.json`)
         .reply(200, expectedResult10023);
 
       const result = commands.weather(testZip);
