@@ -15,7 +15,6 @@ module.exports = (args) => {
         const apiKey = config.wunderground.key;
         const apiUrl = `http://api.wunderground.com/api/${apiKey}/conditions/q/`;
         const url = `${apiUrl}${args}.json`;
-        console.log(`sending request to: ${url}`);
         return new Promise((resolve, reject) => {
           request.get(url).then((response) => {
             if (response.status === 200) {
@@ -30,7 +29,6 @@ module.exports = (args) => {
                 ' is ' + json.current_observation.temp_f +
                 '°F, with a humidity of ' + json.current_observation.relative_humidity +
                 ', Current Weather is ' + json.current_observation.weather;
-                console.log(returnstring);
                 resolve(returnstring);
               }
             }
