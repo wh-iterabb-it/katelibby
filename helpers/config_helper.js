@@ -11,12 +11,17 @@ if (program.config) {
   configFile = program.config;
 }
 
-try {
-  config = require(configFile);
-  logger.debug('configuration loaded...');
-  logger.debug(`loading configuration from ${configFile}...`);
-} catch (e) {
-  logger.error(`config not found ${configFile}`);
+function loadConfig(configFile) {
+  try {
+    config = require(configFile);
+  } catch (e) {
+    if (configFile !== path.join(__dirname, '../', 'config/config.js')) {
+    	logger.warn(`config not found ${configFile} attempting example`);
+      loadConfig(path.join(__dirname, '../', 'config/config.js'));
+    }
+  }
 }
+
+loadConfig(configFile);
 
 export default config;

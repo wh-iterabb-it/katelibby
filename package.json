@@ -113,11 +113,12 @@
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.8.2",
     "mocha": "5.2.0",
+    "nock": "9.2.6",
     "nyc": "11.7.3",
     "pm2": "2.10.4",
     "sinon": "5.0.5",
     "sinon-chai": "3.0.0",
     "sinon-stub-promise": "4.0.0",
-    "tough-cookie": "^2.3.4"
+    "tough-cookie": "2.3.4"
   }
 }
