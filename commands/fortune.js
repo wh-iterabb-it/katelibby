@@ -9,6 +9,7 @@ module.exports = (args) => {
       case 'help':
         return Promise.resolve('Fortune is for getting a cookie fortune in Chat \r\n' +
           'Syntax is ' + config.commandChar + 'fortune');
+    }
   } 
     let li = [
       'You will make a fortune with your friend.',
