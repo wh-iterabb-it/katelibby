@@ -4,6 +4,7 @@ import logger from '../utils/logger';
 // only allows 500 calls a day and 10 a minute
 module.exports = (args) => {
   if (config.wunderground.key.length < 1) {
+    logger.warn('Please add an API key to the configuration file.');
     return Promise.resolve('Please add an API key to the configuration file.');
   }
   if (typeof args !== 'undefined') {
@@ -15,7 +16,6 @@ module.exports = (args) => {
         const apiKey = config.wunderground.key;
         const apiUrl = `http://api.wunderground.com/api/${apiKey}/conditions/q/`;
         const url = `${apiUrl}${args}.json`;
-        console.log(`sending request to: ${url}`);
         return new Promise((resolve, reject) => {
           request.get(url).then((response) => {
             if (response.status === 200) {
@@ -30,7 +30,6 @@ module.exports = (args) => {
                 ' is ' + json.current_observation.temp_f +
                 '°F, with a humidity of ' + json.current_observation.relative_humidity +
                 ', Current Weather is ' + json.current_observation.weather;
-                console.log(returnstring);
                 resolve(returnstring);
               }
             }
