@@ -96,7 +96,9 @@
     "commander": "2.15.0",
     "fs": "0.0.1-security",
     "google": "2.1.0",
+    "mta-gtfs": "^1.1.0",
     "path": "0.12.7",
+    "striptags": "^3.1.1",
     "superagent": "3.8.3",
     "winston": "3.0.0-rc5"
   },
