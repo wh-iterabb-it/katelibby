@@ -118,7 +118,7 @@
     "nock": "9.2.6",
     "nyc": "11.7.3",
     "pm2": "2.10.4",
-    "sinon": "5.0.8",
+    "sinon": "5.0.10",
     "sinon-chai": "3.1.0",
     "sinon-stub-promise": "4.0.0",
     "tough-cookie": "2.3.4"
