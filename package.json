@@ -103,8 +103,8 @@
     "winston": "3.0.0-rc5"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.47",
-    "@babel/register": "7.0.0-beta.47",
+    "@babel/core": "7.0.0-beta.48",
+    "@babel/register": "7.0.0-beta.48",
     "babel-eslint": "8.2.3",
     "babel-preset-env": "1.7.0",
     "chai": "4.1.2",
@@ -118,8 +118,8 @@
     "nock": "9.2.6",
     "nyc": "11.7.3",
     "pm2": "2.10.4",
-    "sinon": "5.0.5",
-    "sinon-chai": "3.0.0",
+    "sinon": "5.0.10",
+    "sinon-chai": "3.1.0",
     "sinon-stub-promise": "4.0.0",
     "tough-cookie": "2.3.4"
   }
