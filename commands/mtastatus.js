@@ -3,7 +3,7 @@ import striptags from 'striptags';
 
 import config from '../helpers/config_helper';
 import logger from '../utils/logger';
-import sanitize from '../utils/sanitize';
+import Sanitize from '../utils/sanitize';
 
 const lineColors = {
   '123': 'light_red',
@@ -82,22 +82,22 @@ module.exports = async (args) => {
       key: 'MY-MTA-API-KEY-HERE', // only needed for mta.schedule() method
       feed_id: 1, // optional, default = 1
     });
-    let cat = '';
+    let response = '';
     await mta.status('subway').then((subway) => {
       const lineName = getLineKey(args);
       subway.map((currentLine) => {
         if (currentLine.name === lineName) {
-          let outStatus = sanitize(currentLine.name) + ': ' +
-            sanitize(striptags(currentLine.status));
-          let outText = sanitize(striptags(currentLine.text));
+          let outStatus = Sanitize.sanitize(currentLine.name) + ': ' +
+            Sanitize.sanitize(striptags(currentLine.status));
+          let outText = Sanitize.sanitize(striptags(currentLine.text));
           if (outText.length > 0) {
             outStatus = outStatus + outText;
           }
-          cat = outStatus;
+          response = outStatus;
         }
       });
     });
-    return Promise.resolve(cat);
+    return Promise.resolve(response);
   } else {
     return Promise.resolve('You must specify a valid line!');
   }
