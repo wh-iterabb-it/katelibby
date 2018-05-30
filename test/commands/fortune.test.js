@@ -21,5 +21,19 @@ describe('Command', () => {
         });
       } catch (error) {}
     });
+
+    /**
+     * This is a bad test, but alturnative is coppying all of the array
+     * and deep comparison the result.
+     */
+    it('should return any expected string when passed empty string', (done) => {
+      config.app.nsfw = true;
+      try {
+        commands.fortune('').then((result) => {
+          expect(result).to.be.a('string');
+          done();
+        });
+      } catch (error) {}
+    });
   });
 });

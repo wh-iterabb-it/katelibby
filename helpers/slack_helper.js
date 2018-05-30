@@ -2,13 +2,21 @@ const {
   WebClient, RTMClient, CLIENT_EVENTS, IncomingWebhook,
 } = require('@slack/client');
 
-import logger from '../utils/logger';
 import config from '../helpers/config_helper';
 import commands from '../commands';
+import logger from '../utils/logger';
+import urlRegex from '../utils/urlRegex';
+import Sanitize from '../utils/sanitize';
+import toHHMMSS from '../utils/format';
+import pkjson from '../package.json';
+
+
 
 class slackHelper {
   constructor(callback) {
-    this.appData = {};
+    this.appData = {
+      source: {}
+    };
     logger.info('slack helper start');
     this.connect();
     this.commandPattern = this.setCommandPattern(config.commandChar);
@@ -20,23 +28,6 @@ class slackHelper {
     // this.rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, this.onAuthenticate(connectData));
     // this.rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, this.onConnect());
     this.onMessage();
-  }
-
-  thatOtherStuff() {
-    // Log all incoming messages
-    rtm.on('message', (event) => {
-      // Structure of `event`: <https://api.slack.com/events/message>
-      console.log(`Message from ${event.user}: ${event.text}`);
-    })
-
-
-    rtm.on('reaction_removed', (event) => {
-      // Structure of `event`: <https://api.slack.com/events/reaction_removed>
-      console.log(`Reaction removed by ${event.user}: ${event.reaction}`);
-    });
-
-    // Send a message once the connection is ready
-    
   }
 
   /**
@@ -147,6 +138,7 @@ class slackHelper {
   async detectCommand(message) {
     const text = message.text;
     const match = text.match(this.commandPattern);
+    const url = this.detectURL(text)
     if (match) {
       const command = match[1];
       const args = match[2];
@@ -161,9 +153,45 @@ class slackHelper {
           logger.error(error);
         });
       } else {
-        this.sendMessage(message.channel, 'Sorry I do not know that command.');
+        if (command === 'stats') {
+          this.sendMessage(message.channel, 'Stats for this Slack');
+          const time = process.uptime();
+          const uptime = toHHMMSS(time + '');
+          this.sendMessage(message.channel, 'Total Uptime of Bot: ' + uptime);
+          this.sendMessage(message.channel, 'Version: ' + pkjson.version);
+          this.sendMessage(message.channel, 'Top domains linked in this slack:');
+          for(let prop in this.appData.source) {
+            this.sendMessage(message.channel, `${this.appData.source[prop].domain} = ${this.appData.source[prop].count} links`);
+          }
+        } else {
+          this.sendMessage(message.channel, 'Sorry I do not know that command.');
+        }
       }
+    } else if (url) {
+      const domain = Sanitize.extractRootDomain(url);
+      if (this.appData.source.hasOwnProperty(domain)) {
+        this.appData.source[domain].count ++;
+      } else {
+        const thegoods = {
+          'domain': domain,
+          'count': 1
+        };
+        this.appData.source[domain] = thegoods;
+      }
+      logger.info(this.appData.source[domain].domain + ' ' + this.appData.source[domain].count);
     }
+  }
+
+  /**
+   * detectURL
+   * @param {string} str - a string to check for a url in it
+   */
+  detectURL(str) {
+    if (str.length < 2083 && (str.match(urlRegex))) {
+      const match = str.match(urlRegex);
+      return match[0];
+    }
+    return false;
   }
 
   /**
