@@ -7,7 +7,7 @@ module.exports = (args) => {
     switch (args) {
       case 'help':
       default: 
-        return Promise.resolve('Fortune is for getting a cookie fortune in Chat \r\n' +
+        return Promise.resolve('About this bot, will return  \r\n' +
           'Syntax is ' + config.commandChar + 'about');
     }
   } else {
