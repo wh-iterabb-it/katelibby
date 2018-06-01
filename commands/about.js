@@ -1,0 +1,19 @@
+import toHHMMSS from '../utils/format';
+import pkjson from '../package.json';
+import logger from '../utils/logger';
+
+module.exports = (args) => {
+  if (typeof args !== 'undefined') {
+    switch (args) {
+      case 'help':
+      default: 
+        return Promise.resolve('Fortune is for getting a cookie fortune in Chat \r\n' +
+          'Syntax is ' + config.commandChar + 'about');
+    }
+  } else {
+  	const time = process.uptime();
+    const uptime = toHHMMSS(time + '');
+  	const response = `About this Bot\r\nVersion: ${pkjson.version}\r\nTotal Uptime of Bot: ${uptime}`;
+  	return Promise.resolve(response);
+  }
+}
