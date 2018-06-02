@@ -1,5 +1,3 @@
-import google from 'google';
-
 import config from '../helpers/config_helper';
 import logger from '../utils/logger';
 
