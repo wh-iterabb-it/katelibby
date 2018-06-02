@@ -153,18 +153,21 @@ class slackHelper {
           logger.error(error);
         });
       } else {
-        if (command === 'stats') {
-          this.sendMessage(message.channel, 'Stats for this Slack');
-          const time = process.uptime();
-          const uptime = toHHMMSS(time + '');
-          this.sendMessage(message.channel, 'Total Uptime of Bot: ' + uptime);
-          this.sendMessage(message.channel, 'Version: ' + pkjson.version);
-          this.sendMessage(message.channel, 'Top domains linked in this slack:');
-          for(let prop in this.appData.source) {
-            this.sendMessage(message.channel, `${this.appData.source[prop].domain} = ${this.appData.source[prop].count} links`);
-          }
-        } else {
-          this.sendMessage(message.channel, 'Sorry I do not know that command.');
+        switch(command) {
+          case 'stats':
+            // This will list the top posted domains from appData.source 
+            this.sendMessage(message.channel, 'Top domains linked in this slack:');
+          case 'command':
+            /*
+             * This will be an interface to disable, or enable commands. 
+             * !command enable {command} - will enable a command
+             * !command disable {command} - will disable a command
+             * !command list - lists the commands and their status
+             * !command help - says the help message explaining this.
+             */
+            this.sendMessage(message.channel, '');
+          default:
+            this.sendMessage(message.channel, 'Sorry I do not know that command.');
         }
       }
     } else if (url) {
