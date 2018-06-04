@@ -153,6 +153,7 @@ class slackHelper {
           logger.error(error);
         });
       } else {
+        // i want this to be abstracted into a stats util or something
         if (command === 'stats') {
           this.sendMessage(message.channel, 'Stats for this Slack');
           const time = process.uptime();
@@ -168,6 +169,7 @@ class slackHelper {
         }
       }
     } else if (url) {
+      // this is a simple url counter... 
       const domain = Sanitize.extractRootDomain(url);
       if (this.appData.source.hasOwnProperty(domain)) {
         this.appData.source[domain].count ++;
