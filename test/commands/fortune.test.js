@@ -15,7 +15,7 @@ describe('Command', () => {
     it('should return expected help result when passed help', (done) => {
       config.app.nsfw = true;
       try {
-        commands.fortune('help').then((result) => {
+        commands.fortune.main('help').then((result) => {
           expect(result).to.equal(expectedHelp);
           done();
         });
@@ -29,7 +29,7 @@ describe('Command', () => {
     it('should return any expected string when passed empty string', (done) => {
       config.app.nsfw = true;
       try {
-        commands.fortune('').then((result) => {
+        commands.fortune.main('').then((result) => {
           expect(result).to.be.a('string');
           done();
         });

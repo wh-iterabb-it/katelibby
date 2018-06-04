@@ -13,15 +13,15 @@ describe('Command', () => {
     const commandz = Object.keys(commandList).map((command) => {
       return config.commandChar + command;
     }).join(' ');
-    const msg = 'Hello, I am ' + config.irc.realName + ', a bot. My commands are: ';
-    const expected = msg + commandz + '\n\r' +
-      'You can also type !{command} help, to get more info about a specific command';
 
-    const expectedHelp = 'Syntax is !{command} help, to get more info about a specific command 🤔';
+    const msg = `Hello, I am ${config.irc.realName}, a bot. My commands are: `;
+    const expected = `${msg}${commandz}\n\rYou can also type ${config.commandChar}{command} help, to get more info about a specific command`;
+
+    const expectedHelp = `Syntax is ${config.commandChar}{command} help, to get more info about a specific command 🤔`;
 
     it('should return expected help result when invoked', (done) => {
       try {
-        commands.help('').then((result) => {
+        commands.help.main('').then((result) => {
           expect(result).to.equal(expected);
           done();
         });
@@ -30,7 +30,7 @@ describe('Command', () => {
 
     it('should return expected help result when passed in "help"', (done) => {
       try {
-        commands.help('help').then((result) => {
+        commands.help.main('help').then((result) => {
           expect(result).to.equal(expectedHelp);
           done();
         });

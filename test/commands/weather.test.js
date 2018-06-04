@@ -127,7 +127,7 @@ describe('Command', () => {
 
     it('should log a warn when there is no api key', () => {
       config.wunderground.key = '';
-      commands.weather('12345');
+      commands.weather.main('12345');
       expect(logger.warn).to.have.been.called;
     });
 
@@ -139,25 +139,23 @@ describe('Command', () => {
         .reply(200, expectedResult10023);
 
       try {
-        commands.weather(testZip).then((result) => {
+        commands.weather.main(testZip).then((result) => {
           expect(result).to.equal(expected);
           done();
         });
       } catch (error) {
-
+        console.log(error);
       }
     });
 
     it('should return expected help result when passed help', (done) => {
       config.wunderground.key = testKey; // 'testKey' is our key :D
       try {
-        commands.weather('help').then((result) => {
+        commands.weather.main('help').then((result) => {
           expect(result).to.equal(expectedHelp);
           done();
         });
-      } catch (error) {
-
-      }
+      } catch (error) {}
     });
   });
 });

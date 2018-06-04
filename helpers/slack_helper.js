@@ -141,7 +141,7 @@ class slackHelper {
 
       if (command in commands) {
         logger.info(`Command found: channel: ${message.channel}, user: ${message.user}, command: ${command}`);
-        commands[command](args).then((response) => {
+        commands[command].main(args).then((response) => {
           this.sendMessage(message.channel, `${response}`);
           logger.info(response);
         }).catch((error) => {
@@ -151,9 +151,9 @@ class slackHelper {
       } else {
         switch(command) {
           // i want this to be abstracted into a stats util or something
-          case 'stats':
+          case 'about':
             // This will list the top posted domains from appData.source 
-            this.sendMessage(message.channel, 'Top domains linked in this slack:');
+            break;
           case 'command':
             /*
              * This will be an interface to disable, or enable commands. 
@@ -163,6 +163,7 @@ class slackHelper {
              * !command help - says the help message explaining this.
              */
             this.sendMessage(message.channel, '');
+            break;
           default:
             this.sendMessage(message.channel, 'Sorry I do not know that command.');
         }
