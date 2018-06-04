@@ -7,10 +7,6 @@ import commands from '../commands';
 import logger from '../utils/logger';
 import urlRegex from '../utils/urlRegex';
 import Sanitize from '../utils/sanitize';
-import toHHMMSS from '../utils/format';
-import pkjson from '../package.json';
-
-
 
 class slackHelper {
   constructor(callback) {
@@ -156,10 +152,6 @@ class slackHelper {
         // i want this to be abstracted into a stats util or something
         if (command === 'stats') {
           this.sendMessage(message.channel, 'Stats for this Slack');
-          const time = process.uptime();
-          const uptime = toHHMMSS(time + '');
-          this.sendMessage(message.channel, 'Total Uptime of Bot: ' + uptime);
-          this.sendMessage(message.channel, 'Version: ' + pkjson.version);
           this.sendMessage(message.channel, 'Top domains linked in this slack:');
           for(let prop in this.appData.source) {
             this.sendMessage(message.channel, `${this.appData.source[prop].domain} = ${this.appData.source[prop].count} links`);
