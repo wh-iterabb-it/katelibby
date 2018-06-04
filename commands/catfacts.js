@@ -1,15 +1,19 @@
 import config from '../helpers/config_helper';
-import logger from '../utils/logger';
+import BaseCommand from './utils/command_factory';
 
-module.exports = (args) => {
-  if (typeof args !== 'undefined') {
-    switch (args) {
-      case 'help':
-        return Promise.resolve('Catfacts returns a random cat fact! \r\n' +
-          'Syntax is ' + config.commandChar + 'catfacts');
-    }
-  } 
-    const li = [
+const factoryParams = {
+  enabled: true,
+  help_msg: `Catfacts returns a random cat fact! \r\nSyntax is ${config.commandChar}catfacts`,
+  alias: false,
+  nsfw: false,
+};
+
+const CatfactsCommand = function CatfactsCommand() {
+  const basedCommand = !(this instanceof CatfactsCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+
+  return Object.assign(Object.create(basedCommand), {
+    primary: (args) => {
+      const li = [
         'Welcome to CatFacts!, you will be receiving great cat facts to your phone every hour!',
         'In 1987 cats overtook dogs as the number one pet in America.',
         'Cats that live together sometimes rub each others heads to show that they have no intention of fighting.' +
@@ -133,6 +137,13 @@ module.exports = (args) => {
         'A cat\'s brain is more similar to a man\'s brain than that of a dog.',
         'A cat has more bones than a human; humans have 206, and the cat - 230.',
         'Cats have 30 vertebrae--5 more than humans have.',
-  ];
-    return Promise.resolve(li[Math.floor(Math.random() * li.length)]);
+        ];
+        return Promise.resolve(li[Math.floor(Math.random() * li.length)]);
+    },
+  });
 };
+
+const catfactsCommand = CatfactsCommand();
+
+export default catfactsCommand;
+

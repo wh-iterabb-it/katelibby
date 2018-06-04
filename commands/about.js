@@ -1,20 +1,28 @@
 import pkjson from '../package.json';
 import toHHMMSS from '../utils/format';
-import logger from '../utils/logger';
 import config from '../helpers/config_helper';
+import BaseCommand from './utils/command_factory';
 
-module.exports = (args) => {
-  if (typeof args !== 'undefined') {
-    switch (args) {
-      case 'help':
-      default: 
-        return Promise.resolve('About this bot, will return \r\n' +
-          'Syntax is ' + config.commandChar + 'about');
-    }
-  } else {
-  	const time = process.uptime();
-    const uptime = toHHMMSS(time + '');
-  	const response = `About this Bot\r\nVersion: ${pkjson.version}\r\nTotal Uptime of Bot: ${uptime}`;
-  	return Promise.resolve(response);
-  }
+const factoryParams = {
+  enabled: true,
+  help_msg: `About this bot, will return \r\nSyntax is ${config.commandChar}about`,
+  alias: false,
+  nsfw: false,
 };
+
+const AboutCommand = function AboutCommand() {
+  const basedCommand = !(this instanceof AboutCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+
+  return Object.assign(Object.create(basedCommand), {
+    primary: (args) => {
+      const time = process.uptime();
+      const uptime = toHHMMSS(time + '');
+      const response = `About this Bot\r\nVersion: ${pkjson.version}\r\nTotal Uptime of Bot: ${uptime}`;
+      return Promise.resolve(response);
+    },
+  });
+};
+
+const aboutCommand = AboutCommand();
+
+export default aboutCommand;

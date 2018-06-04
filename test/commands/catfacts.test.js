@@ -14,7 +14,7 @@ describe('Command', () => {
 
     it('should return expected help result when passed help', (done) => {
       try {
-        commands.catfacts('help').then((result) => {
+        commands.catfacts.main('help').then((result) => {
           expect(result).to.equal(expectedHelp);
           done();
         });
@@ -27,7 +27,7 @@ describe('Command', () => {
      */
     it('should return any expected string when passed empty string', (done) => {
       try {
-        commands.catfacts('').then((result) => {
+        commands.catfacts.main('').then((result) => {
           expect(result).to.be.a('string');
           done();
         });

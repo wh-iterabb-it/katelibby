@@ -2,8 +2,7 @@ import chai from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import commands from '../../commands/';
-import config from '../../helpers/config_helper';
+import commands from '../../commands';
 
 const { expect } = chai;
 
@@ -13,9 +12,8 @@ describe('Command', () => {
     const expectedHelp = 'About this bot, will return \r\nSyntax is !about';
 
     it('should return expected help result when passed help', (done) => {
-      config.app.nsfw = true;
       try {
-        commands.about('help').then((result) => {
+        commands.about.main('help').then((result) => {
           expect(result).to.equal(expectedHelp);
           done();
         });
@@ -27,13 +25,14 @@ describe('Command', () => {
      * and deep comparison the result.
      */
     it('should return any expected string when passed empty string', (done) => {
-      config.app.nsfw = true;
       try {
-        commands.about('').then((result) => {
+        commands.about.main('').then((result) => {
           expect(result).to.be.a('string');
           done();
         });
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+      }
     });
   });
 });
