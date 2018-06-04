@@ -9,11 +9,11 @@ fs
   .filter((file) => {
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   }).forEach((file) => {
-    commands[file.substring(0, file.length - 3)] = require(path.join(__dirname, file));
+    commands[file.substring(0, file.length - 3)] = require(path.join(__dirname, file)).default;
   });
 
 // aliases
-commands.g = require('./google');
-commands.w = require('./weather');
+commands.g = require('./google').default;
+commands.w = require('./weather').default;
 
 module.exports = commands;
