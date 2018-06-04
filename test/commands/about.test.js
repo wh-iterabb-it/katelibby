@@ -10,7 +10,7 @@ const { expect } = chai;
 describe('Command', () => {
   describe('About', () => {
 
-    const expectedHelp = 'Fortune is for getting a cookie about in Chat \r\nSyntax is !fortune';
+    const expectedHelp = 'About this bot, will return \r\nSyntax is !about';
 
     it('should return expected help result when passed help', (done) => {
       config.app.nsfw = true;
