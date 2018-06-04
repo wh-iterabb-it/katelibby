@@ -7,10 +7,6 @@ import commands from '../commands';
 import logger from '../utils/logger';
 import urlRegex from '../utils/urlRegex';
 import Sanitize from '../utils/sanitize';
-import toHHMMSS from '../utils/format';
-import pkjson from '../package.json';
-
-
 
 class slackHelper {
   constructor(callback) {
@@ -154,6 +150,7 @@ class slackHelper {
         });
       } else {
         switch(command) {
+          // i want this to be abstracted into a stats util or something
           case 'stats':
             // This will list the top posted domains from appData.source 
             this.sendMessage(message.channel, 'Top domains linked in this slack:');
@@ -171,6 +168,7 @@ class slackHelper {
         }
       }
     } else if (url) {
+      // this is a simple url counter... 
       const domain = Sanitize.extractRootDomain(url);
       if (this.appData.source.hasOwnProperty(domain)) {
         this.appData.source[domain].count ++;
