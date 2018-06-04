@@ -37,7 +37,7 @@ describe('Command', () => {
         "state_name":"New York",
         "country":"US",
         "country_iso3166":"US",
-        "zip":"10023",
+        "zip":"12345",
         "magic":"1",
         "wmo":"99999",
         "latitude":"40.77999878",
@@ -110,6 +110,9 @@ describe('Command', () => {
       }
     };
 
+    const expected = `Current temperature in New York, New York, 12345 is 58.6°F, with a humidity of 41%, Current Weather is Overcast`;
+    const expectedHelp = 'Weather command queries the Weather Underground for your local weather \n\rSyntax is !w { zipcode OR city, state }';
+
     before(() => {
       sandbox = sinon.createSandbox();
     });
@@ -123,19 +126,36 @@ describe('Command', () => {
     });
 
     it('should log a warn when there is no api key', () => {
-      commands.weather('12345');
+      config.wunderground.key = '';
+      commands.weather.main('12345');
       expect(logger.warn).to.have.been.called;
     });
 
-    it('should return expected nyc result', () => {
+    it('should return expected nyc result', (done) => {
       config.wunderground.key = testKey; // 'testKey' is our key :D
 
       nock('http://api.wunderground.com')
         .get(`/api/${testKey}/conditions/q/${testZip}.json`)
         .reply(200, expectedResult10023);
 
-      const result = commands.weather(testZip);
+      try {
+        commands.weather.main(testZip).then((result) => {
+          expect(result).to.equal(expected);
+          done();
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    });
 
+    it('should return expected help result when passed help', (done) => {
+      config.wunderground.key = testKey; // 'testKey' is our key :D
+      try {
+        commands.weather.main('help').then((result) => {
+          expect(result).to.equal(expectedHelp);
+          done();
+        });
+      } catch (error) {}
     });
   });
 });

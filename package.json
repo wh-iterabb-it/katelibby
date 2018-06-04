@@ -1,6 +1,6 @@
 {
   "name": "katelibby",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "An IRC and Slack Bot",
   "repository": {
     "type": "git",
@@ -96,13 +96,15 @@
     "commander": "2.15.0",
     "fs": "0.0.1-security",
     "google": "2.1.0",
+    "mta-gtfs": "^1.1.0",
     "path": "0.12.7",
+    "striptags": "^3.1.1",
     "superagent": "3.8.3",
-    "winston": "3.0.0-rc5"
+    "winston": "3.0.0-rc6"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.47",
-    "@babel/register": "7.0.0-beta.47",
+    "@babel/core": "7.0.0-beta.48",
+    "@babel/register": "7.0.0-beta.48",
     "babel-eslint": "8.2.3",
     "babel-preset-env": "1.7.0",
     "chai": "4.1.2",
@@ -111,14 +113,14 @@
     "eslint-config-airbnb": "16.1.0",
     "eslint-plugin-import": "2.12.0",
     "eslint-plugin-jsx-a11y": "6.0.3",
-    "eslint-plugin-react": "7.8.2",
+    "eslint-plugin-react": "7.9.1",
     "mocha": "5.2.0",
-    "nock": "9.2.6",
-    "nyc": "11.7.3",
+    "nock": "9.3.0",
+    "nyc": "12.0.2",
     "pm2": "2.10.4",
-    "sinon": "5.0.5",
-    "sinon-chai": "3.0.0",
+    "sinon": "5.0.10",
+    "sinon-chai": "3.1.0",
     "sinon-stub-promise": "4.0.0",
-    "tough-cookie": "2.3.4"
+    "tough-cookie": "2.4.2"
   }
 }

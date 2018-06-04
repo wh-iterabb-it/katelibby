@@ -2,13 +2,17 @@ const {
   WebClient, RTMClient, CLIENT_EVENTS, IncomingWebhook,
 } = require('@slack/client');
 
-import logger from '../utils/logger';
 import config from '../helpers/config_helper';
 import commands from '../commands';
+import logger from '../utils/logger';
+import urlRegex from '../utils/urlRegex';
+import Sanitize from '../utils/sanitize';
 
 class slackHelper {
   constructor(callback) {
-    this.appData = {};
+    this.appData = {
+      source: {}
+    };
     logger.info('slack helper start');
     this.connect();
     this.commandPattern = this.setCommandPattern(config.commandChar);
@@ -22,25 +26,9 @@ class slackHelper {
     this.onMessage();
   }
 
-  thatOtherStuff() {
-    // Log all incoming messages
-    rtm.on('message', (event) => {
-      // Structure of `event`: <https://api.slack.com/events/message>
-      console.log(`Message from ${event.user}: ${event.text}`);
-    })
-
-
-    rtm.on('reaction_removed', (event) => {
-      // Structure of `event`: <https://api.slack.com/events/reaction_removed>
-      console.log(`Reaction removed by ${event.user}: ${event.reaction}`);
-    });
-
-    // Send a message once the connection is ready
-    
-  }
-
   /**
    * connect
+   * builds all connection objects
    */
   connect() {
     logger.info('connect');
@@ -146,13 +134,14 @@ class slackHelper {
   async detectCommand(message) {
     const text = message.text;
     const match = text.match(this.commandPattern);
+    const url = this.detectURL(text)
     if (match) {
       const command = match[1];
       const args = match[2];
 
       if (command in commands) {
         logger.info(`Command found: channel: ${message.channel}, user: ${message.user}, command: ${command}`);
-        commands[command](args).then((response) => {
+        commands[command].main(args).then((response) => {
           this.sendMessage(message.channel, `${response}`);
           logger.info(response);
         }).catch((error) => {
@@ -160,9 +149,51 @@ class slackHelper {
           logger.error(error);
         });
       } else {
-        this.sendMessage(message.channel, 'Sorry I do not know that command.');
+        switch(command) {
+          // i want this to be abstracted into a stats util or something
+          case 'about':
+            // This will list the top posted domains from appData.source 
+            break;
+          case 'command':
+            /*
+             * This will be an interface to disable, or enable commands. 
+             * !command enable {command} - will enable a command
+             * !command disable {command} - will disable a command
+             * !command list - lists the commands and their status
+             * !command help - says the help message explaining this.
+             */
+            this.sendMessage(message.channel, '');
+            break;
+          default:
+            this.sendMessage(message.channel, 'Sorry I do not know that command.');
+        }
       }
+    } else if (url) {
+      // this is a simple url counter... 
+      const domain = Sanitize.extractRootDomain(url);
+      if (this.appData.source.hasOwnProperty(domain)) {
+        this.appData.source[domain].count ++;
+      } else {
+        const thegoods = {
+          'domain': domain,
+          'count': 1
+        };
+        this.appData.source[domain] = thegoods;
+      }
+      logger.info(this.appData.source[domain].domain + ' ' + this.appData.source[domain].count);
     }
+  }
+
+  /**
+   * detectURL
+   * @param {string} str - a string to check for a url in it
+   */
+  detectURL(str) {
+    if (str.length < 2083 && (str.match(urlRegex))) {
+      const match = str.match(urlRegex);
+      return match[0];
+    }
+    return false;
   }
 
   /**
