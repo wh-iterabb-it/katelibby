@@ -38,6 +38,9 @@ function sanitize(data) {
 
   clean = lines.join('\n');
 
+  // removes annoying white space
+  clean = clean.replace(/\s+/g, ' ');
+
   return clean;
 }
 
