@@ -97,7 +97,7 @@ const MtastatusCommand = function MtastatusCommand() {
               Sanitize.sanitize(striptags(currentLine.status));
             let outText = Sanitize.sanitize(striptags(currentLine.text));
             if (outText.length > 0) {
-              outStatus = outStatus + outText;
+              outStatus = outStatus + outText.replace(/\s+/g, ' ');
             }
             response = outStatus;
           }
