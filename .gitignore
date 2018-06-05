@@ -13,3 +13,6 @@ coverage.lcov
 
 # Dev configs
 *config.js
+
+# Dist
+dist
