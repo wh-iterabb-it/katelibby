@@ -1,10 +1,10 @@
 FROM mhart/alpine-node:8.6.0
 
 # Copy source code
-COPY . /app
+RUN mkdir -p /usr/src/app
 
 # Change working directory
-WORKDIR /app
+WORKDIR /usr/src/app
 
 # Install dependencies
 RUN npm install
