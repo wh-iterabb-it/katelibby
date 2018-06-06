@@ -1,19 +1,22 @@
 FROM mhart/alpine-node:8.6.0
 
-# Copy source code
+# Creating working directory
 RUN mkdir -p /usr/src/app
+
+# Copy files to working directory
+COPY . /usr/src/app/
 
 # Change working directory
 WORKDIR /usr/src/app
 
-# Install dependencies
+# Install node dependencies
 RUN npm install
 
 # Create Distribution
 RUN npm run build
 
 # Expose API port to the outside
-EXPOSE 80
+EXPOSE 3924
 
 # Launch application
 CMD ["npm","start"]

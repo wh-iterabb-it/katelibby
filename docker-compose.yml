@@ -1,11 +1,11 @@
 version: '3'
 services:
-  kate-libby
+  kate-libby:
     container_name: kate-libby
     build: .
-    command: ["npm", "run-script", "start-dev"]
+    command: ["npm", "run-script", "start"]
     ports:
-      - "80:80"
+      - "3924:3924"
     volumes:
       - ${PWD}:/usr/src/app
       
