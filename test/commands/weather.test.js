@@ -16,6 +16,7 @@ describe('Command', () => {
     let sandbox;
     const testKey = 'testKey';
     const testZip = '12345';
+    const unexpectedResult = { "error": "invalid blah blah"};
     const expectedResult10023 = {
       "response": {
       "version":"0.1",
@@ -129,6 +130,19 @@ describe('Command', () => {
       config.wunderground.key = '';
       commands.weather.main('12345');
       expect(logger.warn).to.have.been.called;
+    });
+
+    it('should return expected promise rejection and result when malformed data is sent', (done) => {
+      config.wunderground.key = testKey; // 'testKey' is our key :D
+
+      nock('http://api.wunderground.com')
+        .get(`/api/${testKey}/conditions/q/77777.json`)
+        .reply(200, unexpectedResult);
+
+      commands.weather.main('77777').then(()=>{}).catch((error) => {
+        expect(error).to.equal('Are you trying to make me crash?');
+        done();
+      });
     });
 
     it('should return expected nyc result', (done) => {
