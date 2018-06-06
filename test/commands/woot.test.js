@@ -236,22 +236,5 @@ describe('Command', () => {
         });
       } catch (error) {}
     });
-
-    it('should return expected rejection result when trying to hit a bad site', (done) => {
-      nock('https://api.woot.com/1/sales')
-        .get(`/current.json/www.woot.com`)
-        .reply(200, {"error":"broken"});
-
-      const expectedMalformedOutput = 'Are you trying to make me crash?';
-      try {
-        commands.woot.main('tacobell').then(() => {}).catch((error) => {
-          console.log(error);
-          expect(error).to.equal(expectedMalformedOutput);
-          done();
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    });
   });
 });
