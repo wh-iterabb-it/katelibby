@@ -148,39 +148,7 @@ class slackHelper {
           this.sendMessage(message.channel, `${error}`);
           logger.error(error);
         });
-      } else {
-        switch(command) {
-          // i want this to be abstracted into a stats util or something
-          case 'about':
-            // This will list the top posted domains from appData.source 
-            break;
-          case 'command':
-            /*
-             * This will be an interface to disable, or enable commands. 
-             * !command enable {command} - will enable a command
-             * !command disable {command} - will disable a command
-             * !command list - lists the commands and their status
-             * !command help - says the help message explaining this.
-             */
-            this.sendMessage(message.channel, '');
-            break;
-          default:
-            this.sendMessage(message.channel, 'Sorry I do not know that command.');
-        }
       }
-    } else if (url) {
-      // this is a simple url counter... 
-      const domain = Sanitize.extractRootDomain(url);
-      if (this.appData.source.hasOwnProperty(domain)) {
-        this.appData.source[domain].count ++;
-      } else {
-        const thegoods = {
-          'domain': domain,
-          'count': 1
-        };
-        this.appData.source[domain] = thegoods;
-      }
-      logger.info(this.appData.source[domain].domain + ' ' + this.appData.source[domain].count);
     }
   }
 
