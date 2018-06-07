@@ -14,6 +14,11 @@ const factoryParams = {
 };
 
 class MTA {
+
+  /**
+   * getLineKey
+   * @param {string} input - expected to be a single character for a MTA transit line
+   */
   static getLineKey(input) {
     switch (input.toUpperCase()) {
       case '1':
@@ -54,7 +59,11 @@ class MTA {
         return null;
     }
   }
-
+  
+  /**
+   * getColorForLine
+   * @param {string} input - returns the color for the line, this is normally used for IRC coloring
+   */
   static getColorForLine(line) {
     const lineColors = {
       '123': 'light_red',
@@ -97,13 +106,30 @@ const MtastatusCommand = function MtastatusCommand() {
               Sanitize.sanitize(striptags(currentLine.status));
             let outText = Sanitize.sanitize(striptags(currentLine.text));
             if (outText.length > 0) {
-              outStatus = outStatus + outText;
+              outStatus = outStatus + outText.replace(/\s+/g, ' ');
             }
             response = outStatus;
           }
         });
       });
       return Promise.resolve(response);
+    },
+
+    /**
+     * lineKey
+     * @param {string} input - expected to be a single character for a MTA transit line
+     */
+    lineKey: (input) => {
+      const output = MTA.getLineKey(input);
+      return output;
+    },
+
+    /**
+     * colorForLine
+     * @param {string} input - returns the color for the line, this is normally used for IRC coloring
+     */
+    colorForLine: (input) => {
+      return MTA.getColorForLine(input);
     },
   });
 };

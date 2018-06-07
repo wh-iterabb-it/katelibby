@@ -1,6 +1,6 @@
 {
   "name": "katelibby",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An IRC and Slack Bot",
   "repository": {
     "type": "git",
@@ -18,12 +18,15 @@
     "Ash Kamel <https://github.com/ajkamel>"
   ],
   "scripts": {
-    "test": "node_modules/.bin/mocha test/. --require @babel/register --recursive",
+    "build": "npm run clean && npm run build-dist",
+    "build-dist": "node node_modules/.bin/babel -d dist . -s --ignore test,node_modules",
+    "clean": "rm -rf dist && mkdir -p dist/bin dist/node_modules && cp bin/start dist/bin/start && cp -r node_modules/* dist/node_modules && cp package.json dist/package.json",
     "cover": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov",
+    "start": "node ./dist/bin/start",
+    "start-dev": "node ./bin/start",
+    "test": "node_modules/.bin/mocha test/. --require @babel/register --recursive",
     "lint": "node_modules/.bin/eslint --format codeframe .",
-    "fix-my-shit": "node_modules/.bin/eslint --fix --format codeframe .",
-    "start": "",
-    "start-dev": "node ./bin/start"
+    "fix-my-shit": "node_modules/.bin/eslint --fix --format codeframe ."
   },
   "babel": {
     "presets": [
@@ -91,20 +94,21 @@
     }
   },
   "dependencies": {
-    "@slack/client": "4.0.0",
+    "@slack/client": "4.3.0",
     "bluebird": "3.5.1",
     "commander": "2.15.0",
     "fs": "0.0.1-security",
     "google": "2.1.0",
-    "mta-gtfs": "^1.1.0",
+    "mta-gtfs": "1.1.0",
     "path": "0.12.7",
-    "striptags": "^3.1.1",
+    "striptags": "3.1.1",
     "superagent": "3.8.3",
     "winston": "3.0.0-rc6"
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.48",
     "@babel/register": "7.0.0-beta.48",
+    "babel-cli": "6.26.0",
     "babel-eslint": "8.2.3",
     "babel-preset-env": "1.7.0",
     "chai": "4.1.2",
@@ -118,7 +122,7 @@
     "nock": "9.3.0",
     "nyc": "12.0.2",
     "pm2": "2.10.4",
-    "sinon": "5.0.10",
+    "sinon": "5.1.0",
     "sinon-chai": "3.1.0",
     "sinon-stub-promise": "4.0.0",
     "tough-cookie": "2.4.2"
