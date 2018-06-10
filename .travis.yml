@@ -14,7 +14,6 @@ before_install:
   - npm install -g npm
   
 script:
-  - docker build
   - "npm test"
   - "npm run-script cover"
 
