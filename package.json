@@ -123,7 +123,7 @@
     "nyc": "12.0.2",
     "pm2": "2.10.4",
     "sinon": "6.0.0",
-    "sinon-chai": "3.1.0",
+    "sinon-chai": "3.2.0",
     "sinon-stub-promise": "4.0.0",
     "tough-cookie": "2.4.2"
   }
