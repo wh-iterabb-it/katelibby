@@ -1,5 +1,5 @@
 import pkjson from '../package.json';
-import toHHMMSS from '../utils/format';
+import format from '../utils/format';
 import config from '../helpers/config_helper';
 import BaseCommand from './utils/command_factory';
 
@@ -16,7 +16,7 @@ const AboutCommand = function AboutCommand() {
   return Object.assign(Object.create(basedCommand), {
     primary: (args) => {
       const time = process.uptime();
-      const uptime = toHHMMSS(time + '');
+      const uptime = format.toDDHHMMSS(time + '');
       const response = `About this Bot\r\nVersion: ${pkjson.version}\r\nTotal Uptime of Bot: ${uptime}`;
       return Promise.resolve(response);
     },
