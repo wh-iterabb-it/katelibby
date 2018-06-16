@@ -11,7 +11,7 @@ const { expect } = chai;
 
 describe('App Tests', () => {
   describe('setCommandPattern method', () => {
-    it('should spin up preflight connection logic', () => {
+    it('should spin up preflight connection logic', (done) => {
       try {
         kate.init();
         const timer = new Promise(function(resolve) {
