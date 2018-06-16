@@ -171,5 +171,18 @@ describe('Command', () => {
         });
       } catch (error) {}
     });
+
+    /**
+     * This is a bad test, but alturnative is coppying all of the array
+     * and deep comparison the result.
+     */
+    it('should return any expected string when passed empty string', (done) => {
+      try {
+        commands.weather.main('10023').then((result) => {
+          expect(result).to.be.a('string');
+          done();
+        });
+      } catch (error) {}
+    });
   });
 });

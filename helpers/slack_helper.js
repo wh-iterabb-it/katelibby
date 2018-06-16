@@ -15,6 +15,7 @@ class slackHelper {
     };
     logger.info('slack helper start');
     this.commandPattern = this.setCommandPattern(config.commandChar);
+    // this.rtm = {sendMessage: {}};
   }
 
   setupEvents() {
