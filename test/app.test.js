@@ -12,10 +12,16 @@ const { expect } = chai;
 describe('App Tests', () => {
   describe('setCommandPattern method', () => {
     it('should spin up preflight connection logic', () => {
-      setTimeout(() => {
+      try {
         kate.init();
-      }, 5000);
-      done();
+        const timer = new Promise(function(resolve) {
+         setTimeout(resolve(1), 5000);
+        });
+
+        timer.then(() => {
+          done();
+        });
+      } catch (error) {}
     });
   });
 });
