@@ -23,6 +23,20 @@ describe('Command', () => {
         }
       });
 
+      /**
+       * This is a bad test, but alturnative is coppying all of the array
+       * and deep comparison the result.
+       */
+      it('should return any expected string when passed empty string', (done) => {
+        config.app.nsfw = true;
+        try {
+          commands.fortune.main('a').then((result) => {
+            expect(result).to.be.a('string');
+            done();
+          });
+        } catch (error) {}
+      });
+
       it('should return expected error result when passed in an invalid line', (done) => {
         try {
           commands.mtastatus.main('tacobell').then((result) => {
@@ -182,7 +196,7 @@ describe('Command', () => {
           const resultSLowercase = commands.mtastatus.lineKey('s')
           expect(resultSLowercase).to.equal(expectedLine);
       });
-      
+
       it('should return expected transit line result "L" when passed in "L" in various forms', () => {
           const expectedLine = 'L';
 
