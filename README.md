@@ -7,7 +7,6 @@ katelibby
 [![devDependency Status](https://img.shields.io/david/dev/wh-iterabb-it/katelibby.svg?style=flat)](https://david-dm.org/wh-iterabb-it/katelibby#info=devDependencies)
 [![codecov](https://codecov.io/gh/wh-iterabb-it/katelibby/branch/development/graph/badge.svg)](https://codecov.io/gh/wh-iterabb-it/katelibby)
 
-
 ### Description:
 
 katelibby is a node slack bot.
@@ -19,17 +18,16 @@ katelibby is a node slack bot.
 ```
 npm install
 ```
-
 ### Example Usage
 
 Basic usage
 ```
-node ./bin/start
+npm run build
+npm run start
 ```
-
 Accepting a config from anywhere using the `--config` flag
 ```
-node ./bin/start --config /home/username/config/config.js
+npm run start --config /home/username/config/config.js
 ```
 
 ### Configuration
