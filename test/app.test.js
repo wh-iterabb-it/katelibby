@@ -12,7 +12,10 @@ const { expect } = chai;
 describe('App Tests', () => {
   describe('setCommandPattern method', () => {
     it('should spin up preflight connection logic', () => {
-      kate.init();
+      setTimeout(() => {
+        kate.init();
+      }, 5000);
+      done();
     });
   });
 });
