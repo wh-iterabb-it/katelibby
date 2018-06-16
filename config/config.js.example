@@ -39,7 +39,7 @@ const config = {
 
   // Giphy API key
   giphy: {
-    key: KL_GIPHY_API_KEY || '',
+    key: process.env.KL_GIPHY_API_KEY || '',
   },
 
   // Weather Underground API key
