@@ -182,6 +182,16 @@ describe('Command', () => {
           const resultSLowercase = commands.mtastatus.lineKey('s')
           expect(resultSLowercase).to.equal(expectedLine);
       });
+      
+      it('should return expected transit line result "L" when passed in "L" in various forms', () => {
+          const expectedLine = 'L';
+
+          const resultLUppercase = commands.mtastatus.lineKey('L');
+          expect(resultLUppercase).to.equal(expectedLine);
+
+          const resultLLowercase = commands.mtastatus.lineKey('l')
+          expect(resultLLowercase).to.equal(expectedLine);
+      });
 
       it('should return expected transit line result "SIR" when passed in "SIR" in various forms', () => {
           const expectedLine = 'SIR';
