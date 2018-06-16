@@ -14,7 +14,7 @@ describe('Slack Helper Tests', () => {
     it('should return true when detecting a real url', () => {
       try {
         const slack = new Slack();
-        const testURL = 'http://wh.iterabb.it';
+        const testURL = 'http://www.google.com';
         const result = slack.detectURL(testURL);
         expect(result).to.equal(true);
       } catch (error) {}
@@ -25,7 +25,7 @@ describe('Slack Helper Tests', () => {
         const slack = new Slack();
         const testURL = 'tacobell';
         const result = slack.detectURL(testURL);
-        expect(result).to.equal(true);
+        expect(result).to.equal(false);
       } catch (error) {}
     });
   });
