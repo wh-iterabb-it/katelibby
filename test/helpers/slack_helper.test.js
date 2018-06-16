@@ -10,19 +10,22 @@ chai.use(sinonChai);
 const { expect } = chai;
 
 describe('Slack Helper Tests', () => {
-  describe('connect method', () => {
-    it('should spin up preflight connection logic', () => {
+  describe('detectURL method', () => {
+    it('should return true when detecting a real url', () => {
       try {
-        const slack = new Slack(this);
-        slack.connect();
-        const timer = new Promise(function(resolve) {
-         setTimeout(resolve(1), 5000);
-        });
+        const slack = new Slack();
+        const testURL = 'http://wh.iterabb.it';
+        const result = slack.detectURL(testURL);
+        expect(result).to.equal(true);
+      } catch (error) {}
+    });
 
-        timer.then(() => {
-          slack.disconnect();
-          done();
-        });
+    it('should return false when detecting an invalid url', () => {
+      try {
+        const slack = new Slack();
+        const testURL = 'tacobell';
+        const result = slack.detectURL(testURL);
+        expect(result).to.equal(true);
       } catch (error) {}
     });
   });
