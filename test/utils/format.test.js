@@ -79,4 +79,26 @@ describe('Format Utility Tests', () => {
       expect(resp).to.equal(expected);
     });
   });
+
+  describe('formatMoney method', () => {
+    it('should return correct dollar figure and round correctly on complex input', () => {
+      const expected = '$705,726,246.27';
+      const resp = format.formatMoney('705726246.26999999');
+      expect(resp).to.equal(expected);
+    });
+
+    it('should return round correctly on "0.49999" to $0.50', () => {
+      const expected = '$0.50';
+      const resp = format.formatMoney('0.49999');
+      expect(resp).to.equal(expected);
+    });
+  });
+
+  describe('formatLastTrade method', () => {
+    it('should return 1 second when 1 seconds passed in', () => {
+      const expected = '01:01:06';
+      const resp = format.formatLastTrade(46);
+      expect(resp).to.equal(expected);
+    });
+  });
 });

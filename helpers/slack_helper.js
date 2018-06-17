@@ -14,8 +14,9 @@ class slackHelper {
       source: {}
     };
     logger.info('slack helper start');
+    this.connect();
     this.commandPattern = this.setCommandPattern(config.commandChar);
-    // this.rtm = {sendMessage: {}};
+    this.onMessage();
   }
 
   setupEvents() {
@@ -32,7 +33,6 @@ class slackHelper {
     logger.info('connect');
     this.connectRTM();
     this.connectWeb();
-    this.setupEvents();
   }
 
   connectRTM() {
@@ -40,6 +40,7 @@ class slackHelper {
     // Initialize the RTM client with the recommended settings. Using the defaults for these
     // settings is deprecated.
     this.rtm = new RTMClient(config.slack.token);
+    
     this.rtm.start();
     // {
     //   dataStore: false,
@@ -51,22 +52,6 @@ class slackHelper {
     logger.info('connectWeb');
     // Initialize a Web API client
     this.web = new WebClient(config.slack.token);
-  }
-
-  disconnect() {
-    logger.info('disconnect');
-    this.disconnectRTM();
-    this.disconnectWeb();
-  }
-
-  disconnectRTM() {
-    logger.info('disconnectRTM');
-    this.rtm.disconnect();
-  }
-
-  disconnectWeb() {
-    logger.info('disconnectWeb');
-    this.web.disconnect();
   }
 
   /**

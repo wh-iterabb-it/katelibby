@@ -11,8 +11,8 @@ const { expect } = chai;
 
 describe('App Tests', () => {
   describe('setCommandPattern method', () => {
-    it('should spin up preflight connection logic', () => {
-      // soon
+    it('should return correct commandPattern when passed character', () => {
+
     });
   });
 });
