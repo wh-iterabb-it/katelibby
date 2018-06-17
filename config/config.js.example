@@ -39,20 +39,20 @@ const config = {
 
   // Giphy API key
   giphy: {
-    key: '',
+    key: process.env.KL_GIPHY_API_KEY || '',
   },
 
   // Weather Underground API key
   // only allows 500 calls a day and 10 a minute
   wunderground: {
-    key: '',
+    key: process.env.KL_WU_API_KEY || '',
   },
 
   // World Coin Index API Key
   // get your key from
   // https://www.worldcoinindex.com/apiservice/
   worldcoinindex: {
-    key: ''
+    key: process.env.KL_WCI_API_KEY || '',
   }
 };
 

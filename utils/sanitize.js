@@ -76,7 +76,7 @@ function extractRootDomain(url) {
   let arrLen = splitArr.length;
 
   // extracting the root domain here
-  // if there is a subdomain 
+  // if there is a subdomain
   if (arrLen > 2) {
     domain = splitArr[arrLen - 2] + '.' + splitArr[arrLen - 1];
     // check to see if it's using a Country Code Top Level Domain (ccTLD) (i.e. ".me.uk")

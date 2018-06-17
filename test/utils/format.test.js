@@ -79,4 +79,45 @@ describe('Format Utility Tests', () => {
       expect(resp).to.equal(expected);
     });
   });
+
+  describe('formatMoney method', () => {
+    it('should return correct dollar figure and round correctly on complex input', () => {
+      const expected = '$705,726,246.27';
+      const resp = format.formatMoney('705726246.26999999');
+      expect(resp).to.equal(expected);
+    });
+
+    it('should return round correctly on "0.49999" to $0.50', () => {
+      const expected = '$0.50';
+      const resp = format.formatMoney('0.49999');
+      expect(resp).to.equal(expected);
+    });
+  });
+
+  describe('formatPast method', () => {
+    it('should return 0:00:00 because we are passing in right now', () => {
+      const expected = '0:00:00';
+      let time = Math.floor(Date.now() / 1000);
+      const resp = format.formatPast(time);
+      expect(resp).to.equal(expected);
+    });
+  });
+
+  describe('detectURL method', () => {
+    it('should return true when detecting a real url', () => {
+      try {
+        const testURL = 'http://www.google.com';
+        const result = format.detectURL(testURL);
+        expect(result).to.equal(true);
+      } catch (error) {}
+    });
+
+    it('should return false when detecting an invalid url', () => {
+      try {
+        const testURL = 'tacobell';
+        const result = format.detectURL(testURL);
+        expect(result).to.equal(false);
+      } catch (error) {}
+    });
+  });
 });

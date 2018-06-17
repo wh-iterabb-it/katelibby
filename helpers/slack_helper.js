@@ -5,7 +5,6 @@ const {
 import config from '../helpers/config_helper';
 import commands from '../commands';
 import logger from '../utils/logger';
-import urlRegex from '../utils/urlRegex';
 import Sanitize from '../utils/sanitize';
 
 class slackHelper {
@@ -14,10 +13,7 @@ class slackHelper {
       source: {}
     };
     logger.info('slack helper start');
-    this.connect();
     this.commandPattern = this.setCommandPattern(config.commandChar);
-    this.onMessage();
-    this.rtm.start();
   }
 
   setupEvents() {
@@ -41,6 +37,7 @@ class slackHelper {
     // Initialize the RTM client with the recommended settings. Using the defaults for these
     // settings is deprecated.
     this.rtm = new RTMClient(config.slack.token);
+    this.rtm.start();
     // {
     //   dataStore: false,
     //   useRtmConnect: true,
@@ -59,12 +56,12 @@ class slackHelper {
    * (before the connection is open)
    * @param {object} connectData
    */
-  onAuthenticate(connectData) {
-    // Cache the data necessary for this app in memory
-    this.appData.selfId = connectData.self.id;
-    this.appData.teamId = connectData.team.id;
-    logger.info(`Logged in as ${connectData.self.id} of team ${connectData.team.id}`);
-  }
+  // onAuthenticate(connectData) {
+  //   // Cache the data necessary for this app in memory
+  //   this.appData.selfId = connectData.self.id;
+  //   this.appData.teamId = connectData.team.id;
+  //   logger.info(`Logged in as ${connectData.self.id} of team ${connectData.team.id}`);
+  // }
 
   /**
    * onConnect
@@ -96,35 +93,35 @@ class slackHelper {
     });
   }
 
-  onReactionAdded() {
-    // Log all reactions
-    rtm.on('reaction_added', (event) => {
-      // Structure of `event`: <https://api.slack.com/events/reaction_added>
-      console.log(`Reaction from ${event.user}: ${event.reaction}`);
-    });
-  }
+  // onReactionAdded() {
+  //   // Log all reactions
+  //   rtm.on('reaction_added', (event) => {
+  //     // Structure of `event`: <https://api.slack.com/events/reaction_added>
+  //     console.log(`Reaction from ${event.user}: ${event.reaction}`);
+  //   });
+  // }
 
-  onReactionRemoved() {
-    rtm.on('reaction_removed', (event) => {
-      // Structure of `event`: <https://api.slack.com/events/reaction_removed>
-      console.log(`Reaction removed by ${event.user}: ${event.reaction}`);
-    });
-  }
+  // onReactionRemoved() {
+  //   rtm.on('reaction_removed', (event) => {
+  //     // Structure of `event`: <https://api.slack.com/events/reaction_removed>
+  //     console.log(`Reaction removed by ${event.user}: ${event.reaction}`);
+  //   });
+  // }
 
   /**
    * onReady
-   * The ready handler for when connection is established and readiness 
+   * The ready handler for when connection is established and readiness
    */
-  onReady() {
-    rtm.on('ready', (event) => {
-
-      // Getting a conversation ID is left as an exercise for the reader. It's usually available as the `channel` property
-      // on incoming messages, or in responses to Web API requests.
-
-      // const conversationId = '';
-      // rtm.sendMessage('Hello, world!', conversationId);
-    });
-  }
+  // onReady() {
+  //   rtm.on('ready', (event) => {
+  //
+  //     // Getting a conversation ID is left as an exercise for the reader. It's usually available as the `channel` property
+  //     // on incoming messages, or in responses to Web API requests.
+  //
+  //     // const conversationId = '';
+  //     // rtm.sendMessage('Hello, world!', conversationId);
+  //   });
+  // }
 
   /**
    * detectCommand
@@ -150,18 +147,6 @@ class slackHelper {
         });
       }
     }
-  }
-
-  /**
-   * detectURL
-   * @param {string} str - a string to check for a url in it
-   */
-  detectURL(str) {
-    if (str.length < 2083 && (str.match(urlRegex))) {
-      const match = str.match(urlRegex);
-      return match[0];
-    }
-    return false;
   }
 
   /**
