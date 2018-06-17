@@ -27,6 +27,9 @@ describe('Slack Helper Tests', () => {
     sandbox.restore();
   });
 
-  describe('detectURL method', () => {
+  describe('constructor ', () => {
+    it('should just not crash when spun up on this test', () => {
+
+    });
   });
 });
