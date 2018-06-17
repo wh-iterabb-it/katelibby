@@ -18,29 +18,18 @@ describe('Slack Helper Tests', () => {
   });
 
   beforeEach(() => {
-    slack = new Slack();
+    sandbox.stub(logger, 'info');
     sandbox.stub(logger, 'warn');
+    slack = new Slack();
   });
 
   afterEach(() => {
     sandbox.restore();
   });
 
-  describe('detectURL method', () => {
-    it('should return true when detecting a real url', () => {
-      try {
-        const testURL = 'http://www.google.com';
-        const result = slack.detectURL(testURL);
-        expect(result).to.equal(true);
-      } catch (error) {}
-    });
+  describe('constructor ', () => {
+    it('should just not crash when spun up on this test', () => {
 
-    it('should return false when detecting an invalid url', () => {
-      try {
-        const testURL = 'tacobell';
-        const result = slack.detectURL(testURL);
-        expect(result).to.equal(false);
-      } catch (error) {}
     });
   });
 });
