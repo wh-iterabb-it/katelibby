@@ -65,7 +65,9 @@ wunderground: {
 ### Command Reference
 ---
 
-`!catfacts`  - Get a random cat fact in chat
+`!catfacts` - Get a random cat fact in chat
+
+`!coin`     - Getting the current price USD of a given crypto coin.
 
 `!fortune`  - Check your fortune
 
