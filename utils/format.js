@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+import urlRegex from './urlRegex';
+
 /**
  * toHHMMSS
  * turns an amount of seconds into days, hours, minutes seconds
@@ -63,8 +65,24 @@ function formatMoney(incInt) {
   return factoredNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-function formatLastTrade(intDate) {
-  // get the time since last trade
+/**
+ * detectURL
+ * @param {string} str - a string to check for a url in it
+ */
+function detectURL(str) {
+  if (str.length < 2083 && (str.match(urlRegex))) {
+    const match = str.match(urlRegex);
+    return match[0];
+  }
+  return false;
+}
+
+/**
+ * formatPast
+ * takes a time stamp from the past and calculates the hh:mm:ss it was in the past
+ * @param {string} intDate - a time stamp in the past in seconds
+ */
+function formatPast(intDate) {
   const timestamp = moment.unix(intDate);
   const now = moment.unix(new Date().getTime() / 1000);
   const difference = now.diff(timestamp);
@@ -72,4 +90,4 @@ function formatLastTrade(intDate) {
   return Math.floor(duration.asHours()) + moment.utc(difference).format(':mm:ss');
 }
 
-export default {toHHMMSS, toDDHHMMSS, formatMoney, formatLastTrade}
+export default {toHHMMSS, toDDHHMMSS, formatMoney, formatPast}

@@ -18,8 +18,9 @@ describe('Slack Helper Tests', () => {
   });
 
   beforeEach(() => {
-    slack = new Slack();
+    sandbox.stub(logger, 'info');
     sandbox.stub(logger, 'warn');
+    slack = new Slack();
   });
 
   afterEach(() => {
@@ -27,20 +28,5 @@ describe('Slack Helper Tests', () => {
   });
 
   describe('detectURL method', () => {
-    it('should return true when detecting a real url', () => {
-      try {
-        const testURL = 'http://www.google.com';
-        const result = slack.detectURL(testURL);
-        expect(result).to.equal(true);
-      } catch (error) {}
-    });
-
-    it('should return false when detecting an invalid url', () => {
-      try {
-        const testURL = 'tacobell';
-        const result = slack.detectURL(testURL);
-        expect(result).to.equal(false);
-      } catch (error) {}
-    });
   });
 });

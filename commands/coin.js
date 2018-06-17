@@ -29,7 +29,6 @@ const CoinCommand = function CoinCommand() {
       return new Promise((resolve, reject) => {
         request.get(url).then((response) => {
           if (response.status === 200) {
-            logger.info(`${url} status: ${response.status}`);
             const json = response.body;
             if (typeof json.Markets === 'undefined' || typeof json.error !== 'undefined') {
               return reject('Are you trying to make me crash?');
@@ -38,7 +37,7 @@ const CoinCommand = function CoinCommand() {
               const label = json.Markets[0].Label.substring(0, 3);
               const name = json.Markets[0].Name;
               const volume = format.formatMoney(json.Markets[0].Volume_24h);
-              const lastTrade = format.formatLastTrade(json.Markets[0].Timestamp);
+              const lastTrade = format.formatPast(json.Markets[0].Timestamp);
 
               let returnString = `1 ${label} = ${price} USD as of ${lastTrade} ago\n\r`;
               returnString = returnString + `24 Hour Volume ${volume} USD\n\r`;
