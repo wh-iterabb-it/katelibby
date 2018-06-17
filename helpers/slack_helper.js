@@ -17,6 +17,7 @@ class slackHelper {
   }
 
   setupEvents() {
+    logger.info('setupEvents');
     // this.rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, this.onAuthenticate(connectData));
     // this.rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, this.onConnect());
     this.onMessage();
@@ -67,15 +68,16 @@ class slackHelper {
    * onConnect
    * The Connect handler for when a new connection is established
    */
-  onConnect() {
-    logger.info('Ready');
-  }
+  // onConnect() {
+  //   logger.info('Ready');
+  // }
 
   /**
    * onMessage
    * The message handler for incoming messages for the helper
    */
   onMessage() {
+    logger.info('onMessage setup');
     this.rtm.on('message', (message) => {
       // For structure of `event`, see https://api.slack.com/events/message
 
@@ -131,7 +133,6 @@ class slackHelper {
   async detectCommand(message) {
     const text = message.text;
     const match = text.match(this.commandPattern);
-    const url = this.detectURL(text)
     if (match) {
       const command = match[1];
       const args = match[2];
