@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 /**
  * toHHMMSS
  * turns an amount of seconds into days, hours, minutes seconds
@@ -50,4 +52,24 @@ function toHHMMSS(inctime) {
   return time;
 }
 
-export default {toHHMMSS, toDDHHMMSS}
+function formatMoney(incInt) {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 2,
+  });
+
+  const factoredNumber = formatter.format(incInt);
+  return factoredNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function formatLastTrade(intDate) {
+  // get the time since last trade
+  const timestamp = moment.unix(intDate);
+  const now = moment.unix(new Date().getTime() / 1000);
+  const difference = now.diff(timestamp);
+  const duration = moment.duration(difference);
+  return Math.floor(duration.asHours()) + moment.utc(difference).format(':mm:ss');
+}
+
+export default {toHHMMSS, toDDHHMMSS, formatMoney, formatLastTrade}

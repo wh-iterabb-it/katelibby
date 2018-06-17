@@ -15,7 +15,6 @@ class slackHelper {
     };
     logger.info('slack helper start');
     this.commandPattern = this.setCommandPattern(config.commandChar);
-    // this.rtm = {sendMessage: {}};
   }
 
   setupEvents() {
@@ -32,7 +31,6 @@ class slackHelper {
     logger.info('connect');
     this.connectRTM();
     this.connectWeb();
-    this.setupEvents();
   }
 
   connectRTM() {
@@ -51,22 +49,6 @@ class slackHelper {
     logger.info('connectWeb');
     // Initialize a Web API client
     this.web = new WebClient(config.slack.token);
-  }
-
-  disconnect() {
-    logger.info('disconnect');
-    this.disconnectRTM();
-    this.disconnectWeb();
-  }
-
-  disconnectRTM() {
-    logger.info('disconnectRTM');
-    this.rtm.disconnect();
-  }
-
-  disconnectWeb() {
-    logger.info('disconnectWeb');
-    this.web.disconnect();
   }
 
   /**
