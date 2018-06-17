@@ -14,9 +14,7 @@ class slackHelper {
       source: {}
     };
     logger.info('slack helper start');
-    this.connect();
     this.commandPattern = this.setCommandPattern(config.commandChar);
-    this.onMessage();
   }
 
   setupEvents() {
@@ -40,7 +38,6 @@ class slackHelper {
     // Initialize the RTM client with the recommended settings. Using the defaults for these
     // settings is deprecated.
     this.rtm = new RTMClient(config.slack.token);
-    
     this.rtm.start();
     // {
     //   dataStore: false,

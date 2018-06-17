@@ -93,12 +93,4 @@ describe('Format Utility Tests', () => {
       expect(resp).to.equal(expected);
     });
   });
-
-  describe('formatLastTrade method', () => {
-    it('should return 1 second when 1 seconds passed in', () => {
-      const expected = '01:01:06';
-      const resp = format.formatLastTrade(46);
-      expect(resp).to.equal(expected);
-    });
-  });
 });
