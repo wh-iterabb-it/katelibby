@@ -25,17 +25,20 @@ Basic usage
 npm run build
 npm run start
 ```
-Accepting a config from anywhere using the `--config` flag
-```
-npm run start --config /home/username/config/config.js
-```
 
 ### Configuration
 
 Currently katelibby bot is supported for Slack connections.
 Simply copy the `./config/config.js.example` and rename it as `./config/config.js`.
 
+Accepting a config from anywhere using the `--config` flag
+```
+npm run start --config /home/username/config/config.js
+```
+
 ### Advanced Configuration
+
+#### !giphy command
 
 Several of the commands depend on having API keys in the configuration file.
 To use the `!giphy` command go to the giphy [api page](https://api.giphy.com/) to get a key.
@@ -46,6 +49,8 @@ giphy: {
   key: 'keyhere'
 },
 ```
+
+#### !weather command
 
 To get current weather by location, go to weather underground's [api page](https://www.wunderground.com/weather/api/) to get started, make an account and get a key.
 Put that key in the `config.js`,
@@ -58,12 +63,17 @@ wunderground: {
 },
 ```
 
-#### Slack Usage
+#### !coin command
 
-// TO-DO: fill this in
+
+#### IRC Usage
+
+*TO-DO*: fill this in
 
 ### Command Reference
 ---
+
+`!about`    - Tells the uptime and version of the bot
 
 `!catfacts` - Get a random cat fact in chat
 
