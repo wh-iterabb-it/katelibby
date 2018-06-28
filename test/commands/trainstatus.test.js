@@ -10,7 +10,7 @@ const { expect } = chai;
 describe('Command', () => {
   describe('trainstatus', () => {
     describe('main', () => {
-      const expectedHelp = `Check the status of your NYC Metro Line!\r\nSyntax is ${config.commandChar}trainstatus { line }`;
+      const expectedHelp = `Check the status of your LIRR or NYC Metro Line!\r\nSyntax is ${config.commandChar}trainstatus { line }`;
 
       it('should return expected help result when passed in "help"', (done) => {
         try {
