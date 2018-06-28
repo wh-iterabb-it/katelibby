@@ -8,7 +8,7 @@ import BaseCommand from './utils/command_factory';
 
 const factoryParams = {
   enabled: true,
-  help_msg: `Check the status of your NYC Metro Line!\r\nSyntax is ${config.commandChar}mtastatus { line }`,
+  help_msg: `Check the status of your LIRR or NYC Metro Line!\r\nSyntax is ${config.commandChar}trainstatus { line }`,
   alias: false,
   nsfw: false,
 };
@@ -55,11 +55,34 @@ class MTA {
         return 'S';
       case 'SIR':
         return 'SIR';
+
+      case 'BABYLON':
+        return 'Babylon';
+      case 'CITY TERMINAL ZONE':
+        return 'City Terminal Zone';
+      case 'FAR ROCKAWAY':
+        return 'Far Rockaway';
+      case 'HEMPSTEAD':
+        return 'Hempstead';
+      case 'LONG BEACH':
+        return 'Long Beach';
+      case 'MONTUAK':
+        return 'Montauk';
+      case 'OYSTER BAY':
+        return 'Oyster Bay';
+      case 'PORT JEFFERSON':
+        return 'Port Jefferson';
+      case 'PORT WASHINGTON':
+        return 'Port Washington';
+      case 'RONKONKOMA':
+        return 'Ronkonkoma';
+      case 'WEST HEMPSTEAD':
+        return 'West Hempstead';
       default:
         return null;
     }
   }
-  
+
   /**
    * getColorForLine
    * @param {string} input - returns the color for the line, this is normally used for IRC coloring
@@ -98,20 +121,38 @@ const MtastatusCommand = function MtastatusCommand() {
       if (!MTA.getLineKey(args)) {
         return Promise.resolve('You must specify a valid line!');
       }
-      await mta.status('subway').then((subway) => {
-        const lineName = MTA.getLineKey(args);
-        subway.map((currentLine) => {
-          if (currentLine.name === lineName) {
-            let outStatus = Sanitize.sanitize(currentLine.name) + ': ' +
-              Sanitize.sanitize(striptags(currentLine.status));
-            let outText = Sanitize.sanitize(striptags(currentLine.text));
-            if (outText.length > 0) {
-              outStatus = outStatus + outText.replace(/\s+/g, ' ');
+      if (args.length > 4) {
+        await mta.status('LIRR').then((train) => {
+          const lineName = MTA.getLineKey(args);
+          console.log(train);
+          train.map((currentLine) => {
+            if (currentLine.name === lineName) {
+              let outStatus = Sanitize.sanitize(currentLine.name) + ': ' +
+                Sanitize.sanitize(striptags(currentLine.status));
+              let outText = Sanitize.sanitize(striptags(currentLine.text));
+              if (outText.length > 0) {
+                outStatus = outStatus + outText.replace(/\s+/g, ' ');
+              }
+              response = outStatus;
             }
-            response = outStatus;
-          }
+          });
         });
-      });
+      } else {
+        await mta.status('subway').then((subway) => {
+          const lineName = MTA.getLineKey(args);
+          subway.map((currentLine) => {
+            if (currentLine.name === lineName) {
+              let outStatus = Sanitize.sanitize(currentLine.name) + ': ' +
+                Sanitize.sanitize(striptags(currentLine.status));
+              let outText = Sanitize.sanitize(striptags(currentLine.text));
+              if (outText.length > 0) {
+                outStatus = outStatus + outText.replace(/\s+/g, ' ');
+              }
+              response = outStatus;
+            }
+          });
+        });
+      }
       return Promise.resolve(response);
     },
 
