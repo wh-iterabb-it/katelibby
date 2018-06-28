@@ -220,6 +220,149 @@ describe('Command', () => {
           expect(resultSIRMixedcase).to.equal(expectedLine);
       });
 
+      it('should return expected transit line result "BABYLON" when passed in "BABYLON" in various forms', () => {
+          const expectedLine = 'Babylon';
+
+          const resultSIRUppercase = commands.trainstatus.lineKey('Babylon');
+          expect(resultSIRUppercase).to.equal(expectedLine);
+
+          const resultSIRLowercase = commands.trainstatus.lineKey('BABYLON')
+          expect(resultSIRLowercase).to.equal(expectedLine);
+
+          const resultSIRMixedcase = commands.trainstatus.lineKey('BabYLon')
+          expect(resultSIRMixedcase).to.equal(expectedLine);
+      });
+
+      it('should return expected transit line result "CITY TERMINAL ZONE" when passed in "CITY TERMINAL ZONE" in various forms', () => {
+          const expectedLine = 'City Terminal Zone';
+
+          const resultSIRUppercase = commands.trainstatus.lineKey('City Terminal Zone');
+          expect(resultSIRUppercase).to.equal(expectedLine);
+
+          const resultSIRLowercase = commands.trainstatus.lineKey('CITY TERMINAL ZONE')
+          expect(resultSIRLowercase).to.equal(expectedLine);
+
+          const resultSIRMixedcase = commands.trainstatus.lineKey('CiTy TeRmiNal ZoNe')
+          expect(resultSIRMixedcase).to.equal(expectedLine);
+      });
+
+      it('should return expected transit line result "FAR ROCKAWAY" when passed in "FAR ROCKAWAY" in various forms', () => {
+          const expectedLine = 'Far Rockaway';
+
+          const resultSIRUppercase = commands.trainstatus.lineKey('Far Rockaway');
+          expect(resultSIRUppercase).to.equal(expectedLine);
+
+          const resultSIRLowercase = commands.trainstatus.lineKey('FAR ROCKAWA')
+          expect(resultSIRLowercase).to.equal(expectedLine);
+
+          const resultSIRMixedcase = commands.trainstatus.lineKey('FaR ROckaWA')
+          expect(resultSIRMixedcase).to.equal(expectedLine);
+      });
+
+      it('should return expected transit line result "HEMPSTEAD" when passed in "HEMPSTEAD" in various forms', () => {
+          const expectedLine = 'Hempstead';
+
+          const resultSIRUppercase = commands.trainstatus.lineKey('Hempstead');
+          expect(resultSIRUppercase).to.equal(expectedLine);
+
+          const resultSIRLowercase = commands.trainstatus.lineKey('HEMPSTEAD')
+          expect(resultSIRLowercase).to.equal(expectedLine);
+
+          const resultSIRMixedcase = commands.trainstatus.lineKey('HEMpstEAD')
+          expect(resultSIRMixedcase).to.equal(expectedLine);
+      });
+
+      it('should return expected transit line result "LONG BEACH" when passed in "LONG BEACH" in various forms', () => {
+          const expectedLine = 'Long Beach';
+
+          const resultSIRUppercase = commands.trainstatus.lineKey('Long Beach');
+          expect(resultSIRUppercase).to.equal(expectedLine);
+
+          const resultSIRLowercase = commands.trainstatus.lineKey('LONG BEACH')
+          expect(resultSIRLowercase).to.equal(expectedLine);
+
+          const resultSIRMixedcase = commands.trainstatus.lineKey('LonG BeAcH')
+          expect(resultSIRMixedcase).to.equal(expectedLine);
+      });
+
+      it('should return expected transit line result "MONTAUK" when passed in "MONTAUK" in various forms', () => {
+          const expectedLine = 'Montauk';
+
+          const resultSIRUppercase = commands.trainstatus.lineKey('Montauk');
+          expect(resultSIRUppercase).to.equal(expectedLine);
+
+          const resultSIRLowercase = commands.trainstatus.lineKey('MONTAUK')
+          expect(resultSIRLowercase).to.equal(expectedLine);
+
+          const resultSIRMixedcase = commands.trainstatus.lineKey('MOntAuK')
+          expect(resultSIRMixedcase).to.equal(expectedLine);
+      });
+
+      it('should return expected transit line result "OYSTER BAY" when passed in "OYSTER BAY" in various forms', () => {
+          const expectedLine = 'Oyster Bay';
+
+          const resultSIRUppercase = commands.trainstatus.lineKey('Oyster Bay');
+          expect(resultSIRUppercase).to.equal(expectedLine);
+
+          const resultSIRLowercase = commands.trainstatus.lineKey('OYSTER BAY')
+          expect(resultSIRLowercase).to.equal(expectedLine);
+
+          const resultSIRMixedcase = commands.trainstatus.lineKey('OySTer BAy')
+          expect(resultSIRMixedcase).to.equal(expectedLine);
+      });
+
+      it('should return expected transit line result "PORT JEFFERSON" when passed in "PORT JEFFERSON" in various forms', () => {
+          const expectedLine = 'Port Jefferson';
+
+          const resultSIRUppercase = commands.trainstatus.lineKey('Port Jefferson');
+          expect(resultSIRUppercase).to.equal(expectedLine);
+
+          const resultSIRLowercase = commands.trainstatus.lineKey('PORT JEFFERSON')
+          expect(resultSIRLowercase).to.equal(expectedLine);
+
+          const resultSIRMixedcase = commands.trainstatus.lineKey('PorT JEffeRSON')
+          expect(resultSIRMixedcase).to.equal(expectedLine);
+      });
+
+      it('should return expected transit line result "PORT WASHINGTON" when passed in "PORT WASHINGTON" in various forms', () => {
+          const expectedLine = 'Port Washington';
+
+          const resultSIRUppercase = commands.trainstatus.lineKey('Port Washington');
+          expect(resultSIRUppercase).to.equal(expectedLine);
+
+          const resultSIRLowercase = commands.trainstatus.lineKey('PORT WASHINGTON')
+          expect(resultSIRLowercase).to.equal(expectedLine);
+
+          const resultSIRMixedcase = commands.trainstatus.lineKey('PoRt WASHIngton')
+          expect(resultSIRMixedcase).to.equal(expectedLine);
+      });
+
+      it('should return expected transit line result "RONKONKOMA" when passed in "RONKONKOMA" in various forms', () => {
+          const expectedLine = 'Ronkonkoma';
+
+          const resultSIRUppercase = commands.trainstatus.lineKey('Ronkonkoma');
+          expect(resultSIRUppercase).to.equal(expectedLine);
+
+          const resultSIRLowercase = commands.trainstatus.lineKey('RONKONKOMA')
+          expect(resultSIRLowercase).to.equal(expectedLine);
+
+          const resultSIRMixedcase = commands.trainstatus.lineKey('RoNKONkoma')
+          expect(resultSIRMixedcase).to.equal(expectedLine);
+      });
+
+      it('should return expected transit line result "WEST HEMPSTEAD" when passed in "WEST HEMPSTEAD" in various forms', () => {
+          const expectedLine = 'West Hempstead';
+
+          const resultSIRUppercase = commands.trainstatus.lineKey('West Hempstead');
+          expect(resultSIRUppercase).to.equal(expectedLine);
+
+          const resultSIRLowercase = commands.trainstatus.lineKey('WEST HEMPSTEAD')
+          expect(resultSIRLowercase).to.equal(expectedLine);
+
+          const resultSIRMixedcase = commands.trainstatus.lineKey('WeSt HEMPstEad')
+          expect(resultSIRMixedcase).to.equal(expectedLine);
+      });
+
       it('should return expected null value for malformed transit line', () => {
           const result = commands.trainstatus.lineKey('tacobell')
           expect(result).to.equal(null);
