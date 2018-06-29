@@ -21,6 +21,7 @@ class MTA {
    */
   static getLineKey(input) {
     switch (input.toUpperCase()) {
+      // MTA
       case '1':
       case '2':
       case '3':
@@ -55,7 +56,7 @@ class MTA {
         return 'S';
       case 'SIR':
         return 'SIR';
-
+      // LIRR
       case 'BABYLON':
         return 'Babylon';
       case 'CITY TERMINAL ZONE':
@@ -66,7 +67,7 @@ class MTA {
         return 'Hempstead';
       case 'LONG BEACH':
         return 'Long Beach';
-      case 'MONTUAK':
+      case 'MONTAUK':
         return 'Montauk';
       case 'OYSTER BAY':
         return 'Oyster Bay';
@@ -117,10 +118,13 @@ const MtastatusCommand = function MtastatusCommand() {
         key: 'MY-MTA-API-KEY-HERE', // only needed for mta.schedule() method
         feed_id: 1, // optional, default = 1
       });
+
       let response = '';
+
       if (!MTA.getLineKey(args)) {
         return Promise.resolve('You must specify a valid line!');
       }
+      
       if (args.length > 4) {
         await mta.status('LIRR').then((train) => {
           const lineName = MTA.getLineKey(args);
