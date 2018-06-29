@@ -238,10 +238,10 @@ describe('Command', () => {
           const resultSIRUppercase = commands.trainstatus.lineKey('Far Rockaway');
           expect(resultSIRUppercase).to.equal(expectedLine);
 
-          const resultSIRLowercase = commands.trainstatus.lineKey('FAR ROCKAWA')
+          const resultSIRLowercase = commands.trainstatus.lineKey('FAR ROCKAWAY')
           expect(resultSIRLowercase).to.equal(expectedLine);
 
-          const resultSIRMixedcase = commands.trainstatus.lineKey('FaR ROckaWA')
+          const resultSIRMixedcase = commands.trainstatus.lineKey('FaR ROckaWAY')
           expect(resultSIRMixedcase).to.equal(expectedLine);
       });
 
