@@ -3,7 +3,6 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
 import commands from '../../commands/';
-import config from '../../helpers/config_helper';
 
 const { expect } = chai;
 

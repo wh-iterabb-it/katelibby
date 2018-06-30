@@ -85,6 +85,41 @@ class MTA {
   }
 
   /**
+   * getServiceKey
+   * @param {string} input -
+   */
+  static getServiceKey(input) {
+    switch (input) {
+      // MTA
+      case '123':
+      case '456':
+      case '7':
+      case 'ACE':
+      case 'BDFM':
+      case 'G':
+      case 'JZ':
+      case 'L':
+      case 'NQR':
+      case 'S':
+      case 'SIR':
+        return 'subway';
+      // LIRR
+      case 'Babylon':
+      case 'City Terminal Zone':
+      case 'Far Rockaway':
+      case 'Hempstead':
+      case 'Long Beach':
+      case 'Montauk':
+      case 'Oyster Bay':
+      case 'Port Jefferson':
+      case 'Port Washington':
+      case 'Ronkonkoma':
+      case 'West Hempstead':
+        return 'LIRR';
+    }
+  }
+
+  /**
    * getColorForLine
    * @param {string} input - returns the color for the line, this is normally used for IRC coloring
    */
@@ -124,39 +159,20 @@ const MtastatusCommand = function MtastatusCommand() {
       if (!MTA.getLineKey(args)) {
         return Promise.resolve('You must specify a valid line!');
       }
-      
-      if (args.length > 4) {
-        await mta.status('LIRR').then((train) => {
-          const lineName = MTA.getLineKey(args);
-          console.log(train);
-          train.map((currentLine) => {
-            if (currentLine.name === lineName) {
-              let outStatus = Sanitize.sanitize(currentLine.name) + ': ' +
-                Sanitize.sanitize(striptags(currentLine.status));
-              let outText = Sanitize.sanitize(striptags(currentLine.text));
-              if (outText.length > 0) {
-                outStatus = outStatus + outText.replace(/\s+/g, ' ');
-              }
-              response = outStatus;
+      const lineName = MTA.getLineKey(args);
+      await mta.status(MTA.getServiceKey(lineName)).then((train) => {
+        train.map((currentLine) => {
+          if (currentLine.name === lineName) {
+            let outStatus = Sanitize.sanitize(currentLine.name) + ': ' +
+              Sanitize.sanitize(striptags(currentLine.status));
+            let outText = Sanitize.sanitize(striptags(currentLine.text));
+            if (outText.length > 0) {
+              outStatus = outStatus + outText.replace(/\s+/g, ' ');
             }
-          });
+            response = outStatus;
+          }
         });
-      } else {
-        await mta.status('subway').then((subway) => {
-          const lineName = MTA.getLineKey(args);
-          subway.map((currentLine) => {
-            if (currentLine.name === lineName) {
-              let outStatus = Sanitize.sanitize(currentLine.name) + ': ' +
-                Sanitize.sanitize(striptags(currentLine.status));
-              let outText = Sanitize.sanitize(striptags(currentLine.text));
-              if (outText.length > 0) {
-                outStatus = outStatus + outText.replace(/\s+/g, ' ');
-              }
-              response = outStatus;
-            }
-          });
-        });
-      }
+      });
       return Promise.resolve(response);
     },
 
@@ -175,6 +191,14 @@ const MtastatusCommand = function MtastatusCommand() {
      */
     colorForLine: (input) => {
       return MTA.getColorForLine(input);
+    },
+
+    /**
+     * serviceKey
+     * @param {string} input -
+     */
+    serviceKey: (input) => {
+      return MTA.getServiceKey(input);
     },
   });
 };

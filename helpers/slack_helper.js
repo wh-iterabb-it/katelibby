@@ -2,22 +2,22 @@ const {
   WebClient, RTMClient, CLIENT_EVENTS, IncomingWebhook,
 } = require('@slack/client');
 
-import config from '../helpers/config_helper';
 import commands from '../commands';
 import logger from '../utils/logger';
 import Sanitize from '../utils/sanitize';
+import config from '../helpers/config_helper';
 
 class slackHelper {
-  constructor(callback) {
+  constructor() {
     this.appData = {
       source: {}
     };
-    logger.info('slack helper start');
+    logger.debug('slack helper start');
     this.commandPattern = this.setCommandPattern(config.commandChar);
   }
 
   setupEvents() {
-    logger.info('setupEvents');
+    logger.debug('setupEvents');
     // this.rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, this.onAuthenticate(connectData));
     // this.rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, this.onConnect());
     this.onMessage();
@@ -26,29 +26,113 @@ class slackHelper {
   /**
    * connect
    * builds all connection objects
+   * @param slack
+   *    token - the slack token to form the connection
    */
-  connect() {
-    logger.info('connect');
-    this.connectRTM();
-    this.connectWeb();
+  connect(slack) {
+    logger.debug('connect');
+    this.appData.realName = slack.realName;
+    this.connectRTM(slack.token);
+    this.connectWeb(slack.token);
   }
 
-  connectRTM() {
-    logger.info('connectRTM');
-    // Initialize the RTM client with the recommended settings. Using the defaults for these
-    // settings is deprecated.
-    this.rtm = new RTMClient(config.slack.token);
+  /**
+   * connectRTM
+   * Initialize the RTM client with the recommended settings. Using the defaults for these
+   * @param token - the slack token to form the connection
+   */
+  connectRTM(token) {
+    logger.debug('connectRTM');
+    this.rtm = new RTMClient(token);
     this.rtm.start();
+    // settings is deprecated.
     // {
     //   dataStore: false,
     //   useRtmConnect: true,
     // }
   }
 
-  connectWeb() {
-    logger.info('connectWeb');
+  /**
+   * connectWeb
+   * builds web object
+   * @param token - the slack token to form the connection
+   */
+  connectWeb(token) {
+    logger.debug('connectWeb');
     // Initialize a Web API client
-    this.web = new WebClient(config.slack.token);
+    this.web = new WebClient(token);
+  }
+
+  /**
+   * onMessage
+   * The message handler for incoming messages for the helper
+   */
+  onMessage() {
+    logger.debug('onMessage setup');
+    this.rtm.on('message', (message) => {
+      // For structure of `event`, see https://api.slack.com/events/message
+      // Skip messages that are from a bot or my own user ID
+      if ((message.subtype && message.subtype === 'bot_message') ||
+           // (!message.subtype && message.user === this.rtm.activeUserId) || // self messages
+           (message.user === undefined)) {
+        return;
+      }
+      this.detectCommand(message);
+
+      // Log the message
+      logger.debug(`(channel:${message.channel}) ${message.user} says: ${message.text}`);
+    });
+  }
+
+  /**
+   * detectCommand
+   * detects and calls a command from a message
+   * @param {Object} message - the message is the current message being read.
+   */
+  async detectCommand(message) {
+    const text = message.text;
+    const match = text.match(this.commandPattern);
+    if (match) {
+      const command = match[1];
+      const args = match[2];
+
+      if (command in commands) {
+        logger.debug(`Command found: channel: ${message.channel}, user: ${message.user}, command: ${command}`);
+        commands[command].main(args,this.appData).then((response) => {
+          this.sendMessage(message.channel, `${response}`);
+          logger.debug(response);
+        }).catch((error) => {
+          this.sendMessage(message.channel, `${error}`);
+          logger.error(error);
+        });
+      }
+    }
+  }
+
+  /**
+   * sendMessage
+   * used for sending a message to channel or person
+   * @param {string} channelID - Unique Identifier for the channel to message, also can be a user id
+   * @param {string} messageBody - the message to send
+   */
+  sendMessage(channelID, messageBody) {
+    // use the `sendMessage()` method to send a simple string to a channel using the channel ID
+    this.rtm.sendMessage(messageBody, channelID)
+      // Returns a promise that resolves when the message is sent
+      .then((msg) => logger.debug(`Sent: ${channelID} with ts:${msg.ts}`))
+      .catch(logger.error);
+  }
+
+  /**
+   * setCommandPattern
+   * @param {char} commandChar - a single character which denotes the start of a command
+   * @return {string} regexString - the regular expression string for the commands to be parsed by
+   */
+  setCommandPattern(commandChar) {
+    logger.debug('setCommandPattern');
+    const regexString = `^${commandChar}(\\w+) ?(.*)`;
+    this.commandPattern = new RegExp(regexString);
+    return regexString;
   }
 
   /**
@@ -71,29 +155,6 @@ class slackHelper {
   // onConnect() {
   //   logger.info('Ready');
   // }
-
-  /**
-   * onMessage
-   * The message handler for incoming messages for the helper
-   */
-  onMessage() {
-    logger.info('onMessage setup');
-    this.rtm.on('message', (message) => {
-      // For structure of `event`, see https://api.slack.com/events/message
-
-      // Skip messages that are from a bot or my own user ID
-      if ((message.subtype && message.subtype === 'bot_message') ||
-           // (!message.subtype && message.user === this.rtm.activeUserId) || // self messages
-           (message.user === undefined)) {
-        return;
-      }
-
-      this.detectCommand(message);
-
-      // Log the message
-      logger.info(`(channel:${message.channel}) ${message.user} says: ${message.text}`);
-    });
-  }
 
   // onReactionAdded() {
   //   // Log all reactions
@@ -124,57 +185,6 @@ class slackHelper {
   //     // rtm.sendMessage('Hello, world!', conversationId);
   //   });
   // }
-
-  /**
-   * detectCommand
-   * detects and calls a command from a message
-   * @param {Object} message - the message is the current message being read.
-   */
-  async detectCommand(message) {
-    const text = message.text;
-    const match = text.match(this.commandPattern);
-    if (match) {
-      const command = match[1];
-      const args = match[2];
-
-      if (command in commands) {
-        logger.info(`Command found: channel: ${message.channel}, user: ${message.user}, command: ${command}`);
-        commands[command].main(args).then((response) => {
-          this.sendMessage(message.channel, `${response}`);
-          logger.info(response);
-        }).catch((error) => {
-          this.sendMessage(message.channel, `${error}`);
-          logger.error(error);
-        });
-      }
-    }
-  }
-
-  /**
-   * sendMessage
-   * used for sending a message to channel or person
-   * @param {string} channelID - Unique Identifier for the channel to message, also can be a user id
-   * @param {string} messageBody - the message to send
-   */
-  sendMessage(channelID, messageBody) {
-    // use the `sendMessage()` method to send a simple string to a channel using the channel ID
-    this.rtm.sendMessage(messageBody, channelID)
-      // Returns a promise that resolves when the message is sent
-      .then((msg) => logger.info(`Sent: ${channelID} with ts:${msg.ts}`))
-      .catch(logger.error);
-  }
-
-  /**
-   * setCommandPattern
-   * @param {char} commandChar - a single character which denotes the start of a command
-   * @return {string} regexString - the regular expression string for the commands to be parsed by
-   */
-  setCommandPattern(commandChar) {
-    logger.info('setCommandPattern');
-    const regexString = `^${commandChar}(\\w+) ?(.*)`;
-    this.commandPattern = new RegExp(regexString);
-    return regexString;
-  }
 }
 
 export default slackHelper;
