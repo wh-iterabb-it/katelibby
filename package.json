@@ -96,7 +96,7 @@
   "dependencies": {
     "@slack/client": "4.3.1",
     "bluebird": "3.5.1",
-    "commander": "2.15.0",
+    "commander": "2.16.0",
     "fs": "0.0.1-security",
     "google": "2.1.0",
     "mta-gtfs": "1.1.0",
@@ -119,7 +119,7 @@
     "eslint-plugin-jsx-a11y": "6.0.3",
     "eslint-plugin-react": "7.10.0",
     "mocha": "5.2.0",
-    "nock": "9.3.3",
+    "nock": "9.4.0",
     "nyc": "12.0.2",
     "pm2": "2.10.4",
     "sinon": "6.0.1",
