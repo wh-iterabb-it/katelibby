@@ -6,18 +6,18 @@ class Command {
 		this.params = params;
 	}
 
-	async main(args) {
+	async main(args, appData) {
 	  if (typeof args !== 'undefined') {
 	    if(args==='help') {
 	      return await Promise.resolve(this.params.help_msg);
 	    }
-	  } 
+	  }
 
-  	return await this.primary(args);
+  	return await this.primary(args, appData);
 	}
 
 	primary() {
-		
+
 	}
 }
 
