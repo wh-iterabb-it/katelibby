@@ -79,6 +79,25 @@ class MTA {
         return 'Ronkonkoma';
       case 'WEST HEMPSTEAD':
         return 'West Hempstead';
+      // MetroNorth
+      case 'HUDSON':
+        return 'Hudson';
+      case 'HARLEM':
+        return 'Harlem';
+      case 'WASSAIC':
+        return 'Wassaic';
+      case 'NEW HAVEN':
+        return 'New Haven';
+      case 'NEW CANAAN':
+        return 'New Canaan';
+      case 'DANBURY':
+        return 'Danbury';
+      case 'WATERBURY':
+        return 'Waterbury';
+      case 'PASCACK VALLEY':
+        return 'Pascack Valley';
+      case 'PORT JERVIS':
+        return 'Port Jervis';
       default:
         return null;
     }
@@ -116,6 +135,40 @@ class MTA {
       case 'Ronkonkoma':
       case 'West Hempstead':
         return 'LIRR';
+      // MetroNorth
+      case 'Hudson':
+      case 'Harlem':
+      case 'Wassaic':
+      case 'New Haven':
+      case 'New Canaan':
+      case 'Danbury':
+      case 'Waterbury':
+      case 'Pascack Valley':
+      case 'Port Jervis':
+        return 'MetroNorth';
+      // BT - Bridges And Tunnels 
+      case 'Bronx-Whitestone':
+      case 'Cross Bay':
+      case 'Henry Hudson':
+      case 'Hugh L. Carey':
+      case 'Marine Parkway':
+      case 'Queens Midtown':
+      case 'Robert F. Kennedy':
+      case 'Throgs Neck':
+      case 'Verrazano-Narrows':
+        return 'BT';
+      // Bus
+      case 'B1 - B84':
+      case 'B100 - B103':
+      case 'BM1 - BM5':
+      case 'BX1 - BX55':
+      case 'BXM1 - BXM18':
+      case 'M1 - M116':
+      case 'Q1 - Q113':
+      case 'QM1 - QM44':
+      case 'S40 - S98':
+      case 'x1 - x68':
+        return 'bus';
     }
   }
 
