@@ -79,6 +79,44 @@ class MTA {
         return 'Ronkonkoma';
       case 'WEST HEMPSTEAD':
         return 'West Hempstead';
+      // MetroNorth
+      case 'HUDSON':
+        return 'Hudson';
+      case 'HARLEM':
+        return 'Harlem';
+      case 'WASSAIC':
+        return 'Wassaic';
+      case 'NEW HAVEN':
+        return 'New Haven';
+      case 'NEW CANAAN':
+        return 'New Canaan';
+      case 'DANBURY':
+        return 'Danbury';
+      case 'WATERBURY':
+        return 'Waterbury';
+      case 'PASCACK VALLEY':
+        return 'Pascack Valley';
+      case 'PORT JERVIS':
+        return 'Port Jervis';
+        // BT - Bridges And Tunnels
+      case 'BRONX-WHITESTONE':
+        return 'Bronx-Whitestone';
+      case 'CROSS BAY':
+        return 'Cross Bay';
+      case 'HENRY HUDSON':
+        return 'Henry Hudson';
+      case 'HUGH L. CAREY':
+        return 'Hugh L. Carey';
+      case 'MARINE PARKWAY':
+        return 'Marine Parkway';
+      case 'QUEENS MIDTOWN':
+        return 'Queens Midtown';
+      case 'ROBERT F. KENNEDY':
+        return 'Robert F. Kennedy';
+      case 'THROGS NECK':
+        return 'Throgs Neck';
+      case 'VERRAZANO-NARROWS':
+        return 'Verrazano-Narrows';
       default:
         return null;
     }
@@ -116,6 +154,40 @@ class MTA {
       case 'Ronkonkoma':
       case 'West Hempstead':
         return 'LIRR';
+      // MetroNorth
+      case 'Hudson':
+      case 'Harlem':
+      case 'Wassaic':
+      case 'New Haven':
+      case 'New Canaan':
+      case 'Danbury':
+      case 'Waterbury':
+      case 'Pascack Valley':
+      case 'Port Jervis':
+        return 'MetroNorth';
+      // BT - Bridges And Tunnels
+      case 'Bronx-Whitestone':
+      case 'Cross Bay':
+      case 'Henry Hudson':
+      case 'Hugh L. Carey':
+      case 'Marine Parkway':
+      case 'Queens Midtown':
+      case 'Robert F. Kennedy':
+      case 'Throgs Neck':
+      case 'Verrazano-Narrows':
+        return 'BT';
+      // Bus
+      case 'B1 - B84':
+      case 'B100 - B103':
+      case 'BM1 - BM5':
+      case 'BX1 - BX55':
+      case 'BXM1 - BXM18':
+      case 'M1 - M116':
+      case 'Q1 - Q113':
+      case 'QM1 - QM44':
+      case 'S40 - S98':
+      case 'x1 - x68':
+        return 'bus';
     }
   }
 
