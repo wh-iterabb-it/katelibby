@@ -98,6 +98,25 @@ class MTA {
         return 'Pascack Valley';
       case 'PORT JERVIS':
         return 'Port Jervis';
+        // BT - Bridges And Tunnels
+      case 'BRONX-WHITESTONE':
+        return 'Bronx-Whitestone';
+      case 'CROSS BAY':
+        return 'Cross Bay';
+      case 'HENRY HUDSON':
+        return 'Henry Hudson';
+      case 'HUGH L. CAREY':
+        return 'Hugh L. Carey';
+      case 'MARINE PARKWAY':
+        return 'Marine Parkway';
+      case 'QUEENS MIDTOWN':
+        return 'Queens Midtown';
+      case 'ROBERT F. KENNEDY':
+        return 'Robert F. Kennedy';
+      case 'THROGS NECK':
+        return 'Throgs Neck';
+      case 'VERRAZANO-NARROWS':
+        return 'Verrazano-Narrows';
       default:
         return null;
     }
@@ -146,7 +165,7 @@ class MTA {
       case 'Pascack Valley':
       case 'Port Jervis':
         return 'MetroNorth';
-      // BT - Bridges And Tunnels 
+      // BT - Bridges And Tunnels
       case 'Bronx-Whitestone':
       case 'Cross Bay':
       case 'Henry Hudson':
