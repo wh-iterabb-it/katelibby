@@ -16,7 +16,7 @@ describe('Command', () => {
         <line>
           <name>123</name>
           <status>GOOD SERVICE</status>
-          <text />
+          <text>just a reminder that service is always great with mta</text>
           <Date></Date>
           <Time></Time>
         </line>
