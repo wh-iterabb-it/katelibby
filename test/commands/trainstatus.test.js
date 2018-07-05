@@ -379,7 +379,7 @@ describe('Command', () => {
 
         try {
           commands.trainstatus.main('1').then((result) => {
-            expect(result).to.equal('123: SERVICE CHANGE Service Change Posted: 07/04/2018 11:05PM Southbound [1] trains are bypassing 157 St because of FDNY activity at 157 St.');
+            expect(result).to.equal('123: SERVICE CHANGE Service Change Posted: 07/04/2018 11:05PM Southbound [1] trains are bypassing 157 St because of FDNY activity at 157 St. ');
             done();
           });
         } catch (error) {
