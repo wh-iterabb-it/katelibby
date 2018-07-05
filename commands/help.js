@@ -12,9 +12,9 @@ const HelpCommand = function HelpCommand() {
   const basedCommand = !(this instanceof HelpCommand) ? new BaseCommand(factoryParams) : BaseCommand;
 
   return Object.assign(Object.create(basedCommand), {
-    primary: (args) => {
+    primary: (args, appData) => {
         const commands = require('./');
-        const msg = `Hello, I am ${config.irc.realName}, a bot. My commands are: `;
+        const msg = `Hello, I am ${appData.realName}, a bot. My commands are: `;
         const commandz = Object.keys(commands).map((command) => {
           return config.commandChar + command;
         }).join(' ');

@@ -79,7 +79,29 @@ You can use the enviorment variable `KL_WCI_API_KEY` to pass in this key, or put
   }
 ```
 
+#### Advanced Slack Usage
+
+The slack configuration in your `config.js` is an array, you can add multiple instances of the bot by simply adding more slack objects to the array. Each instance assumes a new connection, and allows you to add the bot to multiple slacks.
+
+```
+slack: [
+  // gin bot for slack 1
+  {
+    realName: 'gin',
+    token: process.env.SLACK_TOKEN || 'token 1', // REQUIRED
+  },
+  // tonic bot for slack 2
+  {
+    realName: 'tonic',
+    token: process.env.SLACK_TOKEN || 'token 2', // REQUIRED
+  }],
+```
+
 #### IRC Usage
+
+*TO-DO*: fill this in
+
+#### Discord Usage
 
 *TO-DO*: fill this in
 
@@ -98,7 +120,7 @@ You can use the enviorment variable `KL_WCI_API_KEY` to pass in this key, or put
 
 `!help`     - displays a help message
 
-`!mtastatus`- Gets MTA status of subway
+`!trainstatus`- Gets status of MTA subway and LIRR trains
 
 `!w `       - Returns weather from underground weather,  !w only allows 500 calls a day and 10 a minute
 

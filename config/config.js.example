@@ -6,13 +6,14 @@ const config = {
     nsfw: false // true allows nsfw content
   },
 
-  slack: {
-    token: process.env.SLACK_TOKEN || '',
-    client_id: process.env.SLACK_CLIENT_ID || '', // used for production
-    client_secret: process.env.SLACK_CLIENT_SECRET || '', // used for production
-  },
+  slack: [{
+    realName: 'Kate Libby',
+    token: process.env.SLACK_TOKEN || '', // REQUIRED
+    client_id: process.env.SLACK_CLIENT_ID || '', // OPTIONAL used for production
+    client_secret: process.env.SLACK_CLIENT_SECRET || '', // OPTIONAL used for production
+  }],
 
-  irc: {
+  irc: [{
     server: '',
     port: 6667,
     userName: 'kate',
@@ -35,7 +36,7 @@ const config = {
     channelPrefixes: '&#',
     messageSplit: 512,
     encoding: ''
-  },
+  }],
 
   // Giphy API key
   giphy: {
