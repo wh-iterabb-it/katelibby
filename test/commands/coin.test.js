@@ -51,8 +51,8 @@ describe('Command', () => {
       config.worldcoinindex.key = '';
       
       try {
-        commands.coin.main('eth').then(()=>{}).catch((error) => {
-          expect(error).to.equal('Please add an API key to the configuration file.');
+        commands.coin.main('eth').then((result) => {
+          expect(result).to.equal('Please add an API key to the configuration file.');
           done();
         });
       } catch (error) {
