@@ -46,6 +46,19 @@ describe('Command', () => {
         done();
       });
     });
+    
+    it('should return expected promise rejection and result when no key is found', (done) => {
+      config.worldcoinindex.key = '';
+      
+      try {
+        commands.coin.main('eth').then(()=>{}).catch((error) => {
+          expect(error).to.equal('Please add an API key to the configuration file.');
+          done();
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    });
 
     it('should return expected eth result', (done) => {
       config.worldcoinindex.key = 'testKey'; // 'testKey' is our key :D
