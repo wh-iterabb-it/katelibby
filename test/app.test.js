@@ -18,7 +18,10 @@ describe('App Tests', () => {
       // info log of 'No discord configuration found'
     });
     it('should return expected log for valid config', () => {
-      config.discord = { token="stuff" };
+      config.discord = [{
+        realName: 'Kate Libby',
+        token: 'tacobell', // REQUIRED
+      }];
       kate.connectDiscord();
     });
   });
@@ -36,7 +39,10 @@ describe('App Tests', () => {
       // info log of 'No irc  configuration found'
     });
     it('should return expected log for a valid config', () => {
-      config.irc = { token="stuff" };
+      config.irc = [{
+        realName: 'Kate Libby',
+        token: 'tacobell', // REQUIRED
+      }];
       kate.connectIRC();
     });
   });
