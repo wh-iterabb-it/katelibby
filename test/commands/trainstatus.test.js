@@ -15,8 +15,8 @@ describe('Command', () => {
       const expectedXML = `<service><responsecode>0</responsecode><timestamp>7/3/2018 2:26:00 PM</timestamp><subway>
         <line>
           <name>123</name>
-          <status>GOOD SERVICE</status>
-          <text>just a reminder that service is always great with mta</text>
+          <status>SERVICE CHANGE</status>
+          <text>Service Change Posted: 07/04/2018 11:05PM Southbound [1] trains are bypassing 157 St because of FDNY activity at 157 St.</text>
           <Date></Date>
           <Time></Time>
         </line>
@@ -370,14 +370,14 @@ describe('Command', () => {
         }
       });
 
-      it('should return expected error result when passed in an invalid line', (done) => {
+      it('should pass through mocked response with service change message', (done) => {
         nock('http://web.mta.info')
           .get(`/status/serviceStatus.txt`)
           .reply(200, expectedXML);
 
         try {
           commands.trainstatus.main('1').then((result) => {
-            expect(result).to.equal('123: GOOD SERVICE');
+            expect(result).to.equal('123: SERVICE CHANGE Service Change Posted: 07/04/2018 11:05PM Southbound [1] trains are bypassing 157 St because of FDNY activity at 157 St.');
             done();
           });
         } catch (error) {
