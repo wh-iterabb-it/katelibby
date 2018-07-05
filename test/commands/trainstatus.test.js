@@ -16,7 +16,9 @@ describe('Command', () => {
         <line>
           <name>123</name>
           <status>SERVICE CHANGE</status>
-          <text>Service Change Posted: 07/04/2018 11:05PM Southbound [1] trains are bypassing 157 St because of FDNY activity at 157 St.</text>
+          <text>
+            Service Change Posted: 07/04/2018 11:05PM Southbound [1] trains are bypassing 157 St because of FDNY activity at 157 St.
+          </text>
           <Date></Date>
           <Time></Time>
         </line>
