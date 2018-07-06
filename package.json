@@ -112,7 +112,7 @@
     "babel-eslint": "8.2.4",
     "babel-preset-env": "1.7.0",
     "chai": "4.1.2",
-    "codecov": "3.0.2",
+    "codecov": "3.0.3",
     "eslint": "5.0.1",
     "eslint-config-airbnb": "17.0.0",
     "eslint-plugin-import": "2.13.0",
