@@ -106,8 +106,8 @@
     "winston": "3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-beta.51",
-    "@babel/register": "7.0.0-beta.51",
+    "@babel/core": "7.0.0-beta.52",
+    "@babel/register": "7.0.0-beta.52",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.2.4",
     "babel-preset-env": "1.7.0",
