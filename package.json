@@ -38,6 +38,9 @@
           }
         }
       ]
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-object-rest-spread"
     ]
   },
   "eslintConfig": {
@@ -99,6 +102,7 @@
     "commander": "2.16.0",
     "fs": "0.0.1-security",
     "google": "2.1.0",
+    "irc": "git+https://github.com/wh-iterabb-it/node-irc.git",
     "mta-gtfs": "1.1.0",
     "path": "0.12.7",
     "striptags": "3.1.1",
@@ -107,6 +111,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.0.0-beta.52",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0-beta.53",
     "@babel/register": "7.0.0-beta.52",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.2.4",

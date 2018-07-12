@@ -38,12 +38,5 @@ describe('App Tests', () => {
       kate.connectIRC();
       // info log of 'No irc  configuration found'
     });
-    it('should return expected log for a valid config', () => {
-      config.irc = [{
-        realName: 'Kate Libby',
-        token: 'tacobell', // REQUIRED
-      }];
-      kate.connectIRC();
-    });
   });
 });

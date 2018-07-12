@@ -35,7 +35,7 @@ const config = {
     stripColors: false,
     channelPrefixes: '&#',
     messageSplit: 512,
-    encoding: ''
+    encoding: '',
   }],
 
   // Giphy API key
