@@ -13,7 +13,10 @@ fs
   });
 
 // aliases
+// TO-DO refactor this to use factory params
 commands.g = require('./google').default;
 commands.w = require('./weather').default;
+commands.mtastatus = require('./trainstatus').default;
+commands.mta = require('./trainstatus').default;
 
 module.exports = commands;
