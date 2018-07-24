@@ -124,7 +124,7 @@
     "eslint-plugin-jsx-a11y": "6.1.1",
     "eslint-plugin-react": "7.10.0",
     "mocha": "5.2.0",
-    "nock": "9.4.2",
+    "nock": "9.4.3",
     "nyc": "12.0.2",
     "pm2": "3.0.0",
     "sinon": "6.0.1",
