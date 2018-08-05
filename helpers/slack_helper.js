@@ -88,6 +88,8 @@ class slackHelper {
    * detectCommand
    * detects and calls a command from a message
    * @param {Object} message - the message is the current message being read.
+   *          message.channel
+   *          message.user
    */
   async detectCommand(message) {
     const text = message.text;
@@ -118,9 +120,10 @@ class slackHelper {
   sendMessage(channelID, messageBody) {
     // use the `sendMessage()` method to send a simple string to a channel using the channel ID
     this.rtm.sendMessage(messageBody, channelID)
-      // Returns a promise that resolves when the message is sent
       .then((msg) => logger.debug(`Sent: ${channelID} with ts:${msg.ts}`))
-      .catch(logger.error);
+      .catch((err) => {
+        logger.error(`sendMessage has experienced an Error: ${err}`);
+      });
   }
 
   /**
