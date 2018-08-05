@@ -20,6 +20,7 @@ describe('Slack Helper Tests', () => {
   beforeEach(() => {
     sandbox.stub(logger, 'info');
     sandbox.stub(logger, 'warn');
+    sandbox.stub(logger, 'debug');
     sandbox.stub(logger, 'error');
     slack = new Slack();
   });
@@ -102,6 +103,44 @@ describe('Slack Helper Tests', () => {
       it('should accept the promise from the mock stub with no error with no command', () => {
         const message = {channel:'foo', user: 'bar', text: 'bell'};
         slack.detectCommand(message);
+        logger.error.should.not.have.been.calledWith();
+      });
+    });
+  });
+
+  describe('setupEvents', () => {
+    context('Success Cases', () => {
+      beforeEach(() => {
+        slack = new Slack();
+        // mocking stuff
+        slack.onMessage = ()=> {};
+        sandbox.stub(slack, 'onMessage');
+      });
+
+      it('should accept the promise from the mock stub with no error', () => {
+        slack.setupEvents();
+        logger.debug.should.have.been.calledWith();
+        slack.onMessage.should.have.been.calledWith();
+        logger.error.should.not.have.been.calledWith();
+      });
+    });
+  });
+
+  describe('connect', () => {
+    context('Success Cases', () => {
+      beforeEach(() => {
+        slack = new Slack();
+        // mocking stuff
+        slack.connectRTM = ()=> {};
+        slack.connectWeb = ()=> {};
+        sandbox.stub(slack, 'connectRTM');
+        sandbox.stub(slack, 'connectWeb');
+      });
+
+      it('should accept the promise from the mock stub with no error', () => {
+        slack.connect({token: 'test', realName: 'kate'});
+        slack.connectRTM.should.have.been.calledWith();
+        slack.connectWeb.should.have.been.calledWith();
         logger.error.should.not.have.been.calledWith();
       });
     });
