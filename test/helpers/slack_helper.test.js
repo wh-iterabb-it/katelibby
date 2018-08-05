@@ -80,14 +80,27 @@ describe('Slack Helper Tests', () => {
     context('Success Cases', () => {
       beforeEach(() => {
         slack = new Slack();
+        slack.setCommandPattern('!');
         // mocking stuff
         slack.rtm = () => {};
         slack.rtm.sendMessage = () => {};
         sandbox.stub(slack.rtm, 'sendMessage').resolves({ts: 'stuff'});
       });
-      it('should accept the promise from the mock stub with no error', () => {
-        const message = {channel:'foo', user: 'bar', text: '!fortune'};
-        slack.setCommandPattern('!');
+
+      it('should accept the promise from the mock stub with no error with real command', () => {
+        const message = {channel:'foo', user: 'bar', text: '!help'};
+        slack.detectCommand(message);
+        logger.error.should.not.have.been.calledWith();
+      });
+
+      it('should accept the promise from the mock stub with no error with fake command', () => {
+        const message = {channel:'foo', user: 'bar', text: '!taco'};
+        slack.detectCommand(message);
+        logger.error.should.not.have.been.calledWith();
+      });
+
+      it('should accept the promise from the mock stub with no error with no command', () => {
+        const message = {channel:'foo', user: 'bar', text: 'bell'};
         slack.detectCommand(message);
         logger.error.should.not.have.been.calledWith();
       });
