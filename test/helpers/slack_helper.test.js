@@ -20,6 +20,7 @@ describe('Slack Helper Tests', () => {
   beforeEach(() => {
     sandbox.stub(logger, 'info');
     sandbox.stub(logger, 'warn');
+    sandbox.stub(logger, 'error');
     slack = new Slack();
   });
 
@@ -28,12 +29,33 @@ describe('Slack Helper Tests', () => {
   });
 
   describe('setCommandPattern', () => {
-    it('should just not crash when spun up on this test', () => {
-      const testCommandChar = '@';
-      const expected = `^${testCommandChar}(\\w+) ?(.*)`;
-      const slack = new Slack();
-      let result = slack.setCommandPattern(testCommandChar);
-      expect(result).to.equal(expected);
+    context('Success Cases', () => {
+      it('should return a successful creation of the commandpattern with variable given', () => {
+        const testCommandChar = '@';
+        const expected = `^${testCommandChar}(\\w+) ?(.*)`;
+        // const slack = new Slack();
+        let result = slack.setCommandPattern(testCommandChar);
+        expect(result).to.equal(expected);
+      });
+    });
+  });
+
+  describe('sendMessage', () => {
+    context('Success Cases', () => {
+      beforeEach(() => {
+        slack = new Slack();
+        // mocking stuff
+        slack.rtm = () => {};
+        slack.rtm.sendMessage = () => {};
+        sandbox.stub(slack.rtm, 'sendMessage').resolves();
+      });
+
+      it('should accept the promise from the mock stub with no error', () => {
+        const channelID = `1234`;
+        const messageBody = `ok`;
+        slack.sendMessage(channelID. messageBody);
+        logger.error.should.not.have.been.calledWith();
+      });
     });
   });
 });
