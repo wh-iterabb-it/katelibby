@@ -55,6 +55,26 @@ describe('Irc Helper Tests', () => {
     });
   });
 
+  describe('setupEvents', () => {
+    context('Success Cases', () => {
+      beforeEach(() => {
+        // mocking stuff
+        irc.onMessage = ()=> {};
+        irc.onRegistered = ()=> {};
+        sandbox.stub(irc, 'onMessage');
+        sandbox.stub(irc, 'onRegistered');
+      });
+
+      it('should accept the promise from the mock stub with no error', () => {
+        irc.setupEvents();
+        logger.debug.should.have.been.calledWith();
+        irc.onMessage.should.have.been.calledWith();
+        irc.onRegistered.should.have.been.calledWith();
+        logger.error.should.not.have.been.calledWith();
+      });
+    });
+  });
+
  describe('detectCommand', () => {
     context('Success Cases', () => {
       beforeEach(() => {
