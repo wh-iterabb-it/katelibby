@@ -116,11 +116,16 @@ class slackHelper {
    * @param {string} messageBody - the message to send
    */
   sendMessage(channelID, messageBody) {
-    // use the `sendMessage()` method to send a simple string to a channel using the channel ID
-    this.rtm.sendMessage(messageBody, channelID)
-      // Returns a promise that resolves when the message is sent
-      .then((msg) => logger.debug(`Sent: ${channelID} with ts:${msg.ts}`))
-      .catch(logger.error);
+   // try {
+      // use the `sendMessage()` method to send a simple string to a channel using the channel ID
+      this.rtm.sendMessage(messageBody, channelID)
+        .then((msg) => logger.debug(`Sent: ${channelID} with ts:${msg.ts}`))
+        .catch((err) => {
+          logger.error(`sendMessage has experienced an Error: ${err}`);
+        });
+    // } catch(err) {
+    //   logger.error(`sendMessage has experienced an Error: ${err}`);
+    // }
   }
 
   /**

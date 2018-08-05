@@ -47,13 +47,48 @@ describe('Slack Helper Tests', () => {
         // mocking stuff
         slack.rtm = () => {};
         slack.rtm.sendMessage = () => {};
-        sandbox.stub(slack.rtm, 'sendMessage').resolves();
+        sandbox.stub(slack.rtm, 'sendMessage').resolves({ts: 'stuff'});
       });
 
       it('should accept the promise from the mock stub with no error', () => {
         const channelID = `1234`;
         const messageBody = `ok`;
         slack.sendMessage(channelID. messageBody);
+        logger.error.should.not.have.been.calledWith();
+      });
+    });
+
+    // context('Failure Cases', () => {
+    //   beforeEach(() => {
+    //     slack = new Slack();
+    //     // mocking stuff
+    //     slack.rtm = () => {};
+    //     slack.rtm.sendMessage = () => {};
+    //     sandbox.stub(slack.rtm, 'sendMessage').rejects(new Error('foo'));
+    //   });
+
+    //   it('should throw an error durring a promise rejection', () => {
+    //     const channelID = `1234`;
+    //     const messageBody = `ok`;
+    //     slack.sendMessage(channelID. messageBody);
+    //     logger.error.should.have.been.calledWith();
+    //   });
+    // });
+  });
+
+  describe('detectCommand', () => {
+    context('Success Cases', () => {
+      beforeEach(() => {
+        slack = new Slack();
+        // mocking stuff
+        slack.rtm = () => {};
+        slack.rtm.sendMessage = () => {};
+        sandbox.stub(slack.rtm, 'sendMessage').resolves({ts: 'stuff'});
+      });
+      it('should accept the promise from the mock stub with no error', () => {
+        const message = {channel:'foo', user: 'bar', text: '!fortune'};
+        slack.setCommandPattern('!');
+        slack.detectCommand(message);
         logger.error.should.not.have.been.calledWith();
       });
     });
