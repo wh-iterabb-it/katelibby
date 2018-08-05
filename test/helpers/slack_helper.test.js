@@ -27,9 +27,13 @@ describe('Slack Helper Tests', () => {
     sandbox.restore();
   });
 
-  describe('constructor ', () => {
+  describe('setCommandPattern', () => {
     it('should just not crash when spun up on this test', () => {
-
+      const testCommandChar = '@';
+      const expected = `^${testCommandChar}(\\w+) ?(.*)`;
+      const slack = new Slack();
+      let result = slack.setCommandPattern(testCommandChar);
+      expect(result).to.equal(expected);
     });
   });
 });
