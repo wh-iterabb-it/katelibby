@@ -34,7 +34,6 @@ describe('Slack Helper Tests', () => {
       it('should return a successful creation of the commandpattern with variable given', () => {
         const testCommandChar = '@';
         const expected = `^${testCommandChar}(\\w+) ?(.*)`;
-        // const slack = new Slack();
         let result = slack.setCommandPattern(testCommandChar);
         expect(result).to.equal(expected);
       });
