@@ -67,19 +67,22 @@ describe('Irc Helper Tests', () => {
 
       it('should accept the promise from the mock stub with no error with real command', () => {
         const message = {channel:'foo', user: 'bar', text: '!help'};
-        irc.detectCommand(message);
+        const text = '!help';
+        irc.detectCommand('from', 'target', text, message);
         logger.error.should.not.have.been.calledWith();
       });
 
       it('should accept the promise from the mock stub with no error with fake command', () => {
         const message = {channel:'foo', user: 'bar', text: '!taco'};
-        irc.detectCommand(message);
+        const text = '!taco';
+        irc.detectCommand('from', 'target', text, message);
         logger.error.should.not.have.been.calledWith();
       });
 
       it('should accept the promise from the mock stub with no error with no command', () => {
         const message = {channel:'foo', user: 'bar', text: 'bell'};
-        irc.detectCommand(message);
+        const text = 'bell';
+        irc.detectCommand('from', 'target', text, message);
         logger.error.should.not.have.been.calledWith();
       });
     });
