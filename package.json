@@ -99,7 +99,7 @@
   "dependencies": {
     "@slack/client": "4.3.1",
     "bluebird": "3.5.1",
-    "commander": "2.17.0",
+    "commander": "2.17.1",
     "fs": "0.0.1-security",
     "google": "2.1.0",
     "irc": "git+https://github.com/wh-iterabb-it/node-irc.git",
