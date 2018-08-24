@@ -112,7 +112,7 @@
   "devDependencies": {
     "@babel/core": "7.0.0-rc.1",
     "@babel/plugin-proposal-object-rest-spread": "7.0.0-rc.3",
-    "@babel/register": "7.0.0-rc.1",
+    "@babel/register": "7.0.0-rc.3",
     "babel-cli": "6.26.0",
     "babel-eslint": "8.2.6",
     "babel-preset-env": "1.7.0",
