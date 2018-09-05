@@ -110,7 +110,7 @@
     "winston": "3.0.0"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-rc.1",
+    "@babel/core": "7.0.0-rc.3",
     "@babel/plugin-proposal-object-rest-spread": "7.0.0-rc.3",
     "@babel/register": "7.0.0-rc.3",
     "babel-cli": "6.26.0",
