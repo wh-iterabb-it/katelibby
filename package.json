@@ -110,9 +110,9 @@
     "winston": "3.0.1"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0-rc.3",
-    "@babel/plugin-proposal-object-rest-spread": "7.0.0-rc.3",
-    "@babel/register": "7.0.0-rc.3",
+    "@babel/core": "7.0.0",
+    "@babel/plugin-proposal-object-rest-spread": "7.0.0",
+    "@babel/register": "7.0.0",
     "babel-cli": "6.26.0",
     "babel-eslint": "9.0.0",
     "babel-preset-env": "1.7.0",
