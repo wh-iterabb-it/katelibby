@@ -19,7 +19,7 @@
   ],
   "scripts": {
     "build": "npm run clean && npm run build-dist",
-    "build-dist": "node node_modules/.bin/babel -d dist . -s --ignore test,node_modules",
+    "build-dist": "node node_modules/.bin/babel . --out-dir dist -s --ignore test,node_modules",
     "clean": "rm -rf dist && mkdir -p dist/bin dist/node_modules && cp bin/start dist/bin/start && cp -r node_modules/* dist/node_modules && cp package.json dist/package.json",
     "cover": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov",
     "start": "node ./dist/bin/start",
@@ -102,7 +102,6 @@
     "commander": "2.18.0",
     "fs": "0.0.1-security",
     "google": "2.1.0",
-    "irc": "git+https://github.com/wh-iterabb-it/node-irc.git",
     "mta-gtfs": "1.1.0",
     "path": "0.12.7",
     "striptags": "3.1.1",
@@ -110,10 +109,11 @@
     "winston": "3.0.1"
   },
   "devDependencies": {
+    "@babel/cli": "7.0.0",
     "@babel/core": "7.0.0",
     "@babel/plugin-proposal-object-rest-spread": "7.0.0",
+    "@babel/preset-env": "^7.1.0",
     "@babel/register": "7.0.0",
-    "babel-cli": "6.26.0",
     "babel-eslint": "9.0.0",
     "babel-preset-env": "1.7.0",
     "chai": "4.1.2",
