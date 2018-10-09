@@ -97,7 +97,7 @@
     }
   },
   "dependencies": {
-    "@slack/client": "4.5.0",
+    "@slack/client": "4.7.0",
     "bluebird": "3.5.2",
     "commander": "2.18.0",
     "fs": "0.0.1-security",
@@ -110,13 +110,13 @@
     "winston": "3.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.1.1",
-    "@babel/core": "7.1.1",
+    "@babel/cli": "7.1.2",
+    "@babel/core": "7.1.2",
     "@babel/plugin-proposal-object-rest-spread": "7.0.0",
     "@babel/preset-env": "7.1.0",
     "@babel/register": "7.0.0",
     "babel-preset-env": "1.7.0",
-    "babel-eslint": "10.0.0",
+    "babel-eslint": "10.0.1",
     "chai": "4.1.2",
     "codecov": "3.1.0",
     "eslint": "5.0.1",
