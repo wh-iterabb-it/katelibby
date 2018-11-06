@@ -98,7 +98,7 @@
   },
   "dependencies": {
     "@slack/client": "4.7.0",
-    "bluebird": "3.5.2",
+    "bluebird": "3.5.3",
     "commander": "2.19.0",
     "fs": "0.0.1-security",
     "google": "2.1.0",
