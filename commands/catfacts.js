@@ -1,5 +1,5 @@
-import config from '../helpers/config_helper';
-import BaseCommand from './utils/command_factory';
+const config = require('../helpers/config_helper').default;
+const BaseCommand = require('./utils/command_factory').default;
 
 const factoryParams = {
   enabled: true,
@@ -146,4 +146,3 @@ const CatfactsCommand = function CatfactsCommand() {
 const catfactsCommand = CatfactsCommand();
 
 export default catfactsCommand;
-

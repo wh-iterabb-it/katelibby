@@ -1,7 +1,7 @@
-import path from 'path';
+const path = require('path');
 
-import logger from '../utils/logger';
-import program from './command_helper';
+const logger = require('../utils/logger');
+const program = require('./command_helper');
 
 let config = {};
 

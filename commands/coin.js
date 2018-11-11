@@ -1,10 +1,10 @@
-import request from 'superagent';
+const request = require('superagent');
 
-import config from '../helpers/config_helper';
-import BaseCommand from './utils/command_factory';
-import format from '../utils/format';
-import Sanitize from '../utils/sanitize';
-import logger from '../utils/logger';
+const config = require('../helpers/config_helper').default;
+const BaseCommand = require('./utils/command_factory').default;
+const format = require('../utils/format').default;
+const Sanitize = require( '../utils/sanitize').default;
+const logger = require('../utils/logger').default;
 
 const factoryParams = {
   enabled: true,

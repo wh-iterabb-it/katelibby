@@ -1,10 +1,10 @@
-import Mta from 'mta-gtfs';
-import striptags from 'striptags';
+const Mta = require('mta-gtfs');
+const striptags = require('striptags');
 
-import config from '../helpers/config_helper';
-import logger from '../utils/logger';
-import Sanitize from '../utils/sanitize';
-import BaseCommand from './utils/command_factory';
+const Sanitize = require('../utils/sanitize').default;
+const logger = require('../utils/logger').default;
+const config = require('../helpers/config_helper').default;
+const BaseCommand = require('./utils/command_factory').default;
 
 const factoryParams = {
   enabled: true,

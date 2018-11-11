@@ -1,8 +1,8 @@
-import request from 'superagent';
+const request = require('superagent');
 
-import logger from '../utils/logger';
-import config from '../helpers/config_helper';
-import BaseCommand from './utils/command_factory';
+const logger = require('../utils/logger').default;
+const config = require('../helpers/config_helper').default;
+const BaseCommand = require('./utils/command_factory').default;
 
 const factoryParams = {
   enabled: true,
@@ -57,7 +57,7 @@ const WootCommand = function WootCommand() {
               } else {
                 const url = json.sales[0].SaleUrl.split('?');
                 const result = `${json.sales[0].Title} for ${json.sales[0].Price}\n\r${url[0]}`;
-                
+
                 resolve(result);
               }
             }

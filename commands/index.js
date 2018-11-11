@@ -1,5 +1,5 @@
-import path from 'path';
-import fs from '../utils/fs';
+const path = require('path');
+const fs = require('../utils/fs');
 
 const commands = {};
 const basename = path.basename(module.filename);

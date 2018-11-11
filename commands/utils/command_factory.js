@@ -1,5 +1,5 @@
-import logger from '../../utils/logger';
-import config from '../../helpers/config_helper';
+const logger = require('../../utils/logger').default;
+const config = require('../../helpers/config_helper').default;
 
 class Command {
 	constructor(params) {
