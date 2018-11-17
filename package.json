@@ -106,7 +106,7 @@
     "mta-gtfs": "1.1.0",
     "path": "0.12.7",
     "striptags": "3.1.1",
-    "superagent": "3.8.3",
+    "superagent": "4.0.0",
     "winston": "3.0.1"
   },
   "devDependencies": {
