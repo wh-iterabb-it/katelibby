@@ -2,10 +2,10 @@ const {
   WebClient, RTMClient, CLIENT_EVENTS, IncomingWebhook,
 } = require('@slack/client');
 
-import commands from '../commands';
-import logger from '../utils/logger';
-import Sanitize from '../utils/sanitize';
-import config from '../helpers/config_helper';
+const commands = require('../commands').default;
+const logger = require('../utils/logger').default;
+const {Sanitize} = require('../utils/sanitize').default;
+const config = require('../helpers/config_helper').default;
 
 class slackHelper {
   constructor() {
@@ -190,4 +190,4 @@ class slackHelper {
   // }
 }
 
-export default slackHelper;
+module.exports.default = slackHelper;

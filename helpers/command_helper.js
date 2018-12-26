@@ -8,4 +8,4 @@ program
   .option('--debug', 'debug flag to display debug in stdout')
   .parse(process.argv);
 
-export default program;
+module.exports.default = program;
