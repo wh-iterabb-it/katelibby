@@ -26,4 +26,4 @@ const HelpCommand = function HelpCommand() {
 
 const helpCommand = HelpCommand();
 
-export default helpCommand;
+module.exports.default = helpCommand;

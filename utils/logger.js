@@ -1,18 +1,15 @@
-import { createLogger, format, transports } from 'winston';
-import program from '../helpers/command_helper';
+const { createLogger, format, transports } = require('winston');
 
 const {
   colorize, combine, timestamp, printf,
 } = format;
-
-const level = program.debug ? 'debug' : 'info';
 
 const currentFormat = printf((options) => {
   return `${options.timestamp} ${options.level}: ${options.message}`;
 });
 
 const logger = createLogger({
-  'level': level,
+  'level': 'info',
   format: combine(
     timestamp(),
     colorize(),
@@ -23,4 +20,4 @@ const logger = createLogger({
   ],
 });
 
-export default logger;
+module.exports.default = logger;

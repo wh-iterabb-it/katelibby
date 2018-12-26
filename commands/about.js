@@ -25,4 +25,4 @@ const AboutCommand = function AboutCommand() {
 
 const aboutCommand = AboutCommand();
 
-export default aboutCommand;
+module.exports.default = aboutCommand;

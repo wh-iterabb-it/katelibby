@@ -145,4 +145,4 @@ const CatfactsCommand = function CatfactsCommand() {
 
 const catfactsCommand = CatfactsCommand();
 
-export default catfactsCommand;
+module.exports.default = catfactsCommand;

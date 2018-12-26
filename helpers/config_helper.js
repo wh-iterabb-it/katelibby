@@ -1,15 +1,9 @@
 const path = require('path');
 
-const logger = require('../utils/logger');
-const program = require('./command_helper');
-
+const logger = require('../utils/logger').default;
 let config = {};
 
 let configFile = path.join(__dirname, '../', 'config/config.js');
-
-if (program.config) {
-  configFile = program.config;
-}
 
 function loadConfig(configPath) {
   try {
@@ -24,4 +18,4 @@ function loadConfig(configPath) {
 
 loadConfig(configFile);
 
-export default config;
+module.exports.default = config;

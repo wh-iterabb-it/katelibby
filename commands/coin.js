@@ -53,4 +53,4 @@ const CoinCommand = function CoinCommand() {
 
 const coinCommand = CoinCommand();
 
-export default coinCommand;
+module.exports.default = coinCommand;

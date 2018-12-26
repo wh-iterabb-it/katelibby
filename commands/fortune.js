@@ -86,4 +86,4 @@ const FortuneCommand = function FortuneCommand() {
 
 const fortuneCommand = FortuneCommand();
 
-export default fortuneCommand;
+module.exports.default = fortuneCommand;

@@ -21,4 +21,4 @@ class Command {
 	}
 }
 
-export default Command;
+module.exports.default = Command;

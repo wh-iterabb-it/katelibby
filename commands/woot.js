@@ -70,4 +70,4 @@ const WootCommand = function WootCommand() {
 
 const wootCommand = WootCommand();
 
-export default wootCommand;
+module.exports.default = wootCommand;

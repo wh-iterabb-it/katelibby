@@ -1,5 +1,5 @@
 const path = require('path');
-const fs = require('../utils/fs');
+const fs = require('fs');
 
 const commands = {};
 const basename = path.basename(module.filename);

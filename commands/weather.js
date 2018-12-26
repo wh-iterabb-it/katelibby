@@ -49,4 +49,4 @@ const WeatherCommand = function WeatherCommand() {
 
 const weatherCommand = WeatherCommand();
 
-export default weatherCommand;
+module.exports.default = weatherCommand;

@@ -50,4 +50,4 @@ const GoogleCommand = function GoogleCommand() {
 
 const googleCommand = GoogleCommand();
 
-export default googleCommand;
+module.exports.default = googleCommand;

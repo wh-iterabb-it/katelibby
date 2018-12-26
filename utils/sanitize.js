@@ -89,4 +89,4 @@ function extractRootDomain(url) {
   return domain;
 }
 
-export default {sanitize, detectHostName, extractRootDomain}
+module.exports.default = { sanitize, detectHostName, extractRootDomain };

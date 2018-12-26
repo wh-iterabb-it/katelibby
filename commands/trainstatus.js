@@ -277,4 +277,4 @@ const MtastatusCommand = function MtastatusCommand() {
 
 const mtastatusCommand = MtastatusCommand();
 
-export default mtastatusCommand;
+module.exports.default = mtastatusCommand;
