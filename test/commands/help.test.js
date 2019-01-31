@@ -1,7 +1,7 @@
 import chai from 'chai';
 import sinon from 'sinon';
 
-const commands = require('../../commands').default;
+const commands = require('../../commands');
 const config = require('../../helpers/config_helper').default;
 
 const { expect } = chai;

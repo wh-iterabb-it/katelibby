@@ -1,10 +1,10 @@
 const Mta = require('mta-gtfs');
 const striptags = require('striptags');
 
-const Sanitize = require('../utils/sanitize').default;
+const {sanitize} = require('../utils/sanitize');
 const logger = require('../utils/logger').default;
 const config = require('../helpers/config_helper').default;
-const BaseCommand = require('./utils/command_factory').default;
+const Command = require('./utils/command_factory');
 
 const factoryParams = {
   enabled: true,
@@ -217,7 +217,7 @@ class MTA {
 }
 
 const MtastatusCommand = function MtastatusCommand() {
-  const basedCommand = !(this instanceof MtastatusCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+  const basedCommand = !(this instanceof MtastatusCommand) ? new Command(factoryParams) : Command;
 
   return Object.assign(Object.create(basedCommand), {
     primary: async (args) => {
@@ -235,9 +235,9 @@ const MtastatusCommand = function MtastatusCommand() {
       await mta.status(MTA.getServiceKey(lineName)).then((train) => {
         train.map((currentLine) => {
           if (currentLine.name === lineName) {
-            let outStatus = Sanitize.sanitize(currentLine.name) + ': ' +
-              Sanitize.sanitize(striptags(currentLine.status));
-            let outText = Sanitize.sanitize(striptags(currentLine.text));
+            let outStatus = sanitize(currentLine.name) + ': ' +
+              sanitize(striptags(currentLine.status));
+            let outText = sanitize(striptags(currentLine.text));
             if (outText.length > 0) {
               outStatus = outStatus + outText.replace(/\s+/g, ' ');
             }

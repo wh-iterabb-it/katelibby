@@ -90,4 +90,4 @@ function formatPast(intDate) {
   return Math.floor(duration.asHours()) + moment.utc(difference).format(':mm:ss');
 }
 
-module.exports.default = {toHHMMSS, toDDHHMMSS, formatMoney, formatPast};
+module.exports = {toHHMMSS, toDDHHMMSS, formatMoney, formatPast};

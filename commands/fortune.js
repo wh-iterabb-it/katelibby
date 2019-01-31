@@ -1,5 +1,5 @@
 const config = require('../helpers/config_helper').default;
-const BaseCommand = require('./utils/command_factory').default;
+const Command = require('./utils/command_factory');
 
 const factoryParams = {
   enabled: true,
@@ -9,7 +9,7 @@ const factoryParams = {
 };
 
 const FortuneCommand = function FortuneCommand() {
-  const basedCommand = !(this instanceof FortuneCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+  const basedCommand = !(this instanceof FortuneCommand) ? new Command(factoryParams) : Command;
 
   return Object.assign(Object.create(basedCommand), {
     primary: (args) => {

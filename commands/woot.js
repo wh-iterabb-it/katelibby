@@ -2,7 +2,7 @@ const request = require('superagent');
 
 const logger = require('../utils/logger').default;
 const config = require('../helpers/config_helper').default;
-const BaseCommand = require('./utils/command_factory').default;
+const Command = require('./utils/command_factory');
 
 const factoryParams = {
   enabled: true,
@@ -12,7 +12,7 @@ const factoryParams = {
 };
 
 const WootCommand = function WootCommand() {
-  const basedCommand = !(this instanceof WootCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+  const basedCommand = !(this instanceof WootCommand) ? new Command(factoryParams) : Command;
 
   return Object.assign(Object.create(basedCommand), {
     primary: (args) => {

@@ -3,9 +3,9 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import nock from 'nock';
 
-import commands from '../../commands/';
-import logger from '../../utils/logger';
-import config from '../../helpers/config_helper';
+const commands = require('../../commands');
+const logger = require('../../utils/logger').default;
+const config = require('../../helpers/config_helper').default;
 
 const { expect } = chai;
 chai.should();
@@ -14,7 +14,7 @@ chai.use(sinonChai);
 describe('Command', () => {
   describe('Woot', () => {
     let sandbox;
-    
+
     const expectedHelp = `Woot command will request the latest sale and price from woot.com 👌\n\rSyntax is ${config.commandChar}woot { wine, sellout, electronics, home, tools, sport, computers, shirt }`;
 
     const expectedWine = {sales: [{
@@ -131,7 +131,10 @@ describe('Command', () => {
           expect(result).to.equal(expectedHelp);
           done();
         });
-      } catch (error) {}
+      } catch (error) {
+        console.log(error);
+
+      }
     });
 
     it('should return expected wine.woot result when passed in "wine"', (done) => {

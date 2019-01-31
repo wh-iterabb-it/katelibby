@@ -2,7 +2,7 @@ const google = require('google');
 
 const logger = require('../utils/logger').default;
 const config = require('../helpers/config_helper').default;
-const BaseCommand = require('./utils/command_factory').default;
+const Command = require('./utils/command_factory');
 
 const factoryParams = {
   enabled: true,
@@ -12,7 +12,7 @@ const factoryParams = {
 };
 
 const GoogleCommand = function GoogleCommand() {
-  const basedCommand = !(this instanceof GoogleCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+  const basedCommand = !(this instanceof GoogleCommand) ? new Command(factoryParams) : Command;
 
   return Object.assign(Object.create(basedCommand), {
     primary: (args) => {

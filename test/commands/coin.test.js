@@ -3,8 +3,8 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import nock from 'nock';
 
-import commands from '../../commands/';
-import config from '../../helpers/config_helper';
+const commands = require('../../commands');
+const config = require('../../helpers/config_helper').default;
 
 const { expect } = chai;
 
@@ -46,10 +46,10 @@ describe('Command', () => {
         done();
       });
     });
-    
+
     it('should return expected promise rejection and result when no key is found', (done) => {
       config.worldcoinindex.key = '';
-      
+
       try {
         commands.coin.main('eth').then((result) => {
           expect(result).to.equal('Please add an API key to the configuration file.');

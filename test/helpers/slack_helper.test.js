@@ -2,8 +2,9 @@ import chai from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import logger from '../../utils/logger';
-import Slack from '../../helpers/slack_helper';
+const logger = require('../../utils/logger').default;
+const Slack = require('../../helpers/slack_helper').default;
+
 
 chai.should();
 chai.use(sinonChai);

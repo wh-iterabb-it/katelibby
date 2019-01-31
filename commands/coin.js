@@ -1,9 +1,9 @@
 const request = require('superagent');
 
 const config = require('../helpers/config_helper').default;
-const BaseCommand = require('./utils/command_factory').default;
-const format = require('../utils/format').default;
-const Sanitize = require( '../utils/sanitize').default;
+const Command = require('./utils/command_factory');
+const {toHHMMSS, toDDHHMMSS, formatMoney, formatPast} = require('../utils/format');
+const {sanitize} = require( '../utils/sanitize');
 const logger = require('../utils/logger').default;
 
 const factoryParams = {
@@ -14,7 +14,7 @@ const factoryParams = {
 };
 
 const CoinCommand = function CoinCommand() {
-  const basedCommand = !(this instanceof CoinCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+  const basedCommand = !(this instanceof CoinCommand) ? new Command(factoryParams) : Command;
 
   return Object.assign(Object.create(basedCommand), {
     primary: (args) => {
@@ -24,7 +24,7 @@ const CoinCommand = function CoinCommand() {
       }
       const apiKey = config.worldcoinindex.key;
       const apiUrl = 'https://www.worldcoinindex.com/apiservice/ticker';
-      const coin = Sanitize.sanitize(args.substring(0, 3));
+      const coin = sanitize(args.substring(0, 3));
       const url = `${apiUrl}?key=${apiKey}&label=${coin}btc&fiat=usd`;
       return new Promise((resolve, reject) => {
         request.get(url).then((response) => {
@@ -33,11 +33,11 @@ const CoinCommand = function CoinCommand() {
             if (typeof json.Markets === 'undefined' || typeof json.error !== 'undefined') {
               return reject('Are you trying to make me crash?');
             } else {
-              const price =  format.formatMoney(json.Markets[0].Price);
+              const price =  formatMoney(json.Markets[0].Price);
               const label = json.Markets[0].Label.substring(0, 3);
               const name = json.Markets[0].Name;
-              const volume = format.formatMoney(json.Markets[0].Volume_24h);
-              const lastTrade = format.formatPast(json.Markets[0].Timestamp);
+              const volume = formatMoney(json.Markets[0].Volume_24h);
+              const lastTrade = formatPast(json.Markets[0].Timestamp);
 
               let returnString = `1 ${label} = ${price} USD as of ${lastTrade} ago\n\r`;
               returnString = returnString + `24 Hour Volume ${volume} USD\n\r`;

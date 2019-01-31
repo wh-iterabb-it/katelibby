@@ -2,9 +2,9 @@ const {
   WebClient, RTMClient, CLIENT_EVENTS, IncomingWebhook,
 } = require('@slack/client');
 
-const commands = require('../commands').default;
+const commands = require('../commands');
 const logger = require('../utils/logger').default;
-const {Sanitize} = require('../utils/sanitize').default;
+const {Sanitize} = require('../utils/sanitize');
 const config = require('../helpers/config_helper').default;
 
 class slackHelper {
@@ -19,7 +19,8 @@ class slackHelper {
   setupEvents() {
     logger.debug('setupEvents');
     // this.rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, this.onAuthenticate(connectData));
-    // this.rtm.on(CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED, this.onConnect());
+    // CLIENT_EVENTS.RTM.RTM_CONNECTION_OPENED
+    // this.onConnectSetup();
     this.onMessage();
   }
 
@@ -40,11 +41,12 @@ class slackHelper {
    * connectRTM
    * Initialize the RTM client with the recommended settings. Using the defaults for these
    * @param token - the slack token to form the connection
+   * @return {Promise} <WebAPICallResult>
    */
   connectRTM(token) {
     logger.debug('connectRTM');
     this.rtm = new RTMClient(token);
-    this.rtm.start();
+    return this.rtm.start();
     // settings is deprecated.
     // {
     //   dataStore: false,

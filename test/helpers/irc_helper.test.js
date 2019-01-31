@@ -2,8 +2,8 @@ import chai from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import logger from '../../utils/logger';
-import Irc from '../../helpers/irc_helper';
+const logger = require('../../utils/logger').default;
+const Irc = require('../../helpers/irc_helper').default;
 
 chai.should();
 chai.use(sinonChai);
