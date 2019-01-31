@@ -3,9 +3,9 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 import nock from 'nock';
 
-import commands from '../../commands/';
-import logger from '../../utils/logger';
-import config from '../../helpers/config_helper';
+const commands = require('../../commands');
+const logger = require('../../utils/logger').default;
+const config = require('../../helpers/config_helper').default;
 
 const { expect } = chai;
 chai.should();

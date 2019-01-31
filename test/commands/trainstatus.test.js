@@ -2,9 +2,9 @@ import chai from 'chai';
 import sinon from 'sinon';
 import nock from 'nock';
 
-import commands from '../../commands/';
+const commands = require('../../commands');
 import MTA from '../../commands/trainstatus';
-import config from '../../helpers/config_helper';
+const config = require('../../helpers/config_helper').default;
 
 const { expect } = chai;
 

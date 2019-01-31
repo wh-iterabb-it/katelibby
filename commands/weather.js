@@ -1,8 +1,8 @@
-import request from 'superagent';
+const request = require('superagent');
 
-import logger from '../utils/logger';
-import config from '../helpers/config_helper';
-import BaseCommand from './utils/command_factory';
+const logger = require('../utils/logger').default;
+const config = require('../helpers/config_helper').default;
+const Command = require('./utils/command_factory');
 
 const factoryParams = {
   enabled: true,
@@ -12,7 +12,7 @@ const factoryParams = {
 };
 
 const WeatherCommand = function WeatherCommand() {
-  const basedCommand = !(this instanceof WeatherCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+  const basedCommand = !(this instanceof WeatherCommand) ? new Command(factoryParams) : Command;
 
   return Object.assign(Object.create(basedCommand), {
     primary: (args) => {
@@ -49,4 +49,4 @@ const WeatherCommand = function WeatherCommand() {
 
 const weatherCommand = WeatherCommand();
 
-export default weatherCommand;
+module.exports.default = weatherCommand;

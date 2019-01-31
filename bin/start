@@ -1,8 +1,3 @@
-#!/usr/bin/env node --use_strict
-
-require('@babel/register');
-require('object.entries').shim();
-
 const kate = require('../app.js').default;
 
 kate.init();

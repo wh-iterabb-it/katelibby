@@ -1,9 +1,8 @@
-import irc from 'irc';
+const irc = require('irc');
 
-import commands from '../commands';
-import logger from '../utils/logger';
-import Sanitize from '../utils/sanitize';
-import config from '../helpers/config_helper';
+const commands = require('../commands');
+const logger = require('../utils/logger').default;
+const config = require('../helpers/config_helper').default;
 
 class ircHelper {
   constructor() {
@@ -122,9 +121,9 @@ class ircHelper {
   /**
    * detectCommand
    * detects and calls a command from a message
-   * @param {object} from - 
-   * @param {object} target - 
-   * @param {object} text - 
+   * @param {object} from -
+   * @param {object} target -
+   * @param {object} text -
    * @param {Object} message - the message is the current message being read.
    */
   async detectCommand(from, target, text, message) {
@@ -150,7 +149,7 @@ class ircHelper {
 
   /**
    * sendMessage
-   * @param {Object} to - 
+   * @param {Object} to -
    * @param {Object} message - the message is the current message being read.
    */
   sendMessage(to, message) {
@@ -171,4 +170,4 @@ class ircHelper {
 
 }
 
-export default ircHelper;
+module.exports.default = ircHelper;

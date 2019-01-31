@@ -1,5 +1,5 @@
-import config from '../helpers/config_helper';
-import BaseCommand from './utils/command_factory';
+const config = require('../helpers/config_helper').default;
+const Command = require('./utils/command_factory');
 
 const factoryParams = {
   enabled: true,
@@ -9,7 +9,7 @@ const factoryParams = {
 };
 
 const HelpCommand = function HelpCommand() {
-  const basedCommand = !(this instanceof HelpCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+  const basedCommand = !(this instanceof HelpCommand) ? new Command(factoryParams) : Command;
 
   return Object.assign(Object.create(basedCommand), {
     primary: (args, appData) => {
@@ -26,4 +26,4 @@ const HelpCommand = function HelpCommand() {
 
 const helpCommand = HelpCommand();
 
-export default helpCommand;
+module.exports.default = helpCommand;

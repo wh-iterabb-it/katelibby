@@ -1,8 +1,8 @@
 import chai from 'chai';
 import sinon from 'sinon';
 
-import commands from '../../commands/';
-import config from '../../helpers/config_helper';
+const commands = require('../../commands');
+const config = require('../../helpers/config_helper').default;
 
 const { expect } = chai;
 

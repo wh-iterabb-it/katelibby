@@ -1,6 +1,6 @@
-import moment from 'moment';
+const moment = require('moment');
 
-import urlRegex from './urlRegex';
+const urlRegex = require('./urlRegex');
 
 /**
  * toHHMMSS
@@ -90,4 +90,4 @@ function formatPast(intDate) {
   return Math.floor(duration.asHours()) + moment.utc(difference).format(':mm:ss');
 }
 
-export default {toHHMMSS, toDDHHMMSS, formatMoney, formatPast}
+module.exports = {toHHMMSS, toDDHHMMSS, formatMoney, formatPast};

@@ -1,5 +1,5 @@
-import config from '../helpers/config_helper';
-import BaseCommand from './utils/command_factory';
+const config = require('../helpers/config_helper').default;
+const Command = require('./utils/command_factory');
 
 const factoryParams = {
   enabled: true,
@@ -9,7 +9,7 @@ const factoryParams = {
 };
 
 const FortuneCommand = function FortuneCommand() {
-  const basedCommand = !(this instanceof FortuneCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+  const basedCommand = !(this instanceof FortuneCommand) ? new Command(factoryParams) : Command;
 
   return Object.assign(Object.create(basedCommand), {
     primary: (args) => {
@@ -86,4 +86,4 @@ const FortuneCommand = function FortuneCommand() {
 
 const fortuneCommand = FortuneCommand();
 
-export default fortuneCommand;
+module.exports.default = fortuneCommand;

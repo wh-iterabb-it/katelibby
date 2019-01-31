@@ -1,8 +1,8 @@
-import request from 'superagent';
+const request = require('superagent');
 
-import logger from '../utils/logger';
-import config from '../helpers/config_helper';
-import BaseCommand from './utils/command_factory';
+const logger = require('../utils/logger').default;
+const config = require('../helpers/config_helper').default;
+const Command = require('./utils/command_factory');
 
 const factoryParams = {
   enabled: true,
@@ -12,7 +12,7 @@ const factoryParams = {
 };
 
 const WootCommand = function WootCommand() {
-  const basedCommand = !(this instanceof WootCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+  const basedCommand = !(this instanceof WootCommand) ? new Command(factoryParams) : Command;
 
   return Object.assign(Object.create(basedCommand), {
     primary: (args) => {
@@ -57,7 +57,7 @@ const WootCommand = function WootCommand() {
               } else {
                 const url = json.sales[0].SaleUrl.split('?');
                 const result = `${json.sales[0].Title} for ${json.sales[0].Price}\n\r${url[0]}`;
-                
+
                 resolve(result);
               }
             }
@@ -70,4 +70,4 @@ const WootCommand = function WootCommand() {
 
 const wootCommand = WootCommand();
 
-export default wootCommand;
+module.exports.default = wootCommand;

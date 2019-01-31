@@ -2,9 +2,9 @@ import chai from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai';
 
-import logger from '../utils/logger';
-import config from '../helpers/config_helper';
-import kate from '../app';
+const logger = require('../utils/logger').default;
+const config = require('../helpers/config_helper').default;
+const kate = require('../app.js').default;
 
 chai.should();
 

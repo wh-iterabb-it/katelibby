@@ -1,7 +1,8 @@
 // import Xxmp from './helpers/irc_helper';
-import Slack from './helpers/slack_helper';
-import config from './helpers/config_helper';
-import logger from './utils/logger';
+
+const logger = require('./utils/logger').default;
+const Slack = require('./helpers/slack_helper').default;
+const config = require('./helpers/config_helper').default;
 
 class App {
   static init() {
@@ -50,4 +51,4 @@ class App {
   }
 }
 
-export default App;
+module.exports.default = App;

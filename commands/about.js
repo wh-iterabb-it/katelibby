@@ -1,7 +1,7 @@
-import pkjson from '../package.json';
-import format from '../utils/format';
-import config from '../helpers/config_helper';
-import BaseCommand from './utils/command_factory';
+const pkjson = require('../package.json');
+const {toDDHHMMSS} = require('../utils/format');
+const config = require('../helpers/config_helper').default;
+const Command = require('./utils/command_factory');
 
 const factoryParams = {
   enabled: true,
@@ -10,19 +10,19 @@ const factoryParams = {
   nsfw: false,
 };
 
-const AboutCommand = function AboutCommand() {
-  const basedCommand = !(this instanceof AboutCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+class About extends Command {
+  constructor(factoryParams) {
+    super(factoryParams);
+  }
 
-  return Object.assign(Object.create(basedCommand), {
-    primary: (args) => {
-      const time = process.uptime();
-      const uptime = format.toDDHHMMSS(time + '');
-      const response = `About this Bot\r\nVersion: ${pkjson.version}\r\nTotal Uptime of Bot: ${uptime}`;
-      return Promise.resolve(response);
-    },
-  });
-};
+  primary(args) {
+    const time = process.uptime();
+    const uptime = toDDHHMMSS(time + '');
+    const response = `About this Bot\r\nVersion: ${pkjson.version}\r\nTotal Uptime of Bot: ${uptime}`;
+    return Promise.resolve(response);
+  }
+}
 
-const aboutCommand = AboutCommand();
+const aboutCommand = new About(factoryParams);
 
-export default aboutCommand;
+module.exports.default = aboutCommand;

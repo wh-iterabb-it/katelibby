@@ -1,8 +1,8 @@
-import google from 'google';
+const google = require('google');
 
-import config from '../helpers/config_helper';
-import logger from '../utils/logger';
-import BaseCommand from './utils/command_factory';
+const logger = require('../utils/logger').default;
+const config = require('../helpers/config_helper').default;
+const Command = require('./utils/command_factory');
 
 const factoryParams = {
   enabled: true,
@@ -12,7 +12,7 @@ const factoryParams = {
 };
 
 const GoogleCommand = function GoogleCommand() {
-  const basedCommand = !(this instanceof GoogleCommand) ? new BaseCommand(factoryParams) : BaseCommand;
+  const basedCommand = !(this instanceof GoogleCommand) ? new Command(factoryParams) : Command;
 
   return Object.assign(Object.create(basedCommand), {
     primary: (args) => {
@@ -27,11 +27,11 @@ const GoogleCommand = function GoogleCommand() {
               res.statusCode);
             if (res.links && res.links.length) {
               if (res.links[0].title.match(/(Images|News|Def)/i) != null) {
-                resolve(`${res.links[1].title} - ${res.links[1].href}` + 
+                resolve(`${res.links[1].title} - ${res.links[1].href}` +
                   '\r\n' + res.links[1].description);
               } else {
                 // link.href is an alias for link.link
-                resolve(`${res.links[0].title} - ${res.links[0].href}` + 
+                resolve(`${res.links[0].title} - ${res.links[0].href}` +
                 '\r\n' + res.links[0].description);
               }
             } else {
@@ -50,4 +50,4 @@ const GoogleCommand = function GoogleCommand() {
 
 const googleCommand = GoogleCommand();
 
-export default googleCommand;
+module.exports.default = googleCommand;

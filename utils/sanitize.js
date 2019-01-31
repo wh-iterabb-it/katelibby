@@ -1,4 +1,4 @@
-import entities from 'entities';
+const entities = require('entities');
 
 function sanitize(data) {
   let clean;
@@ -89,4 +89,4 @@ function extractRootDomain(url) {
   return domain;
 }
 
-export default {sanitize, detectHostName, extractRootDomain}
+module.exports = { sanitize, detectHostName, extractRootDomain };
