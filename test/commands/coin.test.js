@@ -1,7 +1,7 @@
-import chai from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-import nock from 'nock';
+const chai = require('chai');
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
+const nock = require('nock');
 
 const commands = require('../../commands');
 const config = require('../../helpers/config_helper').default;

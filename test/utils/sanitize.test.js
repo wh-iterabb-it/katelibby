@@ -1,7 +1,8 @@
-import chai from 'chai';
-import sinonChai from 'sinon-chai';
+const chai = require('chai');
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
 
-import Sanitize from '../../utils/sanitize';
+const Sanitize = require('../../utils/sanitize');
 
 chai.should();
 

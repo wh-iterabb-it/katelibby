@@ -1,5 +1,5 @@
-import chai from 'chai';
-import sinon from 'sinon';
+const chai = require('chai');
+const sinon = require('sinon');
 
 const commands = require('../../commands');
 const config = require('../../helpers/config_helper').default;
