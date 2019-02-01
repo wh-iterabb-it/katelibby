@@ -18,30 +18,11 @@
     "Ash Kamel <https://github.com/ajkamel>"
   ],
   "scripts": {
-    "build": "npm run clean && npm run build-dist",
-    "build-dist": "node node_modules/.bin/babel . --out-dir dist -s --ignore test,node_modules",
-    "clean": "rm -rf dist && mkdir -p dist/bin dist/node_modules && cp bin/start dist/bin/start && cp -r node_modules/* dist/node_modules && cp package.json dist/package.json",
     "cover": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov",
-    "start": "node ./dist/bin/start",
-    "start-dev": "node ./bin/start",
-    "test": "node_modules/.bin/mocha test/. --require @babel/register --recursive",
+    "start": "node ./bin/start",
+    "test": "node_modules/.bin/mocha test/. --recursive",
     "lint": "node_modules/.bin/eslint --format codeframe .",
-    "fix-my-shit": "node_modules/.bin/eslint --fix --format codeframe ."
-  },
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": "current"
-          }
-        }
-      ]
-    ],
-    "plugins": [
-      "@babel/plugin-proposal-object-rest-spread"
-    ]
+    "lint-fix": "node_modules/.bin/eslint --fix --format codeframe ."
   },
   "eslintConfig": {
     "extends": "airbnb",
@@ -110,13 +91,6 @@
     "winston": "3.0.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.2.3",
-    "@babel/core": "7.2.2",
-    "@babel/plugin-proposal-object-rest-spread": "7.2.0",
-    "@babel/preset-env": "7.2.3",
-    "@babel/register": "7.0.0",
-    "babel-preset-env": "1.7.0",
-    "babel-eslint": "10.0.1",
     "chai": "4.1.2",
     "codecov": "3.1.0",
     "eslint": "5.0.1",
