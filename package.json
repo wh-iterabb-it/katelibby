@@ -79,16 +79,13 @@
   },
   "dependencies": {
     "@slack/client": "4.8.0",
-    "bluebird": "3.5.3",
     "commander": "2.19.0",
-    "fs": "0.0.1-security",
     "google": "2.1.0",
     "irc": "git+https://github.com/wh-iterabb-it/node-irc.git",
     "mta-gtfs": "1.1.0",
-    "path": "0.12.7",
     "striptags": "3.1.1",
     "superagent": "4.1.0",
-    "winston": "3.0.1"
+    "winston": "3.2.1"
   },
   "devDependencies": {
     "chai": "4.1.2",
