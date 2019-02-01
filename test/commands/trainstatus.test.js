@@ -1,9 +1,10 @@
-import chai from 'chai';
-import sinon from 'sinon';
-import nock from 'nock';
+const chai = require('chai');
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
+const nock = require('nock');
 
 const commands = require('../../commands');
-import MTA from '../../commands/trainstatus';
+const MTA = require('../../commands/trainstatus');
 const config = require('../../helpers/config_helper').default;
 
 const { expect } = chai;

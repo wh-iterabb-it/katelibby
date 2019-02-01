@@ -1,7 +1,8 @@
-import chai from 'chai';
-import sinonChai from 'sinon-chai';
+const chai = require('chai');
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
 
-import {toHHMMSS, toDDHHMMSS, formatMoney, formatPast} from '../../utils/format';
+const {toHHMMSS, toDDHHMMSS, formatMoney, formatPast} = require('../../utils/format');
 
 chai.should();
 

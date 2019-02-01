@@ -1,6 +1,7 @@
-import chai from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+const chai = require('chai');
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
+const nock = require('nock');
 
 const logger = require('../../utils/logger').default;
 const Slack = require('../../helpers/slack_helper').default;

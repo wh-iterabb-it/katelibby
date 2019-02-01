@@ -1,6 +1,6 @@
-import chai from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
+const chai = require('chai');
+const sinon = require('sinon');
+const sinonChai = require('sinon-chai');
 
 const logger = require('../utils/logger').default;
 const config = require('../helpers/config_helper').default;
