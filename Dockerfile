@@ -12,8 +12,5 @@ WORKDIR /usr/src/app
 # install node dependencies
 RUN npm install
 
-# create distribution
-RUN npm run build
-
 # launch application
 CMD ["npm","start"]
