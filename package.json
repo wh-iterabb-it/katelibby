@@ -81,7 +81,6 @@
     "@slack/client": "4.8.0",
     "commander": "2.19.0",
     "google": "2.1.0",
-    "irc": "git+https://github.com/wh-iterabb-it/node-irc.git",
     "mta-gtfs": "1.1.0",
     "striptags": "3.1.1",
     "superagent": "4.1.0",
