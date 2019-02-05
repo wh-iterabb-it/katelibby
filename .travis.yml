@@ -10,7 +10,6 @@ node_js:
 
 before_install:
   - docker build -t wh-iterabb-it/katelibby .
-  
 script:
   - docker run wh-iterabb-it/katelibby npm run test
   - docker run wh-iterabb-it/katelibby npm run cover
