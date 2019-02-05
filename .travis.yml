@@ -11,10 +11,11 @@ node_js:
 
 before_install:
   - npm install -g npm
-
+  - docker build -t wh-iterabb-it/katelibby .
+  
 script:
-  - "npm test"
-  - "npm run-script cover"
+  - docker run wh-iterabb-it/katelibby npm run test
+  - docker run wh-iterabb-it/katelibby npm run cover
 
 after_success:
   - rm coverage.lcov
