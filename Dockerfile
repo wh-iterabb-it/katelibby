@@ -1,10 +1,9 @@
 FROM mhart/alpine-node:10.15.0
 
-# install git
-RUN apk add --no-cache git
-
-# creating working directory
-RUN mkdir -p /usr/src/app
+# install git creating working directory
+RUN apk update && apk upgrade && \
+    apk add --no-cache bash git openssh && \
+    mkdir -p /usr/src/app
 
 # copy files to working directory
 COPY . /usr/src/app/
