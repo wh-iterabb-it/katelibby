@@ -1,7 +1,7 @@
 FROM mhart/alpine-node:10.15.0
 
 # install git
-RUN apt-get install -y git
+RUN apk add --no-cache git
 
 # creating working directory
 RUN mkdir -p /usr/src/app
