@@ -4,8 +4,6 @@ services:
     container_name: kate-libby
     build: .
     command: ["npm", "run-script", "start"]
-    ports:
-      - "3924:3924"
     volumes:
       - ${PWD}:/usr/src/app
       
