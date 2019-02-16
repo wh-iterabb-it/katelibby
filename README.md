@@ -22,7 +22,6 @@ npm install
 
 Basic usage
 ```
-npm run build
 npm run start
 ```
 
