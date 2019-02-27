@@ -78,7 +78,7 @@
     }
   },
   "dependencies": {
-    "@slack/client": "4.9.0",
+    "@slack/client": "4.10.0",
     "commander": "2.19.0",
     "google": "2.1.0",
     "mta-gtfs": "1.1.0",
