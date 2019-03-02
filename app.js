@@ -1,19 +1,21 @@
 const express = require('express');
-const Doctor = require('./lib/middleware/kubernetes').default;
+const http = require('http');
 
+const Doctor = require('./lib/middleware/kubernetes').default;
 const logger = require('./lib/utils/logger').default;
 const Slack = require('./lib/helpers/slack_helper').default;
 const config = require('./lib/helpers/config_helper').default;
 
 class Kate {
   constructor() {
-    const app = express();
-    this.doctor = new Doctor(app);
+    this.doctor = new Doctor();
+    this.doctor.app.set('port', 3946);
     this.bot_stack = [];
     this.connectDiscord();
     this.connectSlack();
     this.connectIRC();
     this.doctor.updateStatus();
+    const server = http.createServer(this.doctor.app);
   }
 
   /**
@@ -63,7 +65,15 @@ class Kate {
     }
   }
 }
-
 const kate = new Kate();
 
+process.on('message', msg => {
+  if (msg === 'shutdown') {
+    process.exit(0);
+  }
+});
+
+process.on('SIGTERM', () => {
+  process.exit(1);
+});
 module.exports.default = kate;

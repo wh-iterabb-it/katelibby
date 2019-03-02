@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@slack/client": "4.10.0",
+    "body-parser": "^1.18.3",
     "commander": "2.19.0",
     "express": "^4.16.4",
     "google": "2.1.0",
