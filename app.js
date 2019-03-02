@@ -1,21 +1,25 @@
-// import Xxmp from './helpers/irc_helper';
+const express = require('express');
+const Doctor = require('./lib/middleware/kubernetes').default;
 
 const logger = require('./lib/utils/logger').default;
 const Slack = require('./lib/helpers/slack_helper').default;
 const config = require('./lib/helpers/config_helper').default;
 
-class App {
-  static init() {
+class Kate {
+  constructor() {
+    const app = express();
+    this.doctor = new Doctor(app);
     this.bot_stack = [];
     this.connectDiscord();
     this.connectSlack();
     this.connectIRC();
+    this.doctor.updateStatus();
   }
 
   /**
    * connectDiscord
-  * */
-  static connectDiscord() {
+  **/
+  connectDiscord() {
     if (config.discord && config.discord.length >= 1) {
       config.discord.forEach((discordConfig) => {
         // TODO: make discord helper
@@ -27,8 +31,8 @@ class App {
 
   /**
    * connectSlack
-  * */
-  static connectSlack() {
+  **/
+  connectSlack() {
     if (config.slack && config.slack.length >= 1) {
       config.slack.forEach((slackConfig) => {
         logger.info(`Connecting ${slackConfig.realName} to slack`);
@@ -44,8 +48,8 @@ class App {
 
   /**
    * connectIRC
-  * */
-  static connectIRC() {
+  **/
+  connectIRC() {
     if (config.irc && config.irc.length >= 1) {
       // config.irc.forEach((ircConfig) => {
       //   // TODO: make irc helper
@@ -60,4 +64,6 @@ class App {
   }
 }
 
-module.exports.default = App;
+const kate = new Kate();
+
+module.exports.default = kate;

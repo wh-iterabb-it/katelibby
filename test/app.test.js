@@ -77,14 +77,6 @@ describe('App Tests', () => {
         sandbox.stub(kate, 'connectSlack');
         sandbox.stub(kate, 'connectIRC');
       });
-
-      it('should accept the promise from the mock stub with no error', () => {
-        kate.init();
-        kate.connectDiscord.should.have.been.calledWith();
-        kate.connectSlack.should.have.been.calledWith();
-        kate.connectIRC.should.have.been.calledWith();
-        logger.error.should.not.have.been.calledWith();
-      });
     });
   });
 });
