@@ -16,6 +16,9 @@ class slackHelper {
     this.commandPattern = this.setCommandPattern(config.commandChar);
   }
 
+  /**
+   * setupEvents
+   */
   setupEvents() {
     logger.debug('setupEvents');
     // this.rtm.on(CLIENT_EVENTS.RTM.AUTHENTICATED, this.onAuthenticate(connectData));
