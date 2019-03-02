@@ -9,16 +9,17 @@ const {toDDHHMMSS} = require('../utils/format');
  * NOTE: this helper assumes that you don't have any other express / HTTP
  *     being served from this application.
 **/
+class doctor {
+  constructor() {
+    /**
+     * Application state requirements:
+     * Starting .. (no connections made, default value until updated)
+     * Ready (connections and everything is started)
+    **/
+    this.ready = false;
+    this.status = 'Starting...'
+  }
 
-function createRouter(payload) {
-  const router = express.Router();
-  router.get('/', function (req, res, next) {
-    res.json(payload);
-  });
-  return router;
-}
-
-module.exports = function(app) {
   /**
    * Health Endpoint Logic
    * Health checks provide a simple mechanism to determine whether
@@ -26,13 +27,47 @@ module.exports = function(app) {
    * GET to /health
    * @return 200 status code json containing uptime
   **/
-  const healthPayload = {uptime: toDDHHMMSS(process.uptime() + '')};
-  const healthRouter = createRouter(healthPayload);
-  app.use("/health", healthRouter);
+  async healthEndpoint(req, res) {
+    const health = await this.health();
+    health.then((payload) => {
+      res.status(200).json(payload);
+    });
+  }
 
-  const statusPayload = {status: 'ok'};
-  const statusRouter = createRouter(statusPayload);
-  app.use("/status", statusRouter);
+  health() {
+    return new Promise((resolve, reject) => {
+      resolve({
+        uptime: toDDHHMMSS(process.uptime() + ''),
+        version: pkjson.version
+      });
+    });
+  }
+
+  /**
+   * Status Endpoint Logic
+   * GET to /status
+   * @return s
+  **/
+  async statusEndpoint(req, res) {
+    const status = await this.status();
+    status.then((payload) => {
+      res.status(200).json(payload);
+    }).catch((payload) => {
+      res.status(500).json(payload);
+    });
+  }
+  updateStatus() {
+
+  }
+
+  status() {
+    // somehow i need to allow a passthrough of a callback
+    // to have something to check the status of...
+
+    return new Promise((resolve, reject) => {
+      reject({status: this.status});
+    });
+  }
 
   /**
    * Ready Endpoint Logic
@@ -43,11 +78,33 @@ module.exports = function(app) {
    * Readiness can be considered to only be ready
    * if both liveness(status) and Health are 200 OK.
    * GET to /ready
-   * @return 200 status is ok
+   * @return s
   **/
-  const readyPayload = {};
-  const readyRouter = createRouter(readyPayload);
-  app.use("/ready", readyRouter);
+  async readyEndpoint(req, res) {
+    const ready = await this.ready();
+    ready.then((payload) => {
+      res.status(200).json(payload);
+    }).catch((payload) => {
+      res.status(500).json(payload);
+    });
+  }
 
-
+  ready() {
+    // ready is easy, it only resolves if both health and status resolve.
+    return new Promise((resolve, reject) => {
+      const health = this.health();
+      health.then(() => {
+        const status = this.status;
+        status.then(() => {
+          resolve({ready: this.ready});
+        }).catch(() => {
+          reject({ready: this.ready});
+        });
+      }).catch(() => {
+        reject({ready: this.ready});
+      });
+    });
+  }
 }
+
+module.exports.default = doctor;

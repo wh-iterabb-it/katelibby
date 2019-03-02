@@ -12,6 +12,7 @@ class slackHelper {
     this.appData = {
       source: {}
     };
+    this.ready = false;
     logger.debug('slack helper start');
     this.commandPattern = this.setCommandPattern(config.commandChar);
   }
@@ -87,6 +88,29 @@ class slackHelper {
       // Log the message
       logger.debug(`(channel:${message.channel}) ${message.user} says: ${message.text}`);
     });
+  }
+
+  /**
+   * onReady
+   * The ready handler for when connection is established and readiness
+   * The client is ready to send outgoing messages. This is a sub-state of connected
+   */
+  onReady() {
+    logger.debug('onReady setup');
+    this.rtm.on('ready', (event) => {
+      logger.debug('Ready!');
+      this.ready = true;
+    });
+  }
+
+  readyCheck() {
+    return new Promise((resolve, reject) => {
+      if(this.ready) {
+        resolve(this.ready);
+      } else {
+        reject(this.ready);
+      }
+    };
   }
 
   /**
@@ -176,21 +200,6 @@ class slackHelper {
   //   rtm.on('reaction_removed', (event) => {
   //     // Structure of `event`: <https://api.slack.com/events/reaction_removed>
   //     console.log(`Reaction removed by ${event.user}: ${event.reaction}`);
-  //   });
-  // }
-
-  /**
-   * onReady
-   * The ready handler for when connection is established and readiness
-   */
-  // onReady() {
-  //   rtm.on('ready', (event) => {
-  //
-  //     // Getting a conversation ID is left as an exercise for the reader. It's usually available as the `channel` property
-  //     // on incoming messages, or in responses to Web API requests.
-  //
-  //     // const conversationId = '';
-  //     // rtm.sendMessage('Hello, world!', conversationId);
   //   });
   // }
 }
