@@ -1,8 +1,8 @@
 // import Xxmp from './helpers/irc_helper';
 
-const logger = require('./utils/logger').default;
-const Slack = require('./helpers/slack_helper').default;
-const config = require('./helpers/config_helper').default;
+const logger = require('./lib/utils/logger').default;
+const Slack = require('./lib/helpers/slack_helper').default;
+const config = require('./lib/helpers/config_helper').default;
 
 class App {
   static init() {
@@ -14,7 +14,7 @@ class App {
 
   /**
    * connectDiscord
-  **/
+  * */
   static connectDiscord() {
     if (config.discord && config.discord.length >= 1) {
       config.discord.forEach((discordConfig) => {
@@ -27,7 +27,7 @@ class App {
 
   /**
    * connectSlack
-  **/
+  * */
   static connectSlack() {
     if (config.slack && config.slack.length >= 1) {
       config.slack.forEach((slackConfig) => {
@@ -44,7 +44,7 @@ class App {
 
   /**
    * connectIRC
-  **/
+  * */
   static connectIRC() {
     if (config.irc && config.irc.length >= 1) {
       // config.irc.forEach((ircConfig) => {

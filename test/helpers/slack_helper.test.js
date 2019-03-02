@@ -3,8 +3,8 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const nock = require('nock');
 
-const logger = require('../../utils/logger').default;
-const Slack = require('../../helpers/slack_helper').default;
+const logger = require('../../lib/utils/logger').default;
+const Slack = require('../../lib/helpers/slack_helper').default;
 
 
 chai.should();
@@ -36,7 +36,7 @@ describe('Slack Helper Tests', () => {
       it('should return a successful creation of the commandpattern with variable given', () => {
         const testCommandChar = '@';
         const expected = `^${testCommandChar}(\\w+) ?(.*)`;
-        let result = slack.setCommandPattern(testCommandChar);
+        const result = slack.setCommandPattern(testCommandChar);
         expect(result).to.equal(expected);
       });
     });
@@ -49,13 +49,13 @@ describe('Slack Helper Tests', () => {
         // mocking stuff
         slack.rtm = () => {};
         slack.rtm.sendMessage = () => {};
-        sandbox.stub(slack.rtm, 'sendMessage').resolves({ts: 'stuff'});
+        sandbox.stub(slack.rtm, 'sendMessage').resolves({ ts: 'stuff' });
       });
 
       it('should accept the promise from the mock stub with no error', () => {
-        const channelID = `1234`;
-        const messageBody = `ok`;
-        slack.sendMessage(channelID. messageBody);
+        const channelID = '1234';
+        const messageBody = 'ok';
+        slack.sendMessage(channelID.messageBody);
         logger.error.should.not.have.been.calledWith();
       });
     });
@@ -86,23 +86,23 @@ describe('Slack Helper Tests', () => {
         // mocking stuff
         slack.rtm = () => {};
         slack.rtm.sendMessage = () => {};
-        sandbox.stub(slack.rtm, 'sendMessage').resolves({ts: 'stuff'});
+        sandbox.stub(slack.rtm, 'sendMessage').resolves({ ts: 'stuff' });
       });
 
       it('should accept the promise from the mock stub with no error with real command', () => {
-        const message = {channel:'foo', user: 'bar', text: '!help'};
+        const message = { channel: 'foo', user: 'bar', text: '!help' };
         slack.detectCommand(message);
         logger.error.should.not.have.been.calledWith();
       });
 
       it('should accept the promise from the mock stub with no error with fake command', () => {
-        const message = {channel:'foo', user: 'bar', text: '!taco'};
+        const message = { channel: 'foo', user: 'bar', text: '!taco' };
         slack.detectCommand(message);
         logger.error.should.not.have.been.calledWith();
       });
 
       it('should accept the promise from the mock stub with no error with no command', () => {
-        const message = {channel:'foo', user: 'bar', text: 'bell'};
+        const message = { channel: 'foo', user: 'bar', text: 'bell' };
         slack.detectCommand(message);
         logger.error.should.not.have.been.calledWith();
       });
@@ -114,7 +114,7 @@ describe('Slack Helper Tests', () => {
       beforeEach(() => {
         slack = new Slack();
         // mocking stuff
-        slack.onMessage = ()=> {};
+        slack.onMessage = () => {};
         sandbox.stub(slack, 'onMessage');
       });
 
@@ -132,14 +132,14 @@ describe('Slack Helper Tests', () => {
       beforeEach(() => {
         slack = new Slack();
         // mocking stuff
-        slack.connectRTM = ()=> {};
-        slack.connectWeb = ()=> {};
+        slack.connectRTM = () => {};
+        slack.connectWeb = () => {};
         sandbox.stub(slack, 'connectRTM');
         sandbox.stub(slack, 'connectWeb');
       });
 
       it('should accept the promise from the mock stub with no error', () => {
-        slack.connect({token: 'test', realName: 'kate'});
+        slack.connect({ token: 'test', realName: 'kate' });
         slack.connectRTM.should.have.been.calledWith();
         slack.connectWeb.should.have.been.calledWith();
         logger.error.should.not.have.been.calledWith();

@@ -2,7 +2,9 @@ const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 
-const {toHHMMSS, toDDHHMMSS, formatMoney, formatPast} = require('../../utils/format');
+const {
+  toHHMMSS, toDDHHMMSS, formatMoney, formatPast,
+} = require('../../lib/utils/format');
 
 chai.should();
 
@@ -98,7 +100,7 @@ describe('Format Utility Tests', () => {
   describe('formatPast method', () => {
     it('should return 0:00:00 because we are passing in right now', () => {
       const expected = '0:00:00';
-      let time = Math.floor(Date.now() / 1000);
+      const time = Math.floor(Date.now() / 1000);
       const resp = formatPast(time);
       expect(resp).to.equal(expected);
     });

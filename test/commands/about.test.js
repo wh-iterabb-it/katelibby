@@ -2,13 +2,12 @@ const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 
-const commands = require('../../commands');
+const commands = require('../../lib/commands');
 
 const { expect } = chai;
 
 describe('Command', () => {
   describe('About', () => {
-
     const expectedHelp = 'About this bot, will return \r\nSyntax is !about';
 
     it('should return expected help result when passed help', (done) => {

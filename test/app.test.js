@@ -2,8 +2,8 @@ const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 
-const logger = require('../utils/logger').default;
-const config = require('../helpers/config_helper').default;
+const logger = require('../lib/utils/logger').default;
+const config = require('../lib/helpers/config_helper').default;
 const kate = require('../app.js').default;
 
 chai.should();
@@ -70,9 +70,9 @@ describe('App Tests', () => {
     context('Success Cases', () => {
       beforeEach(() => {
         // mocking stuff
-        kate.connectDiscord = ()=> {};
-        kate.connectSlack = ()=> {};
-        kate.connectIRC = ()=> {};
+        kate.connectDiscord = () => {};
+        kate.connectSlack = () => {};
+        kate.connectIRC = () => {};
         sandbox.stub(kate, 'connectDiscord');
         sandbox.stub(kate, 'connectSlack');
         sandbox.stub(kate, 'connectIRC');

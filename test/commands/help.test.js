@@ -1,18 +1,16 @@
 const chai = require('chai');
 const sinon = require('sinon');
 
-const commands = require('../../commands');
-const config = require('../../helpers/config_helper').default;
+const commands = require('../../lib/commands');
+const config = require('../../lib/helpers/config_helper').default;
 
 const { expect } = chai;
 
 describe('Command', () => {
   describe('Help', () => {
-    const commandList = require('../../commands/');
+    const commandList = require('../../lib/commands/');
 
-    const commandz = Object.keys(commandList).map((command) => {
-      return config.commandChar + command;
-    }).join(' ');
+    const commandz = Object.keys(commandList).map(command => config.commandChar + command).join(' ');
     config.slack = [{
       realName: 'Kate Libby',
       token: 'tacobell', // REQUIRED
@@ -28,7 +26,7 @@ describe('Command', () => {
         token: 'tacobell', // REQUIRED
       }];
       try {
-        commands.help.main('',config.slack[0]).then((result) => {
+        commands.help.main('', config.slack[0]).then((result) => {
           expect(result).to.equal(expected);
           done();
         });
