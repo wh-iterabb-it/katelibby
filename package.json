@@ -19,67 +19,19 @@
   ],
   "scripts": {
     "cover": "nyc npm test && nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/.bin/codecov",
-    "start": "node ./bin/start",
+    "start": "node app.js",
     "test": "node_modules/.bin/mocha test/. --recursive",
-    "lint": "node_modules/.bin/eslint --format codeframe .",
-    "lint-fix": "node_modules/.bin/eslint --fix --format codeframe ."
+    "lint": "node_modules/.bin/eslint --format codeframe './lib/**/*.js'",
+    "lint-fix": "node_modules/.bin/eslint --fix --format codeframe './lib/**/*.js'"
   },
   "eslintConfig": {
-    "extends": "airbnb",
-    "env": {
-      "browser": true,
-      "es6": true,
-      "mocha": true,
-      "node": true
-    },
-    "parser": "babel-eslint",
-    "rules": {
-      "max-len": [
-        "error",
-        120,
-        4
-      ],
-      "arrow-body-style": 0,
-      "arrow-parens": 0,
-      "class-methods-use-this": 0,
-      "consistent-return": 0,
-      "default-case": 0,
-      "func-names": 0,
-      "global-require": 0,
-      "import/no-dynamic-require": 0,
-      "import/no-mutable-exports": 0,
-      "jsx-a11y/href-no-hash": "off",
-      "jsx-a11y/anchor-is-valid": [
-        "warn",
-        {
-          "aspects": [
-            "invalidHref"
-          ]
-        }
-      ],
-      "new-cap": 0,
-      "no-confusing-arrow": 0,
-      "no-else-return": 0,
-      "no-loop-func": 0,
-      "no-param-reassign": 0,
-      "no-underscore-dangle": 0,
-      "no-unused-expressions": 0,
-      "prefer-template": 0,
-      "quote-props": 0,
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
-        }
-      ]
-    }
+    "extends": "airbnb"
   },
   "dependencies": {
     "@slack/client": "4.10.0",
+    "body-parser": "^1.18.3",
     "commander": "2.19.0",
+    "express": "^4.16.4",
     "google": "2.1.0",
     "mta-gtfs": "1.1.0",
     "striptags": "3.1.1",

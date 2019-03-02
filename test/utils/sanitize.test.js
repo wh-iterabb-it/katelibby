@@ -2,7 +2,7 @@ const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 
-const Sanitize = require('../../utils/sanitize');
+const Sanitize = require('../../lib/utils/sanitize');
 
 chai.should();
 
@@ -77,8 +77,8 @@ describe('Sanitize Utility Tests', () => {
     });
 
     it('should return www.amazon.co.uk string for a complex amazon url', () => {
-      const testData = 'https://www.amazon.co.uk/JavaScript-Babies-Code-Sterling-Childrens' +
-      '/dp/1454921579/ref=sr_1_fkmr0_1?ie=UTF8&qid=1527617357&sr=8-1-fkmr0';
+      const testData = 'https://www.amazon.co.uk/JavaScript-Babies-Code-Sterling-Childrens'
+      + '/dp/1454921579/ref=sr_1_fkmr0_1?ie=UTF8&qid=1527617357&sr=8-1-fkmr0';
       const expected = 'www.amazon.co.uk';
       const resp = Sanitize.detectHostName(testData);
       expect(resp).to.equal(expected);
@@ -108,8 +108,8 @@ describe('Sanitize Utility Tests', () => {
     });
 
     it('should return www.amazon.co.uk string for a complex amazon url', () => {
-      const testData = 'https://www.amazon.co.uk/JavaScript-Babies-Code-Sterling-Childrens' +
-      '/dp/1454921579/ref=sr_1_fkmr0_1?ie=UTF8&qid=1527617357&sr=8-1-fkmr0';
+      const testData = 'https://www.amazon.co.uk/JavaScript-Babies-Code-Sterling-Childrens'
+      + '/dp/1454921579/ref=sr_1_fkmr0_1?ie=UTF8&qid=1527617357&sr=8-1-fkmr0';
       const expected = 'amazon.co.uk';
       const resp = Sanitize.extractRootDomain(testData);
       expect(resp).to.equal(expected);

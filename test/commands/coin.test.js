@@ -3,14 +3,13 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const nock = require('nock');
 
-const commands = require('../../commands');
-const config = require('../../helpers/config_helper').default;
+const commands = require('../../lib/commands');
+const config = require('../../lib/helpers/config_helper').default;
 
 const { expect } = chai;
 
 describe('Command', () => {
   describe('Coin', () => {
-
     const ethResponse = {
       Markets: [
         {
@@ -18,11 +17,11 @@ describe('Command', () => {
           Name: 'Ethereum',
           Price: 500.4265206,
           Volume_24h: 701419076.0392652,
-          Timestamp: 1529244720
-        }
-      ]
+          Timestamp: 1529244720,
+        },
+      ],
     };
-    const unexpectedResult = { error: 'wut'};
+    const unexpectedResult = { error: 'wut' };
     const expectedHelp = 'Getting the current price USD of a given crypto coin.\n\rSyntax is !coin { ETH }';
 
     it('should return expected help result when passed help', (done) => {
@@ -38,10 +37,10 @@ describe('Command', () => {
       config.worldcoinindex.key = 'testKey'; // 'testKey' is our key :D
 
       nock('https://www.worldcoinindex.com')
-        .get(`/apiservice/ticker?key=testKey&label=tacbtc&fiat=usd`)
+        .get('/apiservice/ticker?key=testKey&label=tacbtc&fiat=usd')
         .reply(200, unexpectedResult);
 
-      commands.coin.main('tacobell').then(()=>{}).catch((error) => {
+      commands.coin.main('tacobell').then(() => {}).catch((error) => {
         expect(error).to.equal('Are you trying to make me crash?');
         done();
       });
@@ -64,7 +63,7 @@ describe('Command', () => {
       config.worldcoinindex.key = 'testKey'; // 'testKey' is our key :D
 
       nock('https://www.worldcoinindex.com')
-        .get(`/apiservice/ticker?key=testKey&label=ethbtc&fiat=usd`)
+        .get('/apiservice/ticker?key=testKey&label=ethbtc&fiat=usd')
         .reply(200, ethResponse);
 
       const expected = '1 ETH = $500.43 USD as of 2:59:50 ago\n\r24 Hour Volume $701,419,076.04 USD\n\rEthereum https://www.worldcoinindex.com/coin/Ethereum';

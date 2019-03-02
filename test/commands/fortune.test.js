@@ -2,14 +2,13 @@ const chai = require('chai');
 const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 
-const commands = require('../../commands');
-const config = require('../../helpers/config_helper').default;
+const commands = require('../../lib/commands');
+const config = require('../../lib/helpers/config_helper').default;
 
 const { expect } = chai;
 
 describe('Command', () => {
   describe('Fortune', () => {
-
     const expectedHelp = 'Fortune is for getting a cookie fortune in Chat \r\nSyntax is !fortune';
 
     it('should return expected help result when passed help', (done) => {
