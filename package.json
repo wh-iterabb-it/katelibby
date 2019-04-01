@@ -28,14 +28,14 @@
     "extends": "airbnb"
   },
   "dependencies": {
-    "@slack/client": "4.12.0",
+    "@slack/client": "5.0.0",
     "body-parser": "1.18.3",
     "commander": "2.19.0",
     "express": "4.16.4",
     "google": "2.1.0",
     "mta-gtfs": "1.1.0",
     "striptags": "3.1.1",
-    "superagent": "4.1.0",
+    "superagent": "5.0.2",
     "winston": "3.2.1"
   },
   "devDependencies": {
@@ -50,7 +50,7 @@
     "nock": "10.0.6",
     "nyc": "13.3.0",
     "pm2": "3.4.1",
-    "sinon": "7.3.0",
+    "sinon": "7.3.1",
     "sinon-chai": "3.3.0",
     "sinon-stub-promise": "4.0.0"
   }
