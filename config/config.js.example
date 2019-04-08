@@ -43,11 +43,10 @@ const config = {
     key: process.env.KL_GIPHY_API_KEY || '',
   },
 
-  // Weather Underground API key
-  // only allows 500 calls a day and 10 a minute
-  wunderground: {
-    key: process.env.KL_WU_API_KEY || '',
-  },
+  // Open Weather API key
+  openweathermap: {
+    key: process.env.KL_OWM_API_KEY || '',
+  }
 
   // World Coin Index API Key
   // get your key from
