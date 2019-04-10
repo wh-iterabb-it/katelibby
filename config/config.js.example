@@ -46,7 +46,7 @@ const config = {
   // Open Weather API key
   openweathermap: {
     key: process.env.KL_OWM_API_KEY || '',
-  }
+  },
 
   // World Coin Index API Key
   // get your key from
