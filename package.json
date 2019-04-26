@@ -35,7 +35,7 @@
     "google": "2.1.0",
     "mta-gtfs": "1.1.0",
     "striptags": "3.1.1",
-    "superagent": "5.0.2",
+    "superagent": "5.0.3",
     "winston": "3.2.1"
   },
   "devDependencies": {
