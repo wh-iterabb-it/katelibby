@@ -28,7 +28,7 @@
     "extends": "airbnb"
   },
   "dependencies": {
-    "@slack/client": "5.0.1",
+    "@slack/client": "5.0.2",
     "body-parser": "1.19.0",
     "commander": "2.20.0",
     "express": "4.17.1",
