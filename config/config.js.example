@@ -6,7 +6,7 @@ const config = {
     nsfw: false // true allows nsfw content
   },
 
-  slack: process.env.SLACK_CONFIG || [{ // I want to pass in the slack config as a whole
+  slack: [{
     realName: 'Kate Libby',
     token: process.env.SLACK_TOKEN || '', // REQUIRED
     client_id: process.env.SLACK_CLIENT_ID || '', // OPTIONAL used for production
