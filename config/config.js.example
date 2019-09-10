@@ -13,31 +13,6 @@ const config = {
     client_secret: process.env.SLACK_CLIENT_SECRET || '', // OPTIONAL used for production
   }],
 
-  irc: [{
-    server: '',
-    port: 6667,
-    userName: 'kate',
-    realName: 'Kate Libby',
-    localAddress: null,
-    debug: false,
-    showErrors: false,
-    autoRejoin: false,
-    autoConnect: true,
-    channels: ['#general', '#dangerroom'],
-    secure: false, // very important for connecting
-    selfSigned: false,
-    certExpired: false,
-    floodProtection: false,
-    floodProtectionDelay: 1000,
-    sasl: false,
-    retryCount: 0,
-    retryDelay: 2000,
-    stripColors: false,
-    channelPrefixes: '&#',
-    messageSplit: 512,
-    encoding: '',
-  }],
-
   // Giphy API key
   giphy: {
     key: process.env.KL_GIPHY_API_KEY || '',
