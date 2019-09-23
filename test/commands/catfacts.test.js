@@ -18,4 +18,5 @@ describe('Command', () => {
         });
       } catch (error) {}
     });
+  });
 });
