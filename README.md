@@ -11,7 +11,7 @@ katelibby
 
 katelibby is a node slack bot.
 
-*Katelibby is still in development, after it has tests created it will have a production mode*
+it also connects to twitch.
 
 ### Installation
 
