@@ -1,6 +1,14 @@
 katelibby
 =========
 
+
+> # ⚠️⚠️⚠️ NOTICE ⚠️⚠️⚠️
+> This repo is no longer maintained, please see its spiritual successor project [kate](https://github.com/wh-iterabb-it/kate/)
+
+
+
+-------
+
 [![Greenkeeper badge](https://badges.greenkeeper.io/wh-iterabb-it/katelibby.svg)](https://greenkeeper.io/)
 [![Travis Badge](https://travis-ci.org/wh-iterabb-it/katelibby.svg?branch=master)](https://travis-ci.org/wh-iterabb-it/katelibby)
 [![Dependency Status](https://img.shields.io/david/wh-iterabb-it/katelibby.svg?style=flat)](https://david-dm.org/wh-iterabb-it/katelibby#info=Dependencies)
